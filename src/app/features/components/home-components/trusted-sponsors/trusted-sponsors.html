@@ -1,1 +1,75 @@
-<p>trusted-sponsors works!</p>
+
+<section #statsSection class="py-20 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        Trusted by
+        <span class="bg-gradient-to-r from-red-600 via-red-800 to-red-800 bg-clip-text text-transparent">
+          Industry Leaders
+        </span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        We're proud to partner with world-class brands who trust us to deliver exceptional manufacturing solutions that drive their global success.
+      </p>
+    </div>
+
+    <!-- Infinite Scrolling Carousel -->
+    <div class="relative">
+      <!-- Gradient overlays -->
+      <div class="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
+      <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+
+      <!-- Scrolling container -->
+      <div class="flex space-x-8 animate-scroll">
+        <ng-container *ngFor="let client of duplicatedClients; let i = index">
+          <div class="flex-shrink-0 group">
+            <div class="w-48 h-28  shadow-lg bg-white border border-gray-200 rounded-2xl flex items-center justify-center p-6 hover:shadow-xl hover:border-red-200 transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-800 group-hover:text-red-600 transition-colors duration-300 mb-1">
+                  <img [src]="client.logo" [alt]="client.name" class="h-full object-contain" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center group">
+        <div class="text-3xl lg:text-4xl font-bold text-red-800 mb-2 transition-all duration-500" [ngClass]="{ 'animate-pulse': isVisible }">
+          {{ counts().partners }}+
+        </div>
+        <div class="text-gray-600 font-medium group-hover:text-red-700 transition-colors duration-300">
+          Global Partners
+        </div>
+      </div>
+      <div class="text-center group">
+        <div class="text-3xl lg:text-4xl font-bold text-red-800 mb-2 transition-all duration-500" [ngClass]="{ 'animate-pulse': isVisible }">
+          {{ counts().countries }}+
+        </div>
+        <div class="text-gray-600 font-medium group-hover:text-red-700 transition-colors duration-300">
+          Countries Served
+        </div>
+      </div>
+      <div class="text-center group">
+        <div class="text-3xl lg:text-4xl font-bold text-red-800 mb-2 transition-all duration-500" [ngClass]="{ 'animate-pulse': isVisible }">
+          {{ counts().satisfaction }}%
+        </div>
+        <div class="text-gray-600 font-medium group-hover:text-red-700 transition-colors duration-300">
+          Client Satisfaction
+        </div>
+      </div>
+      <div class="text-center group">
+        <div class="text-3xl lg:text-4xl font-bold text-red-800 mb-2 transition-all duration-500" [ngClass]="{ 'animate-pulse': isVisible }">
+          {{ counts().support }}/7
+        </div>
+        <div class="text-gray-600 font-medium group-hover:text-red-700 transition-colors duration-300">
+          Support Available
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

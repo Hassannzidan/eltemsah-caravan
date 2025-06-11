@@ -1,0 +1,110 @@
+<footer class="bg-gray-900 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+    <!-- Quick Contact -->
+    <div class="space-y-6">
+      <h3 class="text-xl font-bold">Quick Contact</h3>
+      <p class="text-gray-300 leading-relaxed">
+        If you have any questions or need help, feel free to contact with our team.
+      </p>
+      <div class="flex items-center gap-3">
+        <!-- <app-lucide-phone class="w-5 h-5 text-orange-500"></app-lucide-phone> -->
+        <span class="text-xl font-bold text-orange-500">55 654 5417</span>
+      </div>
+      <div class="space-y-2 text-gray-300">
+        <p>2307 Beverley Rd Brooklyn, New York</p>
+        <p>11226 United States.</p>
+      </div>
+      <div class="flex gap-3 pt-2">
+        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
+          <!-- <app-lucide-facebook class="w-5 h-5"></app-lucide-facebook> -->
+        </div>
+        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
+          <!-- <app-lucide-twitter class="w-5 h-5"></app-lucide-twitter> -->
+        </div>
+        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
+          <!-- <app-lucide-instagram class="w-5 h-5"></app-lucide-instagram> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Company -->
+    <div class="space-y-6">
+      <h3 class="text-xl font-bold">Company</h3>
+      <ul class="space-y-3">
+        <li *ngFor="let item of ['About Us', 'Meet Our Team', 'News & Media', 'Case Studies Grid', 'Contact Us', 'Careers']">
+          <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
+            <span class="text-orange-500">→</span> {{ item }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Industries -->
+    <div class="space-y-6">
+      <h3 class="text-xl font-bold">Industries</h3>
+      <ul class="space-y-3">
+        <li *ngFor="let item of ['Retail & Consumer', 'Sciences & Healthcare', 'Industrial & Chemical', 'Power Generation', 'Food & Beverage', 'Oil & Gas']">
+          <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
+            <span class="text-orange-500">→</span> {{ item }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <div class="space-y-6">
+      <p class="text-white font-medium leading-relaxed">
+        Sign up for industry alerts, our latest news, thoughts, and insights from Koira.
+      </p>
+      <form (ngSubmit)="onSubmit()" class="space-y-4">
+        <div class="relative">
+          <input
+            type="email"
+            [formControl]="emailControl"
+            placeholder="Your Email Address"
+            required
+            class="w-full h-12 rounded-full bg-transparent border-2 border-orange-500 px-4 pr-12 placeholder:text-gray-400 text-white focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+          />
+          <button
+            type="submit"
+            class="absolute right-1 top-1 h-10 w-10 rounded-full bg-orange-500 hover:bg-orange-600 p-0 flex items-center justify-center"
+          >
+            <!-- <app-lucide-arrow-right class="w-4 h-4"></app-lucide-arrow-right> -->
+          </button>
+        </div>
+      </form>
+      <p class="text-gray-400 text-sm">
+        You may withdraw your consent at any time!
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+        <h2 class="text-2xl font-bold order-2 lg:order-1">Koira</h2>
+        <div class="flex flex-wrap justify-center lg:justify-end gap-6 text-sm order-1 lg:order-2">
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">Terms & Conditions</a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">Sitemap</a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">Employee Login</a>
+        </div>
+      </div>
+      <div class="text-center lg:text-right mt-4">
+        <p class="text-gray-400 text-sm">
+          ©2025 Koira. All Rights Reserved. With Love by <span class="text-orange-500">CMSSuperHeroes</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll to Top -->
+  <button
+    (click)="scrollToTop()"
+    class="fixed bottom-6 right-6 w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+  >
+    ↑
+  </button>
+</footer>

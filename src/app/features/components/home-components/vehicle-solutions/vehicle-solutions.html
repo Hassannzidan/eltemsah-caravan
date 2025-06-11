@@ -1,1 +1,107 @@
-<p>vehicle-solutions works!</p>
+<section class="py-20 bg-gradient-to-br from-slate-50 to-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left Content -->
+      <div class="space-y-8">
+        <div class="space-y-2">
+          <p class="text-primary tracking-wide capitalize text-orange-700 text-sm font-semibold mb-2">
+            Smart Design, Practical Performance – Vehicles That Meet All Your Needs
+          </p>
+          <h2 class="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
+            Driving the Future of
+            <span class="bg-gradient-to-r from-red-900 to-red-600 bg-clip-text text-transparent"> Multi-Purpose Vehicles</span>
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <p class="text-lg text-slate-600 leading-relaxed">
+            We are a leading company in designing and manufacturing caravans, trailers, and smart mobility solutions. We offer a comprehensive range of products that serve various sectors such as food trucks, commercial kiosks, mobile sales units, and container modifications.          </p>
+          <p class="text-slate-600 leading-relaxed">
+            With extensive experience and cutting-edge technologies, we provide customized and efficient solutions that help our clients succeed in their industries.          </p>
+
+          <div [ngClass]="{
+              'max-h-96 opacity-100': isExpanded(),
+              'max-h-0 opacity-0': !isExpanded()
+            }"
+            class="overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="space-y-4 pt-2">
+              <p class="text-slate-600 leading-relaxed">
+                  In a rapidly changing world, we don't just follow trends—we create them. Through innovation, quality, and flexible manufacturing, we help turn your idea into a real mobile project that opens up new possibilities              </p>
+              <p class="text-slate-600 leading-relaxed">
+                  We don't just build vehicles—we create opportunities and deliver experiences.              </p>
+            </div>
+          </div>
+
+          <button
+            (click)="toggleExpanded()"
+            class="cursor-pointer text-red-600 group flex items-center space-x-2 -translate-y-1 hover:text-red-600/70 transition-colors duration-300 font-medium"
+          >
+            <span>{{ isExpanded() ? 'Show Less' : 'Show More' }}</span>
+            <div class="transition-transform duration-300 group-hover:scale-110">
+              <svg *ngIf="isExpanded(); else downIcon" class="w-4 h-4" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+              </svg>
+              <ng-template #downIcon>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </ng-template>
+            </div>
+          </button>
+        </div>
+
+        <!-- CTA Button -->
+        <div >
+          <button
+            class="group cursor-pointer bg-gradient-to-r from-red-900 to-red-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
+          >
+            <span class="flex items-center space-x-3">
+              <span>Get a Free Consultation</span>
+              <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:rotate-90">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Image Section -->
+      <div class="relative group">
+        <div class="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-primary/20 to-red-600/20 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-xl"></div>
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary to-red-600 rounded-3xl transform rotate-3 scale-105 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl transform -rotate-2 scale-102 opacity-10 group-hover:-rotate-3 transition-transform duration-500"></div>
+
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-3xl transition-all duration-500 transform group-hover:-translate-y-2">
+            <img
+              src="/assets/backgrounds/aboutAtHome.png"
+              alt="Manufacturing Professional with Vehicle"
+              class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent  "></div>
+            <div class="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+              <span class="text-sm font-semibold text-slate-800">Premium Quality</span>
+            </div>
+
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-pulse delay-300"></div>
+              <div class="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-white rounded-full animate-pulse delay-700"></div>
+            </div>
+          </div>
+
+          <div class="absolute -top-4 -left-4 grid grid-cols-3 gap-2 opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+            <div *ngFor="let dot of [].constructor(9); let i = index"
+              [style.animationDelay]="i * 100 + 'ms'"
+              class="w-2 h-2 bg-gradient-to-r from-primary to-red-600 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

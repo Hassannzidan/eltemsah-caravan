@@ -1,0 +1,140 @@
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out backdrop-blur-[2px]"
+  [ngClass]="{
+    'bg-white/85 backdrop-blur-md border-gray-100 shadow-sm ': isScrolled,
+    'bg-transparent border-b border-black/5': !isScrolled
+  }"
+>
+  <div class="max-w-7xl mx-auto px-8 sm:px-10 lg:px-12">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center space-x-2">
+        <span
+          [ngStyle]="{
+            color: isScrolled ? '#8b0000' : 'white'
+          }"
+          class="self-center whitespace-nowrap logo-text text-center text-2xl tracking-wider flex flex-col leading-6"
+        >
+          <span> TEMSAH </span>
+          <span> CARAVAN </span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-8 border-b-2 border-transparent transition-all duration-300">
+        <a
+          *ngFor="let item of navigation"
+          [routerLink]="item.href"
+          (click)="closeMenu()"
+          class="relative text-md font-medium transition-all duration-300 group tracking-wider font-Staatliches"
+          [ngStyle]="{
+            color: isScrolled ? '#8b0000' : 'white',
+            transition: 'color 0.3s ease-in-out'
+          }"
+        >
+          {{ item.name }}
+          <span
+            class="absolute -bottom-1 left-0 w-0 h-1 rounded transition-all duration-300 group-hover:w-full font-Anton"
+            [ngClass]="{
+              'w-full bg-orange-800': router.url === item.href,
+              'bg-orange-600/85': router.url !== item.href
+            }"
+          ></span>
+        </a>
+      </nav>
+
+      <!-- Right Side -->
+      <div class="hidden lg:flex items-center space-x-6" 
+      [ngStyle]="{
+        color: isScrolled ? '#8b0000' : 'white',
+        transition: 'color 0.3s ease-in-out'
+      }">
+        <!-- Language -->
+        <button class="flex items-center space-x-1 transition-colors duration-300 cursor-pointer">
+          <span class="text-md p-0.5 mt-0.5"> 
+            <ng-icon name="featherGlobe" class="w-5 h-5" />
+          </span>
+          <span class="font-Staatliches text-md mt-0.5"> EN </span>
+        </button>
+
+        <!-- Phone -->
+        <div class="flex items-center space-x-1 font-Staatliches tracking-wider">
+          <span class="mt-1.5"> 
+            <ng-icon name="featherPhone" class="w-4 h-4" />
+          </span>
+          <span class="text-md font-medium transition-colors duration-300 mt-0.5">
+            +20 110 201 2009 
+          </span>
+        </div>
+
+        <!-- CTA -->
+        <button
+          class="font-Antonio text-sm bg-transparent font-semibold cursor-pointer hover:bg-orange-600 hover:text-white text-white border-2 border-orange-700 hover:border-orange-600 transition-all duration-400 px-3 py-1 rounded-full"
+          [ngClass]="{
+            'border-orange-800 text-white bg-transparent': !isScrolled,
+            'border-orange-800 text-orange-800 bg-white/20': isScrolled
+          }"
+          style="transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;"
+        >
+          Get Started Now
+          <span class="inline-block transition-transform duration-300 translate-y-0.5 font-bold" >
+            <ng-icon name="featherArrowRight" class="w-4 h-4" />
+          </span>
+        </button>
+
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="lg:hidden">
+        <button
+          (click)="toggleMenu()"
+          class="transition-colors duration-300"
+          [ngClass]="isScrolled ? 'text-gray-900 hover:bg-gray-100' : 'text-white hover:bg-white/10'"
+        >
+          {{ isMenuOpen ? '✖' : '☰' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div *ngIf="isMenuOpen" class="lg:hidden animate-fade-in">
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg">
+        <a
+          *ngFor="let item of navigation"
+          [routerLink]="item.href"
+          (click)="closeMenu()"
+          class="block px-3 py-2 text-base font-medium transition-colors duration-200 relative group"
+          [ngStyle]="{
+            color: isScrolled ? '#8b0000' : 'white'
+          }"
+        >
+          {{ item.name }}
+          <span
+            class="absolute bottom-0 left-3 w-0 h-0.5 transition-all duration-300 group-hover:w-[calc(100%-24px)]"
+            [ngClass]="{
+              'w-[calc(100%-24px)] bg-orange-500': router.url === item.href,
+              'bg-orange-500': router.url !== item.href
+            }"
+          ></span>
+        </a>
+
+        <!-- Mobile Language -->
+        <div class="px-3 py-2 flex items-center space-x-2">
+          🌐 <span class="text-sm font-medium text-gray-700">English</span>
+        </div>
+
+        <!-- Mobile Phone -->
+        <div class="px-3 py-2 flex items-center space-x-2">
+          📞 <span class="text-sm font-medium text-gray-700">0111 375 8909</span>
+        </div>
+
+        <!-- Mobile CTA -->
+        <div class="px-3 py-2">
+          <button class="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full">
+            Get A Quote
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> 
+</header>

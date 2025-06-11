@@ -1,1 +1,137 @@
-<p>video-showcase works!</p>
+<section class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left Content -->
+      <div class="text-gray-800 z-10 relative space-y-8">
+        <div class="space-y-6">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            <span class="text-slate-800">Temsah Group is a leading</span>
+            <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+              MENA region
+            </span>
+            <span class="text-slate-800">in steel fabrication & industrial solutions!</span>
+          </h2>
+
+          <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+            For over 40 years, Temsah has driven innovation and integrity across industries, from oil & gas to infrastructure.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+          <div *ngFor="let feature of features">
+            <div class="flex items-center space-x-3 group">
+              <div class="w-5 h-5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+                <div class="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              <span class="text-slate-700 font-medium group-hover:text-slate-900 transition-colors">{{ feature }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button class="cursor-pointer bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0 px-8 py-3 rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            Schedule An Appointment
+          </button>
+
+          <!-- <button class="text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 group">
+            Explore All Features
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
+              <span class="text-white font-bold text-lg">→</span>
+            </div>
+          </button> -->
+        </div>
+      </div>
+
+      <!-- Right Section -->
+      <div class="relative">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-orange-100 p-1">
+          <div class="rounded-3xl overflow-hidden bg-white">
+            <!-- Background Image -->
+            <div class="relative w-full h-[70vh] bg-cover bg-center bg-no-repeat"
+              [ngStyle]="{
+                  backgroundImage:
+                  'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(249,115,22,0.1)), url(https://images.unsplash.com/photo-1738162837369-a2beec3a1d47?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)'
+                
+              }"
+
+              
+            >
+              <!-- Play Button -->
+              <div *ngIf="!isVideoPlaying ">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-orange-900/20 flex items-center justify-center ">
+                  <button
+                    aria-label="Play promotional video"
+                    (click)="playVideo()"
+                    class="group relative w-24 h-24 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-500 shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  >
+                    <svg class="w-10 h-10 text-orange-500 ml-1 group-hover:text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 4l15 8-15 8z" />
+                    </svg>
+                    <div class="absolute inset-0 rounded-full border-4 border-white/30 animate-ping"></div>
+                    <div class="cursor-pointer absolute inset-0 rounded-full border-2 border-orange-200/50 scale-125 animate-pulse"></div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Video Player -->
+             <!-- Video Modal -->
+              <div
+                *ngIf="isVideoPlaying"
+                  class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Promotional video modal"
+              >
+                <button
+                  (click)="closeVideo()"
+                  aria-label="Close video"
+                  class="absolute top-4 right-4 w-10 h-10 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/90 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                >
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+
+                <div class="w-full h-full max-w-6xl aspect-video p-4">
+                  <iframe
+                    src="https://www.youtube.com/embed/0Bls-tvft0M?autoplay=1&start=80&si=lU4TV6nANJb1VhIG"
+                    class="w-full h-full rounded-2xl"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+
+
+              <!-- Plus Buttons -->
+              <ng-container *ngIf="!isVideoPlaying">
+                <ng-container *ngFor="let button of plusButtons">
+                  <div class="absolute" [ngStyle]="button.position">
+                    <div class="relative">
+                      <button
+                        (click)="toggleTooltip(button.id)"
+                        class="cursor-pointer w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 animate-pulse focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path d="M12 5v14m-7-7h14" />
+                        </svg>
+                      </button>
+
+                      <div *ngIf="activeTooltip() === button.id"
+                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 bg-white text-slate-800 px-4 py-3 rounded-xl shadow-xl whitespace-nowrap font-semibold border border-orange-100 animate-fade-in">
+                        {{ button.text }}
+                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-6 border-transparent border-t-white"></div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
