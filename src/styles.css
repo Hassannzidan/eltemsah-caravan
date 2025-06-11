@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+.font-Staatliches{
+    font-family: 'Staatliches', sans-serif;
+}
+.font-Antonio{
+    font-family: 'Antonio', sans-serif;
+}
+.font-Anton{
+    font-family: 'Anton', sans-serif;
+}
+.font-Roboto{
+  font-family: 'Roboto', sans-serif;
+}
+.font-Montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+.font-BebasNeue{
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+
