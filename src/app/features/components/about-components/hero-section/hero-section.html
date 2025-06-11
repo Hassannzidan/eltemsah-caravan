@@ -1,11 +1,66 @@
-<p>hero-section works!</p>
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo quas asperiores, dolor commodi voluptatibus deleniti at iusto, maxime maiores assumenda earum in quisquam fugiat similique excepturi optio numquam, autem facere.
-Perferendis quos ea error voluptates dolore odit quas omnis, dignissimos impedit architecto fuga. Ratione vel, optio quae explicabo et cum culpa mollitia sequi hic, dolore, recusandae nemo numquam dicta minus.
-Officia qui rerum cum, repellat ea unde odio magnam sunt quibusdam, doloribus voluptate mollitia esse tempora explicabo vero repellendus provident. Voluptatibus distinctio consectetur dolor aspernatur possimus explicabo at libero a?
-Quidem velit quia voluptatum veniam aut voluptate iusto similique, facere quis dolores ab. Cumque rerum sequi eligendi velit vel, iure qui. Esse, explicabo. Rem consectetur repellat debitis qui quibusdam laborum.
-Dicta dolores laborum, harum explicabo est eligendi eum deleniti possimus doloribus cumque nihil repellendus rem, neque vitae cum enim eos aut adipisci quam beatae quis ex inventore. Nostrum, error doloribus!
-Atque tempore tenetur voluptas architecto et inventore unde hic cumque accusamus aperiam quis, nihil illum dicta, odio a doloremque magnam quaerat laudantium! Alias, molestiae aliquam? Saepe ipsam quod aspernatur eligendi.
-Quibusdam neque reprehenderit voluptas aut! Tenetur vel eligendi deleniti, iste assumenda eaque quam facilis accusantium aliquam, eius quibusdam. Neque rem fugit harum maxime vero suscipit id odit doloribus corporis laboriosam!
-Sed, est molestias. Officia exercitationem quod eos dicta. Laboriosam itaque ipsam neque, consequuntur cum perspiciatis similique dignissimos consectetur eos reiciendis! Saepe quasi repellat quae nam, doloremque incidunt. Ex, facere nemo!
-Nam voluptate beatae dolor sunt laboriosam consectetur, iusto eos cum ratione? At neque inventore cupiditate quidem illum eum laudantium veniam voluptatum qui in, odit, molestias beatae nemo ea consequuntur nisi?
-Ea eos labore perferendis tempora sunt harum aliquid natus quae tenetur excepturi at similique, eius dolorum totam ipsa aut accusantium vel quaerat suscipit voluptates voluptatibus corrupti sapiente? Quia, quis nulla.n
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image with Parallax Effect -->
+   <!-- https://images.unsplash.com/photo-1582489853490-cd3a53eb4530?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
+   <!-- https://images.unsplash.com/photo-1582489853490-cd3a53eb4530?q=80&w=2070&auto=format&fit=crop&w=2070&q=80 -->
+   <!-- https://images.unsplash.com/photo-1455165814004-1126a7199f9b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
+   <!-- https://images.unsplash.com/photo-1455165814004-1126a7199f9b?q=80&w=2070&auto=format&fit=crop&w=2070&q=80 -->
+  <!--  https://images.unsplash.com/photo-1565043666747-69f6646db940?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80 -->
+   <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-75"
+    [ngStyle]="{
+      backgroundImage: 'url(https://images.unsplash.com/photo-1582489853490-cd3a53eb4530?q=80&w=2070&auto=format&fit=crop&w=2070&q=80)',
+      transform: 'translateY(' + scrollY * 0.5 + 'px) scale(1.1)'
+    }"
+  >
+    <!-- <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div> -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-red-900/50 via-transparent to-red-600/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-blue-800/10 to-blue-900/60"></div>
+  </div>
+
+  <!-- Animated floating elements -->
+  <div
+    class="absolute top-20 left-10 w-40 h-40 bg-red-500/15 rounded-full blur-2xl animate-pulse"
+    [ngStyle]="{ transform: 'translateY(' + scrollY * 0.3 + 'px)' }"
+  ></div>
+  <div
+    class="absolute top-1/3 right-16 w-32 h-32 bg-red-400/20 rounded-full blur-xl animate-pulse delay-1000"
+    [ngStyle]="{ transform: 'translateY(' + scrollY * -0.4 + 'px)' }"
+  ></div>
+  <div
+    class="absolute bottom-1/4 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-lg animate-pulse delay-500"
+    [ngStyle]="{ transform: 'translateY(' + scrollY * 0.2 + 'px)' }"
+  ></div>
+
+  <!-- Content -->
+  <div class="relative text-center text-white px-4 sm:px-6 lg:px-8 animate-fade-in max-w-5xl">
+    <!-- Inline Badge (No separate component) -->
+    <div
+      class="inline-flex items-center rounded-full border border-white/30 px-6 py-2 text-lg font-semibold text-white bg-white/20 backdrop-blur-md animate-pulse mb-8"
+    >
+      About El-Temsah Caravan
+    </div>
+
+    <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold mb-8 leading-tight">
+      <span class="bg-gradient-to-r from-white via-red-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
+        60 Years of
+      </span>
+      <br />
+      <span class="bg-gradient-to-r from-red-200 via-red-100 to-red-300 bg-clip-text text-transparent drop-shadow-xl">
+        Excellence
+      </span>
+    </h1>
+
+    <p class="text-xl sm:text-2xl text-red-100 max-w-4xl mx-auto leading-relaxed opacity-95 drop-shadow-lg">
+      Since 1960, pioneering the manufacturing of caravan trailers and steel structures with unmatched quality and innovation.
+    </p>
+
+    <!-- Decorative elements -->
+    <div class="flex justify-center items-center gap-4 mt-12">
+      <div class="w-16 h-1 bg-gradient-to-r from-transparent to-red-300 rounded-full"></div>
+      <div class="w-4 h-4 bg-red-400 rounded-full animate-ping"></div>
+      <div class="w-24 h-1 bg-gradient-to-r from-red-300 to-red-400 rounded-full"></div>
+      <div class="w-4 h-4 bg-red-300 rounded-full animate-pulse delay-300"></div>
+      <div class="w-16 h-1 bg-gradient-to-r from-red-400 to-transparent rounded-full"></div>
+    </div>
+  </div>
+</section>
