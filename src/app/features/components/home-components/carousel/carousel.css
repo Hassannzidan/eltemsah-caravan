@@ -1,0 +1,114 @@
+.font-Staatliches{
+    font-family: 'Staatliches', sans-serif;
+}
+.font-Antonio{
+    font-family: 'Antonio', sans-serif;
+}
+.font-Anton{
+    font-family: 'Anton', sans-serif;
+}
+.font-Roboto{
+  font-family: 'Roboto', sans-serif;
+}
+.font-Montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+.font-BebasNeue{
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+
+
+/* wipe animation */
+/* نفس animation بس نخصص لكل واحد delay مختلف */
+
+@keyframes wipe-in {
+  0% {
+    width: 0;
+    right: 0;
+  }
+  50% {
+    width: 100%;
+    right: 0;
+  }
+  100% {
+    width: 0;
+    right: 100%;
+  }
+}
+
+/* Base wipe wrapper */
+.wipe-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* Text content starts hidden */
+.wipe-text {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+/* Wipe animation stages */
+.wipe-step-1::before,
+.wipe-step-2::before,
+.wipe-step-3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: white;
+  z-index: 2;
+  animation: wipe-in 1s ease forwards;
+}
+
+.wipe-step-1::before {
+  animation-delay: 0s;
+}
+
+
+
+/* Add delay to each */
+.wipe-step-1::before {
+  animation-delay: 0s;
+}
+.wipe-step-2::before {
+  animation-delay: 0.5s;
+}
+.wipe-step-3::before {
+  animation-delay: 1s;
+}
+
+/* Fade in text after wipe delay */
+.wipe-step-1 .wipe-text {
+  animation: fadeIn 0.4s ease forwards;
+  animation-delay: 0.5s;
+}
+.wipe-step-2 .wipe-text {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: 1s;
+}
+.wipe-step-3 .wipe-text {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: 1.5s;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* @keyframes zoomOut {
+  0% { transform: scale(1.2); } 
+  100% { transform: scale(1); }
+} */
+
+.carousel-track img {
+  animation: zoomOut 3s ease-in-out;
+}

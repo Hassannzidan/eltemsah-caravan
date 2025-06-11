@@ -1,1 +1,80 @@
-<p>carousel works!</p>
+<div class="carousel-container relative w-full h-screen overflow-hidden">
+  <!-- IMAGES -->
+  <div class="carousel-track h-full flex transition-transform duration-500 ease-in-out"
+       [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+
+    <div *ngFor="let slide of slides" class="w-full h-full flex-shrink-0 relative">
+      <div class="absolute inset-0 bg-black/30 z-10"></div>
+      <img [src]="slide.image" class="w-full h-full object-cover" />
+
+      <!-- TEXT -->
+      <div class="z-10 absolute inset-x-6 sm:left-10 md:left-20 lg:left-40 xl:left-60 
+                  max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg top-1/2 -translate-y-1/2 
+                  p-4 rounded-lg flex flex-col justify-center">
+
+        <!-- Title -->
+        <div class="wipe-wrapper" [ngClass]="animateSlide ? 'wipe-step-1' : ''">
+          <h2 class="wipe-text mb-2 font-Staatliches tracking-wider text-white text-shadow-black 
+                     text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+            {{ slide.title }}
+          </h2>
+        </div>
+
+        <!-- Description -->
+        <div class="wipe-wrapper mt-2" [ngClass]="animateSlide ? 'wipe-step-2' : ''">
+          <p class="wipe-text text-white font-Roboto text-sm sm:text-base md:text-lg lg:text-xl">
+            {{ slide.description }}
+          </p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-4 mt-7 font-Antonio text-sm md:text-base">
+          <div class="wipe-wrapper" [ngClass]="animateSlide ? 'wipe-step-3' : ''">
+            <button class="wipe-text px-4 sm:px-5.5 py-2 bg-[#8b0000] border border-transparent 
+                           hover:border-white hover:bg-white hover:text-black 
+                           text-white rounded-3xl shadow transition-all cursor-pointer">
+              <ng-icon name="featherArrowRight" class="w-4 h-4 inline-block mr-1 translate-y-0.5" />
+              About Us
+            </button>
+          </div>
+
+          <div class="wipe-wrapper" [ngClass]="animateSlide ? 'wipe-step-3' : ''">
+            <button class="wipe-text px-4 sm:px-2.5 py-2 bg-transparent border border-white 
+                           hover:bg-orange-700 hover:border-orange-700 
+                           text-white rounded-3xl shadow transition cursor-pointer">
+              <ng-icon name="featherArrowRight" class="w-4 h-4 inline-block mr-1 translate-y-0.5" />
+              Our Services
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <button (click)="prevSlide()"
+    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-neutral-100/50 hover:bg-white/80 
+           text-black rounded-full shadow-md cursor-pointer w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 
+           flex items-center justify-center transition-all duration-500 hover:-translate-x-1">
+    <ng-icon name="bootstrapChevronCompactLeft" class="text-lg sm:text-xl md:text-2xl text-black/80 hover:text-black" />
+  </button>
+
+  <button (click)="nextSlide()"
+    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-neutral-100/50 hover:bg-white/80 
+           text-black rounded-full shadow-md cursor-pointer w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 
+           flex items-center justify-center transition-all duration-500 hover:translate-x-1">
+    <ng-icon name="bootstrapChevronCompactRight" class="text-lg sm:text-xl md:text-2xl text-black/80 hover:text-black" />
+  </button>
+
+  <!-- Indicators -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+    <div *ngFor="let slide of slides; let i = index"
+      (click)="goToSlide(i)"
+      class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-colors duration-300"
+      [ngClass]="{
+        'bg-[#8b0000]': currentSlide === i,
+        'bg-orange-800/40': currentSlide !== i
+      }"></div>
+  </div>
+</div>
