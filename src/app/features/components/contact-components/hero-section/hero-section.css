@@ -1,0 +1,16 @@
+.typing-target {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.typing {
+  border-right: 2px solid #fff;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
