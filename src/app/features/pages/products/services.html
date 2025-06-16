@@ -11,6 +11,8 @@
   [categories]="categories"
   [filteredProductsCount]="filteredProductsCount"
 />
+<section class="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+  <div class="container mx-auto px-6 lg:px-8">
     <app-product-list
     *ngIf="viewMode === 'list'"
     [products]="filteredProducts"
@@ -19,9 +21,11 @@
     *ngIf="viewMode === 'grid'"
     [products]="filteredProducts"
     />
-    <ng-container *ngIf="filteredProducts.length === 0">
-       <app-no-result></app-no-result>
-    </ng-container>
+  </div>
+  <ng-container *ngIf="filteredProducts.length === 0">
+    <app-no-result></app-no-result>
+  </ng-container>
+</section>
 
 </div>
 

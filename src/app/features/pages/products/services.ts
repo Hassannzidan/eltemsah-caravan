@@ -37,12 +37,14 @@ export class Services {
   categoriesGrid: string[] = allCategories;
   
   get filteredProducts(): Product[] {
-    return this.products.filter(product => {
-      const matchesCategory = this.selectedCategory === 'all' || product.category === this.selectedCategory;
-      const matchesSearch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
-  }
+  return this.products.filter(product => {
+    const matchesCategory =
+      this.selectedCategory === 'all' ||
+      product.category.toLowerCase() === this.selectedCategory.toLowerCase();
+    const matchesSearch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+}
 
   get filteredProductsCount(): number {
     return this.filteredProducts.length;

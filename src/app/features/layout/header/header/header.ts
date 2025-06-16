@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterModule,  Router } from '@angular/router';
-import { NgIconsModule } from '@ng-icons/core';
+import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { LanguageService } from '../../../../services/language/language.service';
+import { featherArrowRight, featherGlobe, featherPhone } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-header',
   imports: [CommonModule, RouterModule, NgIconsModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrl: './header.css',
+  viewProviders:[provideIcons({featherGlobe,featherPhone,featherArrowRight })]
 })
 export class Header {
   isMenuOpen = false;
