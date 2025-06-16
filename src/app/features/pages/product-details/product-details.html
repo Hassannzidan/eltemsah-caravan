@@ -1,0 +1,40 @@
+<div class="min-h-screen bg-slate-50">
+  <!-- Navigation -->
+  <div class="bg-white border-b sticky top-0 z-10">
+    <div class="container mx-auto px-4 py-4">
+      <a routerLink="/services" class="inline-flex items-center text-slate-600 hover:text-orange-600 transition-colors">
+        ← Back to Services
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="product; else notFound" class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <app-product-image-gallery [images]="product.images" [productName]="product.name" />
+
+      <div class="space-y-6">
+        <app-product-info 
+          [name]="product.name"
+          [category]="product.category"
+          [subcategory]="product.subcategory"
+          [longDescription]="product.longDescription" />
+
+        <app-product-benefits [benefits]="product.benefits" />
+        <app-product-features [features]="product.features" />
+        <!-- <app-product-specifications [specifications]="product.specifications" /> -->
+         <app-product-specification [specifications]="productSpecifications"></app-product-specification>
+        <app-product-cta />
+        <app-trust-indicators />
+      </div>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="text-center">
+        <h1 class="text-2xl font-bold text-slate-900 mb-4">Product Not Found</h1>
+        <a routerLink="/services" class="text-orange-600 hover:text-orange-700">← Back to Services</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

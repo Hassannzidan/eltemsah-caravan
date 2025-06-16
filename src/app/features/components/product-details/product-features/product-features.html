@@ -1,0 +1,20 @@
+ <section class="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="text-2xl font-semibold leading-none tracking-tight">
+        <div class="text-sm text-muted-foreground flex items-center gap-2">
+          <!-- <Shield class="w-5 h-5 text-blue-500" /> -->
+          <span>
+            <ng-icon name="lucideShield" class="inline-block w-5 h-5" aria-hidden="true">
+            </ng-icon>
+          </span>
+          Features Included
+        </div>
+      </div>
+      <div class="flex items-center p-6 pt-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div *ngFor="let feature of features"  class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+              <span class="text-slate-700 text-sm">{{ feature }}</span>
+            </div>
+        </div>
+      </div>
+</section>

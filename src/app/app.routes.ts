@@ -13,4 +13,9 @@ export const routes: Routes = [
   { path: 'contact', component: Contact },
   { path: 'login', component: Login},
   { path: 'admin', component: Dashboard},
+  {
+    path: 'product/:id',
+    loadComponent: () => import('./features/pages/product-details/product-details').then(m => m.ProductDetails)
+  }
+  
 ];

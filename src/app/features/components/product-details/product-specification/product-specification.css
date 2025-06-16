@@ -1,0 +1,39 @@
+.collapsible {
+  transition: all 0.3s ease-in-out;
+}
+
+.card {
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  padding: 16px;
+  cursor: pointer;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.spec-item {
+  padding-left: 16px;
+  border-left: 2px solid #e5e7eb;
+}
+
+.spec-item dt {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.spec-item dd {
+  color: #4b5563;
+  margin-top: 4px;
+}

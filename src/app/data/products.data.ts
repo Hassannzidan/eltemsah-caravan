@@ -221,3 +221,82 @@ export const services: Service[] = [
 
 export const allProducts = services.flatMap(service => service.products);
 export const allCategories = [...new Set(allProducts.map(product => product.category))];
+
+
+export const productData = {
+  1: {  
+    name: 'Travel Caravan Deluxe',
+    category: 'Multi-purpose Caravans',
+    subcategory: 'Travel',
+    shortDescription: 'Luxury travel caravan with modern amenities',
+    longDescription: 'Experience the ultimate in mobile luxury with our Travel Caravan Deluxe. Crafted with precision and attention to detail, this premium caravan offers unmatched comfort and convenience for your adventures.',
+    images: [
+      'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&h=600&fit=crop'
+    ],
+    benefits: [
+      'Save 40% on accommodation costs during travel',
+      'Complete independence and freedom to explore',
+      'Professional-grade construction ensures 20+ year lifespan',
+      'Instant setup - ready in under 15 minutes',
+      'Weather-resistant design for year-round use'
+    ],
+    features: [
+      'Luxury interior with premium finishes',
+      'Full kitchen with modern appliances',
+      'Comfortable sleeping area for 4 people',
+      'Private bathroom with shower',
+      'Climate control system',
+      'Solar power system with battery backup'
+    ],
+    specifications: {
+      'Overall Length': '7.5 meters',
+      'Width': '2.3 meters',
+      'Height': '3.2 meters',
+      'Weight': '2,800 kg',
+      'Sleeping Capacity': '4 people',
+      'Water Tank': '150 liters',
+      'Power System': 'Solar + Battery',
+      'Construction': 'Aluminum frame with composite panels'
+    }
+  },
+  4: {
+    name: 'Gourmet Food Truck',
+    category: 'Food Trucks',
+    subcategory: 'Gourmet',
+    shortDescription: 'High-end food truck with premium equipment',
+    longDescription: 'Transform your culinary dreams into a profitable business with our Gourmet Food Truck. Designed for professional chefs and food entrepreneurs who demand excellence.',
+    images: [
+      'https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop'
+    ],
+    benefits: [
+      'Generate up to $500,000 annual revenue potential',
+      'Mobile business - reach customers anywhere',
+      'Lower overhead costs than traditional restaurants',
+      'Quick ROI - typically 18-24 months',
+      'Built-in marketing appeal attracts customers'
+    ],
+    features: [
+      'Commercial-grade kitchen equipment',
+      'Stainless steel prep surfaces',
+      'High-capacity refrigeration',
+      'Professional ventilation system',
+      'Point-of-sale system ready',
+      'Custom branding opportunities'
+    ],
+    specifications: {
+      'Overall Length': '8.5 meters',
+      'Width': '2.5 meters',
+      'Height': '3.8 meters',
+      'Kitchen Area': '15 m²',
+      'Equipment': 'Commercial grade',
+      'Power': '220V + Generator backup',
+      'Water System': '200L fresh + 150L waste',
+      'Certification': 'Food safety compliant'
+    }
+  }
+  // Add more products as needed
+};

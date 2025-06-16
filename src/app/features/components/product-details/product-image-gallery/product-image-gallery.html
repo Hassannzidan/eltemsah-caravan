@@ -1,0 +1,29 @@
+<div class="space-y-4">
+  <!-- Main Image Display -->
+  <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-slate-200">
+    <img
+      [src]="images[currentImageIndex]"
+      [alt]="productName"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <!-- Thumbnail Grid -->
+  <div class="grid grid-cols-3 gap-2">
+    <button
+      *ngFor="let image of images; let index = index"
+      (click)="setCurrentImageIndex(index)"
+      class="aspect-[4/3] overflow-hidden rounded-lg border-2 transition-all"
+      [ngClass]="{
+        'border-orange-500 ring-2 ring-orange-200': currentImageIndex === index,
+        'border-slate-200 hover:border-slate-300': currentImageIndex !== index
+      }"
+    >
+      <img
+        [src]="image"
+        [alt]="productName + ' view ' + (index + 1)"
+        class="w-full h-full object-cover"
+      />
+    </button>
+  </div>
+</div>

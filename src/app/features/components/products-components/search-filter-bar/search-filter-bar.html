@@ -67,10 +67,12 @@
           [ngClass]="viewMode === 'grid' ? 'bg-red-800 text-white/90 hover:bg-red-800/90' : 'border border-gray-300 bg-gray-50 hover:bg-red-700/20 hover:text-red-600/90'"
           class=" cursor-pointer inline-flex items-center justify-center h-10 w-10 rounded-md text-sm font-medium  ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <!-- <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M4 4h6v6H4V4zM14 4h6v6h-6V4zM4 14h6v6H4v-6zM14 14h6v6h-6v-6z"/>
-          </svg>
-
+          </svg> -->
+          <span class="text-xl">
+            <ng-icon name="lucideGrid3x3" class="w-4 h-4" />
+          </span>
         </button>
 
         <!-- List Button -->

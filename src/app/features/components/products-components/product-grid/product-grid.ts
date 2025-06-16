@@ -5,11 +5,12 @@ import { allCategories, allProducts, services, type Product, type Service } from
 
 
 
+
 @Component({
   selector: 'app-product-grid',
   imports: [CommonModule, RouterModule],
   templateUrl: './product-grid.html',
-  styleUrl: './product-grid.css'
+  styleUrl: './product-grid.css',
 })
 export class ProductGrid {
     @Input() products: Product[] = [];

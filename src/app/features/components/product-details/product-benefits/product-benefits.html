@@ -1,0 +1,18 @@
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+            <span class="text-orange-500">
+              <ng-icon name="lucideCheckCircle" class="w-5 h-5" />
+            </span>
+          Key Benefits
+        </h3>
+      </div>
+      <div class="p-6 pt-0">
+        <ul class="space-y-3">
+          <li *ngFor="let benefit of benefits" class="flex items-start gap-3">
+            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+            <span class="text-slate-700">{{ benefit }}</span>
+          </li>
+        </ul>
+      </div>
+</div>
