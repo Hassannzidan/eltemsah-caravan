@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterModule,  Router } from '@angular/router';
 import { NgIconsModule } from '@ng-icons/core';
+import { LanguageService } from '../../../../services/language/language.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class Header {
   isScrolled = false;
   // isVisible = true;
   // lastScrollY = 0;
-
+  currentLang: 'en' | 'ar' = 'en';
   navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -22,7 +23,13 @@ export class Header {
     { name: 'Contact', href: '/contact' },
   ];
 
-  constructor(public router: Router) {}
+  constructor(
+    private languageService: LanguageService,
+    public router: Router
+  ) {
+    this.currentLang = this.languageService.getCurrentLanguage();
+
+  }
 
 @HostListener('window:scroll', [])
 onScroll(): void {
@@ -35,5 +42,10 @@ onScroll(): void {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  toggleLanguage() {
+    this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
+    this.languageService.switchLanguage(this.currentLang);
   }
 }

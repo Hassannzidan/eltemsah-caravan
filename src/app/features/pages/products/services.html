@@ -1,0 +1,22 @@
+<div class="space-y-12 ">
+    <app-hero-section-products></app-hero-section-products> 
+    <app-search-filter-bar
+        [searchTerm]="searchTerm"
+        (searchTermChange)="searchTerm = $event"
+
+        [selectedCategory]="selectedCategory"
+        (selectedCategoryChange)="selectedCategory = $event"
+
+        [viewMode]="viewMode"
+        (viewModeChange)="viewMode = $event"
+
+        [allCategories]="categories"
+        [filteredProductsCount]="filteredProductsCount"
+    />
+
+    <app-product-list></app-product-list>
+    <app-product-card></app-product-card>
+    <app-product-list-item></app-product-list-item>
+    
+</div>
+
