@@ -1,1 +1,26 @@
-<p>product-list works!</p>
+<div class="space-y-6">
+  <ng-container *ngFor="let product of products">
+    <div class="flex flex-col md:flex-row overflow-hidden hover:shadow-lg transition-shadow rounded-xl border border-gray-200 bg-white">
+      <div class="w-full md:w-64 h-48 md:h-auto">
+        <img [src]="product.image" [alt]="product.name" class="w-full h-full object-cover" />
+      </div>
+      <div class="flex-1 p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">{{ product.name }}</h3>
+            <p class="text-sm text-orange-600 font-semibold mb-2">{{ product.category }}</p>
+            <ng-container *ngIf="product.subcategory">
+              <span class="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm">
+                {{ product.subcategory }}
+              </span>
+            </ng-container>
+          </div>
+          <a [routerLink]="['/product', product.id]">
+            <button variant="outline" class="shadcn-btn-outline">Learn More</button>
+          </a>
+        </div>
+        <p class="text-slate-600">{{ product.description }}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>

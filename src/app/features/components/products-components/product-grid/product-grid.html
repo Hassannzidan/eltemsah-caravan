@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
   <div
     *ngFor="let product of products"
-    class="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg border bg-card text-card-foreground shadow-sm"
+    class="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg border border-gray-300 bg-card text-card-foreground shadow-sm"
   >
     <div class="relative h-48 overflow-hidden rounded-t-lg">
       <img
@@ -33,7 +33,7 @@
       </p>
       <a
         [routerLink]="['/product', product.id]"
-        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground w-full h-10 px-4 py-2"
+        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-red-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-white/90 hover:bg-red-100/70 hover:text-red-800/90 w-full h-10 px-4 py-2"
       >
         Learn More
       </a>

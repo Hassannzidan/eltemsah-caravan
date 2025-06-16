@@ -2,27 +2,26 @@
     <app-hero-section-products></app-hero-section-products> 
 
     <app-search-filter-bar
-        [searchTerm]="searchTerm"
-        (searchTermChange)="searchTerm = $event"
-
-        [selectedCategory]="selectedCategory"
-        (selectedCategoryChange)="selectedCategory = $event"
-
-        [viewMode]="viewMode"
-        (viewModeChange)="viewMode = $event"
-
-        [categories]="categories"
-        [filteredProductsCount]="filteredProductsCount"
+  [searchTerm]="searchTerm"
+  (searchTermChange)="searchTerm = $event"
+  [selectedCategory]="selectedCategory"
+  (selectedCategoryChange)="selectedCategory = $event"
+  [viewMode]="viewMode"
+  (viewModeChange)="viewMode = $event"
+  [categories]="categories"
+  [filteredProductsCount]="filteredProductsCount"
+/>
+    <app-product-list
+    *ngIf="viewMode === 'list'"
+    [products]="filteredProducts"
     />
-    <app-product-grid [products]="products"></app-product-grid>
+    <app-product-grid
+    *ngIf="viewMode === 'grid'"
+    [products]="filteredProducts"
+    />
+    <ng-container *ngIf="filteredProducts.length === 0">
+       <app-no-result></app-no-result>
+    </ng-container>
 
-
-    <!-- <app-product-grid [products]="yourProductsArray"></app-product-grid> -->
- 
-
-    <app-product-list></app-product-list>
-    <app-product-card></app-product-card>
-    <app-product-list-item></app-product-list-item>
-    
 </div>
 
