@@ -1,5 +1,6 @@
 <div class="space-y-12 ">
     <app-hero-section-products></app-hero-section-products> 
+
     <app-search-filter-bar
         [searchTerm]="searchTerm"
         (searchTermChange)="searchTerm = $event"
@@ -10,9 +11,14 @@
         [viewMode]="viewMode"
         (viewModeChange)="viewMode = $event"
 
-        [allCategories]="categories"
+        [categories]="categories"
         [filteredProductsCount]="filteredProductsCount"
     />
+    <app-product-grid [products]="products"></app-product-grid>
+
+
+    <!-- <app-product-grid [products]="yourProductsArray"></app-product-grid> -->
+ 
 
     <app-product-list></app-product-list>
     <app-product-card></app-product-card>

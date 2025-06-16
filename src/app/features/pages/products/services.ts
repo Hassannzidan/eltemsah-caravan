@@ -5,7 +5,7 @@ import { ProductGrid } from "../../components/products-components/product-grid/p
 import { ProductList } from "../../components/products-components/product-list/product-list";
 import { ProductCard } from "../../components/products-components/product-card/product-card";
 import { ProductListItem } from "../../components/products-components/product-list-item/product-list-item";
-import { services } from '../../components/products-components/services.data';
+import { services, allProducts, allCategories, type Product, type Service } from '../../../data/products.data';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -136,4 +136,13 @@ export class Services {
   'Vehicle customization',
   'General steel structure fabrication'
 ];
+//for the grid view
+  // allServices: Service[] = services;
+  products: Product[] = allProducts;
+  // categoriesGrid: string[] = allCategories;
+
+
+
+  
+
 }

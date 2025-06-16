@@ -28,7 +28,7 @@ export class SearchFilterBar {
   @Input() viewMode: 'grid' | 'list' = 'grid';
   @Output() viewModeChange = new EventEmitter<'grid' | 'list'>();
 
-  @Input() allCategories: string[] = [];
+  @Input() categories: string[] = [];
   @Input() filteredProductsCount: number = 0;
 
   onSearchChange(value: string) {
