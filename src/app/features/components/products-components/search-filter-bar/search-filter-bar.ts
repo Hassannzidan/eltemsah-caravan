@@ -51,6 +51,10 @@ export class SearchFilterBar {
   @Input() categories: string[] = [];
   @Input() filteredProductsCount: number = 0;
 
+  @Input() showStatusFilter: boolean = false;
+  @Input() statusFilter: string = 'all';
+  @Output() statusFilterChange = new EventEmitter<string>();
+
   onSearchChange(value: string) {
     this.searchTermChange.emit(value);
   }
@@ -61,6 +65,10 @@ export class SearchFilterBar {
 
   onViewModeChange(mode: 'grid' | 'list') {
     this.viewModeChange.emit(mode);
+  }
+
+  onStatusFilterChange(value: string) {
+  this.statusFilterChange.emit(value);
   }
 
   // for detecting clicks outside the component to close the category menu

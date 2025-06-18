@@ -58,6 +58,20 @@
         </ul>
         </div>
 
+    <!-- status drop down  -->
+    <div *ngIf="showStatusFilter" class="w-full max-w-xs">
+      <select
+        [value]="statusFilter"
+        (change)="onStatusFilterChange($any($event.target).value)"
+        class="border border-slate-300 rounded-lg px-3 py-2 w-full"
+      >
+        <option value="all">All Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+
       <!-- View Mode Toggle -->
       <div class="flex items-center gap-2">
         <!-- Grid Button -->

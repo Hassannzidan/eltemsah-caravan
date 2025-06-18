@@ -1,0 +1,79 @@
+<div class="space-y-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-2">
+      <label class="label" for="name">Product Name</label>
+      <input
+        id="name"
+        [(ngModel)]="formData.name"
+        (ngModelChange)="updateField('name', $event)"
+        required
+        class="input"
+      />
+    </div>
+
+    <div class="space-y-2">
+      <label class="label" for="price">Price ($)</label>
+      <input
+        id="price"
+        type="number"
+        [(ngModel)]="formData.price"
+        (ngModelChange)="updateField('price', $event)"
+        class="input"
+      />
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label class="label" for="description">Description</label>
+    <textarea
+      id="description"
+      rows="3"
+      [(ngModel)]="formData.description"
+      (ngModelChange)="updateField('description', $event)"
+      class="textarea"
+      required
+    ></textarea>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-2">
+      <label class="label">Category</label>
+      <select
+        [(ngModel)]="formData.category"
+        (ngModelChange)="updateField('category', $event); updateField('subcategory', '')"
+        class="input"
+      >
+        <option disabled value="">Select category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="space-y-2" *ngIf="subcategories.length > 0">
+      <label class="label">Subcategory</label>
+      <select
+        [(ngModel)]="formData.subcategory"
+        (ngModelChange)="updateField('subcategory', $event)"
+        class="input"
+      >
+        <option disabled value="">Select subcategory</option>
+        <option *ngFor="let subcategory of subcategories" [value]="subcategory">
+          {{ subcategory }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label class="label">Status</label>
+    <select
+      [(ngModel)]="formData.status"
+      (ngModelChange)="updateField('status', $event)"
+      class="input w-40"
+    >
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+</div>

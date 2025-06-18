@@ -1,0 +1,21 @@
+<div
+  *ngIf="isOpen"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 bg-opacity-50  "
+>
+
+  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold">
+        {{ editingProduct ? 'Edit Product' : 'Add New Product' }}
+      </h2>
+    </div>
+
+    <app-comprehensive-product-form
+      [product]="editingProduct"
+      [categories]="categories"
+      (save)="onSave($event)"
+      (cancel)="onCancel()"
+    ></app-comprehensive-product-form>
+  </div>
+</div>
+

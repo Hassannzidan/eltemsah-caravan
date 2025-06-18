@@ -1,0 +1,26 @@
+<div class="space-y-6">
+    <app-section-toggle
+    [sections]="sections"
+    (onToggleSection)="toggleSectionVisibility($event)">
+  </app-section-toggle>
+  
+  <app-feature-manager
+    [title]="'Key Benefits'"
+    [icon]="'⭐'"
+    [features]="benefits"
+    (toggleFeature)="toggleFeatureVisibility($event, 'benefits')"
+    (addFeature)="addFeature('benefits', $event)"
+    (updateFeature)="updateFeature($event.id, 'benefits', $event.content)"
+    (deleteFeature)="deleteFeature($event, 'benefits')">
+  </app-feature-manager>
+
+  <app-feature-manager
+    [title]="'Features Included'"
+    [icon]="'🛡️'"
+    [features]="features"
+    (toggleFeature)="toggleFeatureVisibility($event, 'features')"
+    (addFeature)="addFeature('features', $event)"
+    (updateFeature)="updateFeature($event.id, 'features', $event.content)"
+    (deleteFeature)="deleteFeature($event, 'features')">
+  </app-feature-manager>
+</div>

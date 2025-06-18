@@ -1,0 +1,33 @@
+<div class="space-y-6">
+  <!-- <app-section-toggle
+    [sections]="productDetails.sections"
+    (toggleSection)="toggleSectionVisibility.emit($event)"
+  /> -->
+
+ <app-section-toggle
+  [sections]="productDetails.sections"
+  (onToggleSection)="toggleSectionVisibility($event)"
+/>
+
+
+
+  <app-feature-manager
+    title="Key Benefits"
+    iconName="lucideStar"
+    [features]="productDetails.benefits"
+    (toggleFeature)="handleToggleFeature('benefits', $event)"
+    (addFeature)="handleAddFeature('benefits', $event)"
+    (updateFeature)="handleUpdateFeature('benefits', $event.id, $event.content)"
+    (deleteFeature)="handleDeleteFeature('benefits', $event)"
+  />
+
+  <app-feature-manager
+    title="Features Included"
+    iconName="lucideShield"
+    [features]="productDetails.features"
+    (toggleFeature)="handleToggleFeature('features', $event)"
+    (addFeature)="handleAddFeature('features', $event)"
+    (updateFeature)="handleUpdateFeature('features', $event.id, $event.content)"
+    (deleteFeature)="handleDeleteFeature('features', $event)"
+  />
+</div>

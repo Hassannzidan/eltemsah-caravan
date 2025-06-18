@@ -261,6 +261,43 @@ export const productData = {
       'Construction': 'Aluminum frame with composite panels'
     }
   },
+  2: {
+    name: 'Mobile Office Caravan',
+    category: 'Multi-purpose Caravans',
+    subcategory: 'Office',
+    shortDescription: 'Professional mobile office solution',
+    longDescription: 'Elevate your business operations with our Mobile Office Caravan. Designed for professionals on the go, this caravan provides a fully functional office space wherever you need it.',
+    images: [
+      'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&h=600&fit=crop'
+    ],
+    benefits: [
+      'Reduce office rental costs by 50%',
+      'Work from anywhere - no location constraints',
+      'Quick setup - ready to use in under 10 minutes',
+      'High-speed internet connectivity options',
+      'Professional appearance enhances business image'
+    ],
+    features: [
+      'Ergonomic office furniture',
+      'High-speed Wi-Fi and network setup',
+      'Integrated power outlets and charging stations',
+      'Climate control for year-round comfort',
+      'Soundproofing for privacy',
+      'Custom branding options available'
+    ],
+    specifications: {
+      'Overall Length': '6.5 meters',
+      'Width': '2.4 meters',
+      'Height': '3.0 meters',
+      'Weight': '2,500 kg',
+      'Office Area': '12 m²',
+      'Power System': '220V + Generator backup',
+      'Water System': '100L fresh + 80L waste',
+      'Certification': 'Business compliant'
+    }
+  },
   4: {
     name: 'Gourmet Food Truck',
     category: 'Food Trucks',

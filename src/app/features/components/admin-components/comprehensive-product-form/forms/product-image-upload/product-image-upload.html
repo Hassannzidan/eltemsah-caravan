@@ -1,0 +1,40 @@
+ <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Product Image</h3>
+      </div>
+      <div class="card-content">
+        <div
+          class="upload-box"
+          [class.drag-active]="dragActive"
+          (dragenter)="handleDrag($event)"
+          (dragleave)="handleDrag($event)"
+          (dragover)="handleDrag($event)"
+          (drop)="handleDrop($event)"
+        >
+          <ng-container *ngIf="image; else uploadPrompt">
+            <div class="preview">
+              <img [src]="image" alt="Preview" />
+              <button type="button" (click)="removeImage()">Remove Image</button>
+            </div>
+          </ng-container>
+
+          <ng-template #uploadPrompt>
+            <div class="upload-prompt">
+              <div class="icon">📤</div>
+              <p class="title">Drop your image here</p>
+              <p class="subtitle">or click to browse</p>
+              <input
+                type="file"
+                id="file-upload"
+                hidden
+                accept="image/*"
+                (change)="handleFileInput($event)"
+              />
+              <label for="file-upload">
+                <button type="button">Choose File</button>
+              </label>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+</div>

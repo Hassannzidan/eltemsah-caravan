@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductSpecification } from "../../components/product-details/product-specification/product-specification";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { productData } from '../../../data/products.data';
 import { CommonModule } from '@angular/common';
 import { TrustIndicators } from '../../components/product-details/trust-indicators/trust-indicators';
@@ -20,7 +20,8 @@ import { ProductImageGallery } from '../../components/product-details/product-im
     ProductFeatures,
     ProductSpecification,
     ProductCTA,
-    TrustIndicators
+    TrustIndicators,
+    RouterLink
   ],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css'

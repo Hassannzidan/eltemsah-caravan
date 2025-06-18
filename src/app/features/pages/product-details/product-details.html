@@ -1,8 +1,8 @@
 <div class="min-h-screen bg-slate-50">
   <!-- Navigation -->
-  <div class="bg-white border-b sticky top-0 z-10">
+  <div class="bg-white border-b sticky top-0 z-10 mt-20">
     <div class="container mx-auto px-4 py-4">
-      <a routerLink="/services" class="inline-flex items-center text-slate-600 hover:text-orange-600 transition-colors">
+      <a [routerLink]='"/services"' class="cursor-pointer inline-flex items-center text-slate-600 hover:text-orange-600 transition-colors border rounded-lg p-2 hover:bg-red-100 font-semibold">
         ← Back to Services
       </a>
     </div>
@@ -33,7 +33,7 @@
     <div class="min-h-screen flex items-center justify-center">
       <div class="text-center">
         <h1 class="text-2xl font-bold text-slate-900 mb-4">Product Not Found</h1>
-        <a routerLink="/services" class="text-orange-600 hover:text-orange-700">← Back to Services</a>
+        <a routerLink="/services" class="text-orange-600 hover:text-orange-700 cursor-pointer">← Back to Services</a>
       </div>
     </div>
   </ng-template>

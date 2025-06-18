@@ -1,0 +1,97 @@
+<form (ngSubmit)="handleSubmit()" class="space-y-6">
+  <!-- Basic Info -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-2">
+      <label for="name">Product Name</label>
+      <input id="name" [(ngModel)]="formData.name" name="name" required class="input" />
+    </div>
+    <div class="space-y-2">
+      <label for="price">Price ($)</label>
+      <input id="price" type="number" [(ngModel)]="formData.price" name="price" class="input" />
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label for="description">Description</label>
+    <textarea id="description" rows="3" [(ngModel)]="formData.description" name="description" required class="textarea"></textarea>
+  </div>
+
+  <!-- Category + Subcategory -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-2">
+      <label>Category</label>
+      <select [(ngModel)]="formData.category" name="category" class="select" (change)="formData.subcategory = ''">
+        <option disabled value="">Select category</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+    <div class="space-y-2" *ngIf="availableSubcategories.length">
+      <label>Subcategory</label>
+      <select [(ngModel)]="formData.subcategory" name="subcategory" class="select">
+        <option disabled value="">Select subcategory</option>
+        <option *ngFor="let sub of availableSubcategories" [value]="sub">{{ sub }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="space-y-2">
+    <label>Status</label>
+    <select [(ngModel)]="formData.status" name="status" class="select w-40">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Image Upload -->
+  <div class="card">
+    <div class="p-4 border-b"><strong>Product Image</strong></div>
+    <div class="p-4">
+      <div
+        class="border-2 border-dashed rounded-lg p-6 text-center"
+        [ngClass]="dragActive ? 'border-orange-500 bg-orange-50' : 'border-slate-300'"
+        (dragover)="handleDrag($event, true)"
+        (dragleave)="handleDrag($event, false)"
+        (drop)="handleDrop($event)"
+      >
+        <div *ngIf="formData.image; else uploadBlock">
+          <img [src]="formData.image" alt="Preview" class="mx-auto max-h-48 rounded-lg object-cover" />
+          <button type="button" class="button-outline mt-2" (click)="formData.image = ''">Remove Image</button>
+        </div>
+        <ng-template #uploadBlock>
+          <div class="space-y-2">
+            <div class="text-lg font-medium">Drop your image here</div>
+            <div class="text-sm text-slate-500">or click to browse</div>
+            <input type="file" id="file-upload" class="hidden" accept="image/*" (change)="handleFileInput($event)" />
+            <label for="file-upload" class="button-outline cursor-pointer inline-block mt-2">Choose File</label>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags -->
+  <div class="card">
+    <div class="p-4 border-b"><strong>Tags</strong></div>
+    <div class="p-4 space-y-4">
+      <div class="flex gap-2">
+        <input [(ngModel)]="newTag" name="newTag" class="input" placeholder="Add a tag" (keydown.enter)="addTag(); $event.preventDefault()" />
+        <button type="button" class="button" (click)="addTag()">+</button>
+      </div>
+      <div class="flex flex-wrap gap-2" *ngIf="formData.tags.length > 0">
+        <span *ngFor="let tag of formData.tags" class="badge flex items-center gap-2">
+          {{ tag }}
+          <button type="button" (click)="removeTag(tag)" class="text-sm ml-1">✕</button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="flex justify-end gap-4 pt-4">
+    <button type="button" class="button-outline" (click)="onCancel.emit()">Cancel</button>
+    <button type="submit" class="button bg-orange-600 hover:bg-orange-700">
+      {{ product ? 'Update Product' : 'Create Product' }}
+    </button>
+  </div>
+</form>
