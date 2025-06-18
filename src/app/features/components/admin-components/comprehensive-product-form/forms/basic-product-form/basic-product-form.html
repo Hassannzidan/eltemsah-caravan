@@ -1,47 +1,22 @@
-<div class="space-y-6">
+<div class="space-y-6 my-2">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="space-y-2">
-      <label class="label" for="name">Product Name</label>
+      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">Product Name</label>
       <input
         id="name"
         [(ngModel)]="formData.name"
         (ngModelChange)="updateField('name', $event)"
         required
-        class="input"
+        class="mt-1 flex h-10 w-full rounded-md border border-gray-300/90 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
       />
     </div>
 
-    <div class="space-y-2">
-      <label class="label" for="price">Price ($)</label>
-      <input
-        id="price"
-        type="number"
-        [(ngModel)]="formData.price"
-        (ngModelChange)="updateField('price', $event)"
-        class="input"
-      />
-    </div>
-  </div>
-
-  <div class="space-y-2">
-    <label class="label" for="description">Description</label>
-    <textarea
-      id="description"
-      rows="3"
-      [(ngModel)]="formData.description"
-      (ngModelChange)="updateField('description', $event)"
-      class="textarea"
-      required
-    ></textarea>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="space-y-2">
-      <label class="label">Category</label>
+     <div class="space-y-2">
+      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Category</label>
       <select
         [(ngModel)]="formData.category"
         (ngModelChange)="updateField('category', $event); updateField('subcategory', '')"
-        class="input"
+        class="mt-1 flex h-10 w-full rounded-md border border-gray-300/90 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
       >
         <option disabled value="">Select category</option>
         <option *ngFor="let category of categories" [value]="category">
@@ -51,11 +26,11 @@
     </div>
 
     <div class="space-y-2" *ngIf="subcategories.length > 0">
-      <label class="label">Subcategory</label>
+      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Subcategory</label>
       <select
         [(ngModel)]="formData.subcategory"
         (ngModelChange)="updateField('subcategory', $event)"
-        class="input"
+        class="mt-1 flex h-10 w-full rounded-md border border-gray-300/90 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
       >
         <option disabled value="">Select subcategory</option>
         <option *ngFor="let subcategory of subcategories" [value]="subcategory">
@@ -66,11 +41,27 @@
   </div>
 
   <div class="space-y-2">
-    <label class="label">Status</label>
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="description">Description</label>
+    <textarea
+      id="description"
+      rows="3"
+      [(ngModel)]="formData.description"
+      (ngModelChange)="updateField('description', $event)"
+      class="mt-1 flex min-h-[80px] w-full rounded-md border border-gray-300/90 bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      required
+    ></textarea>
+  </div>
+
+  <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+   
+  </div> -->
+
+  <div class="space-y-2">
+    <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Status</label>
     <select
       [(ngModel)]="formData.status"
       (ngModelChange)="updateField('status', $event)"
-      class="input w-40"
+      class="mt-1 flex h-10  rounded-md border border-gray-300/90 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm w-40"
     >
       <option value="active">Active</option>
       <option value="inactive">Inactive</option>

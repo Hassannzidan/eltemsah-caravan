@@ -1,116 +1,87 @@
-<!-- <form (submit)="submitForm($event)" class="space-y-6"> -->
-  <!-- Tabs -->
-  <!-- <div class="w-full grid grid-cols-2 gap-2 bg-gray-100 rounded-md p-1">
-    <button
-      type="button"
-      class="py-2 text-sm font-medium rounded-md transition-all"
-      [class.bg-white]="tabs() === 'basic'"
-      (click)="tabs.set('basic')"
-    >
-      Basic Information
-    </button>
-    <button
-      type="button"
-      class="py-2 text-sm font-medium rounded-md transition-all"
-      [class.bg-white]="tabs() === 'details'"
-      (click)="tabs.set('details')"
-    >
-      Product Details
-    </button>
-  </div> -->
-
-  <!-- Tabs Content -->
-  <!-- <div *ngIf="tabs() === 'basic'" class="space-y-6"> -->
-    <!-- هنا ضيف مكونات زي BasicProductFormComponent -->
-    <!-- مثال فقط -->
-    <!-- <div class="border p-4 rounded-md bg-white">BasicProductFormComponent goes here</div>
-    <div class="border p-4 rounded-md bg-white">ProductImageUploadComponent goes here</div>
-    <div class="border p-4 rounded-md bg-white">ProductTagsManagerComponent goes here</div>
-  </div> -->
-
-  <!-- <div *ngIf="tabs() === 'details'" class="space-y-6">
-    <div class="border p-4 rounded-md bg-white">ProductDetailsFormComponent goes here</div>
-    <div class="border p-4 rounded-md bg-white">LeadTimeFormComponent goes here</div>
-  </div> -->
-
-  <!-- Actions -->
-  <!-- <div class="flex justify-end gap-4 pt-4">
-    <button
-      type="button"
-      class="px-4 py-2 text-sm border rounded-md hover:bg-gray-100"
-      (click)="onCancel.emit()"
-    >
-      Cancel
-    </button>
-    <button
-      type="submit"
-      class="px-4 py-2 text-sm bg-orange-600 text-white rounded-md hover:bg-orange-700"
-    >
-      {{ product ? 'Update Product' : 'Create Product' }}
-    </button>
-  </div>
-</form> -->
-
-
 <form (ngSubmit)="handleSubmit()" class="space-y-6">
   <!-- Tabs -->
-  <div class="grid grid-cols-2 w-full border-b">
-    <button type="button"
-      class="py-2 text-center border-b-2"
-      [class.border-orange-600]="activeTab() === 'basic'"
-      (click)="activeTab.set('basic')">Basic Information</button>
+   <div class="TABS w-full">
+     <!-- <div class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid grid-cols-2 w-full  ">
+       <button type="button"
+         class="py-2 text-center border-b-2 "
+         [class.border-orange-600]="activeTab() === 'basic'"
+         (click)="activeTab.set('basic')">Basic Information</button>
+   
+       <button type="button"
+         class="py-2 text-center border-b-2"
+         [class.border-orange-600]="activeTab() === 'details'"
+         (click)="activeTab.set('details')">Product Details</button>
+     </div> -->
+     <div class="h-12 p-1 items-center justify-center rounded-md bg-gray-100/80  text-gray-500 grid grid-cols-2 w-full border border-gray-300/20">
+        <button type="button"
+          class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer"
+          [ngClass]="{
+            'bg-white text-black shadow-sm': activeTab() === 'basic',
+            'text-muted-foreground': activeTab() !== 'basic'
+          }"
+          (click)="activeTab.set('basic')">
+          Basic Information
+        </button>
 
-    <button type="button"
-      class="py-2 text-center border-b-2"
-      [class.border-orange-600]="activeTab() === 'details'"
-      (click)="activeTab.set('details')">Product Details</button>
-  </div>
+        <button type="button"
+          class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer"
+          [ngClass]="{
+            'bg-white text-black shadow-sm': activeTab() === 'details',
+            'text-muted-foreground': activeTab() !== 'details'
+          }"
+          (click)="activeTab.set('details')">
+          Product Details
+        </button>
+      </div>
 
-  <!-- Basic Tab -->
-  <div *ngIf="activeTab() === 'basic'" class="space-y-6">
+   
+     <!-- Basic Tab -->
+     <div *ngIf="activeTab() === 'basic'" class="space-y-6">
+   
+       <app-basic-product-form
+         [formData]="formData()"
+         [categories]="categories"
+         [subcategories]="availableSubcategories"
+         (formDataChange)="updateFormData($event)"
+       />
+   
+      <app-product-image-upload
+       [image]="formData().image"
+       (imageChange)="updateImage($event)"
+      />
+   
+     <app-product-tags-manager
+       [tags]="formData().tags"
+       (tagsChange)="updateTags($event)"
+     />
+     </div>
+     
+     <!-- Details Tab -->  
+     <div *ngIf="activeTab() === 'details'" class="space-y-6">
+       <app-product-details-form
+         [productDetails]="productDetails()"
+         (productDetailsChange)="productDetails.set($event)"
+       />
+   <!-- 
+       <app-lead-time-form
+         [leadTime]="productDetails().leadTime"
+         [availability]="productDetails().availability"
+         (leadTimeChange)="updateLeadTime($event)"
+         (availabilityChange)="updateAvailability($event)"
+       /> -->
+     </div>
+   
+     <!-- Buttons -->
+     <div class="flex justify-end gap-4 pt-4">
+       <button type="button"
+         class="px-4 py-2 border border-gray-400 rounded"
+         (click)="cancel.emit()">Cancel</button>
+       <button type="submit"
+         class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded">
+         {{ product ? 'Update Product' : 'Create Product' }}
+       </button>
+     </div>
 
-    <app-basic-product-form
-      [formData]="formData()"
-      [categories]="categories"
-      [subcategories]="availableSubcategories"
-      (formDataChange)="updateFormData($event)"
-    />
-
-   <app-product-image-upload
-    [image]="formData().image"
-    (imageChange)="updateImage($event)"
-   />
-
-  <app-product-tags-manager
-    [tags]="formData().tags"
-    (tagsChange)="updateTags($event)"
-  />
-
-  <!-- Details Tab -->  
-  <div *ngIf="activeTab() === 'details'" class="space-y-6">
-    <app-product-details-form
-      [productDetails]="productDetails()"
-      (productDetailsChange)="productDetails.set($event)"
-    />
-<!-- 
-    <app-lead-time-form
-      [leadTime]="productDetails().leadTime"
-      [availability]="productDetails().availability"
-      (leadTimeChange)="updateLeadTime($event)"
-      (availabilityChange)="updateAvailability($event)"
-    /> -->
-  </div>
-
-  <!-- Buttons -->
-  <div class="flex justify-end gap-4 pt-4">
-    <button type="button"
-      class="px-4 py-2 border border-gray-400 rounded"
-      (click)="cancel.emit()">Cancel</button>
-    <button type="submit"
-      class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded">
-      {{ product ? 'Update Product' : 'Create Product' }}
-    </button>
-  </div>
-  </div>
-  <!-- End of Tabs Content -->
+     <!-- End of Tabs Content -->
+   </div>
 </form>
