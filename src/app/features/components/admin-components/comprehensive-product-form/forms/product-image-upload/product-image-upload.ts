@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgIconsModule, provideIcons } from '@ng-icons/core';
+import { lucideUpload } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-product-image-upload',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgIconsModule],
   templateUrl: './product-image-upload.html',
-  styleUrl: './product-image-upload.css'
+  styleUrl: './product-image-upload.css',
+  viewProviders:[provideIcons({lucideUpload})]
 })
 export class ProductImageUpload {
-  /**
-   * Component for uploading product images with drag-and-drop support.
-   * Allows users to upload images by dragging them into the designated area or by selecting files from their device.
-   * Emits the uploaded image data as a base64 string to the parent component.
-   */
+
 
   @Input() image: string = '';
   @Output() imageChange = new EventEmitter<string>();

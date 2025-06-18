@@ -1,4 +1,4 @@
- <div class="card">
+ <div class="card my-4">
       <div class="card-header">
         <h3 class="card-title">Product Image</h3>
       </div>
@@ -20,7 +20,9 @@
 
           <ng-template #uploadPrompt>
             <div class="upload-prompt">
-              <div class="icon">📤</div>
+              <span class="text-5xl text-gray-400/90 ">
+                <ng-icon name="lucideUpload" class="h-5 w-5" ></ng-icon>
+              </span>
               <p class="title">Drop your image here</p>
               <p class="subtitle">or click to browse</p>
               <input
@@ -31,7 +33,10 @@
                 (change)="handleFileInput($event)"
               />
               <label for="file-upload">
-                <button type="button">Choose File</button>
+                <button 
+                  type="button"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg  text-sm font-medium ring-offset-red-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-gray-300/90 bg-white hover:bg-red-200/75 hover:text-red-700 p-2 px-3 mt-2"
+                >Choose File</button>
               </label>
             </div>
           </ng-template>
