@@ -11,10 +11,11 @@
           (dragover)="handleDrag($event)"
           (drop)="handleDrop($event)"
         >
-          <ng-container *ngIf="image; else uploadPrompt">
-            <div class="preview">
-              <img [src]="image" alt="Preview" />
-              <button type="button" (click)="removeImage()">Remove Image</button>
+          <ng-container *ngIf="images.length > 0; else uploadPrompt">
+            <div class="preview" *ngFor="let img of images; let i = index">
+              <!-- <img [src]="img" alt="Preview" /> -->
+              <img [src]="previewUrls[i]" alt="Preview" />
+              <button type="button" (click)="removeImage(i)">Remove Image</button>
             </div>
           </ng-container>
 
@@ -25,20 +26,27 @@
               </span>
               <p class="title">Drop your image here</p>
               <p class="subtitle">or click to browse</p>
-              <input
-                type="file"
-                id="file-upload"
-                hidden
-                accept="image/*"
-                (change)="handleFileInput($event)"
-              />
-              <label for="file-upload">
-                <button 
-                  type="button"
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg  text-sm font-medium ring-offset-red-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-gray-300/90 bg-white hover:bg-red-200/75 hover:text-red-700 p-2 px-3 mt-2"
-                >Choose File</button>
-              </label>
+                <input
+              type="file"
+              hidden
+              accept="image/*"
+              #fileInput
+              (change)="handleFileInput($event)"
+              multiple
+            />
+               <button
+              type="button"
+              (click)="fileInput.click()"
+              class="bg-amber-400 rounded-xl px-3 py-1.5 mt-3 cursor-pointer hover:rounded-lg hover:-translate-y-1 hover:bg-amber-400/80 transform transition-all duration-200"
+            >
+              Choose File
+            </button>
             </div>
+
+          
+
+           
+
           </ng-template>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Services } from './features/pages/products/services';
 import { Login } from './features/components/auth-components/login';
 import { AdminDashboard } from './features/pages/admin-dashboard/admin-dashboard';
 import { ProductDetails } from './features/pages/product-details/product-details';
+import { OtpComponent } from './features/components/auth-components/otp-component/otp-component';
 
 export const routes: Routes = [
   { path: '', component: Home , title: 'Home' }, 
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'contact', component: Contact  , title: 'Contact Us' },
   { path: 'login', component: Login , title: 'Login' },
   { path: 'admin', component: AdminDashboard , title: 'Admin Dashboard' },
+  { path: 'verify-otp', component: OtpComponent , title: 'Verification Step' },
   
   {
     path: 'product/:id',

@@ -9,16 +9,18 @@
               <p class="text-slate-600">Manage your products and services</p>
             </div>
             <div class="flex gap-3">
-              <a
-                routerLink="/admin/product-details"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-              >
-              <span class="">
+            <button 
+              [routerLink]="['/products/manage']"
+              class="cursor-pointer bg-blue-600 hover:bg-blue-700 
+                    text-white px-4 py-2 rounded-lg font-medium 
+                    flex items-center">
+
+              <span>
                 <ng-icon [name]="lucideSettings" class="w-4 h-4 mr-2"></ng-icon>
               </span>
-                Manage Product Details
-              </a>
-              
+              Manage Product Details
+            </button>
+
             <button (click)="openAddForm()" 
                     class="cursor-pointer bg-orange-600 hover:bg-orange-700 
                            text-white px-4 py-2 rounded-lg font-medium 
@@ -30,11 +32,13 @@
                   Add Product
             </button>
 
-              <app-add-product-dialog
-                [isOpen]="isFormOpen()"
+            <!-- *ngIf="isFormOpen()" -->
+            <!-- (save)="saveProduct($event)" -->
+            <app-add-product-dialog
+                *ngIf="isFormOpen()" 
+                (closeDialog)="isFormOpen.set(false)"
                 [editingProduct]="editingProduct()"
                 [categories]="categories"
-                (save)="saveProduct($event)"
                 (cancel)="isFormOpen.set(false)"
               ></app-add-product-dialog>
 
@@ -73,7 +77,7 @@
         >
           <div class="relative h-48 overflow-hidden rounded-t-lg">
             <img
-              [src]="product.image"
+              [src]="product.images"
               [alt]="product.name"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
@@ -166,7 +170,7 @@
         >
           <div class="w-32 h-32 flex-shrink-0">
             <img
-              [src]="product.image"
+              [src]="product.images"
               [alt]="product.name"
               class="w-full h-full object-cover"
             />

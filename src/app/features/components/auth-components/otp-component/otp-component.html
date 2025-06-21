@@ -1,0 +1,52 @@
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
+  <div class="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+    <div class="mx-auto flex w-full max-w-md flex-col space-y-16">
+      <div class="flex flex-col items-center justify-center text-center space-y-2">
+        <div class="font-semibold text-3xl">
+          <p>Email Verification</p>
+        </div>
+        <div class="flex flex-row text-sm font-medium text-gray-400">
+          <p>We have sent a code to your {{ email }}</p>
+        </div>
+      </div>
+
+      <div>
+        <form (ngSubmit)="verify()">
+          <div class="flex flex-col space-y-16">
+            <div class="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
+              <div class="w-16 h-16 ">
+                <input [(ngModel)]="otp1" name="otp1" maxlength="1" class="w-full h-full text-center px-5 rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text">
+              </div>
+              <div class="w-16 h-16 ">
+                <input [(ngModel)]="otp2" name="otp2" maxlength="1" class="w-full h-full text-center px-5 rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text">
+              </div>
+              <div class="w-16 h-16 ">
+                <input [(ngModel)]="otp3" name="otp3" maxlength="1" class="w-full h-full text-center px-5 rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text">
+              </div>
+              <div class="w-16 h-16 ">
+                <input [(ngModel)]="otp4" name="otp4" maxlength="1" class="w-full h-full text-center px-5 rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="text">
+              </div>
+            </div>
+
+            <div class="flex flex-col space-y-5">
+              <div>
+                <button type="submit" class="w-full py-5 bg-blue-700 text-white rounded-xl text-sm font-medium">
+                  Verify Account
+                </button>
+              </div>
+
+              <div class="text-center text-sm font-medium text-gray-500">
+                <p>Didn't receive code?</p>
+                <a class="text-blue-600" (click)="resendOtp()" href="#">Resend</a>
+              </div>
+
+              <div *ngIf="error" class="text-center text-red-500 text-sm">
+                {{ error }}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

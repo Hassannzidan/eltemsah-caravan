@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
-import { lucideShield, lucideStar } from '@ng-icons/lucide';
+import { lucideEye, lucideEyeClosed, lucideShield, lucideSquarePen, lucideStar, lucideTrash2 } from '@ng-icons/lucide';
 
 // export interface ProductFeature {
 //   id: string;
@@ -26,7 +26,11 @@ export interface ProductFeature {
   viewProviders: [
     provideIcons({
       lucideStar,
-      lucideShield
+      lucideShield,
+      lucideSquarePen,
+      lucideTrash2,
+      lucideEye,
+      lucideEyeClosed,
     })
   ]
 })

@@ -46,14 +46,13 @@ export interface ProductData {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   description: string;
-  image: string;
+  images: string[];
   category: string;
   subcategory?: string;
-  status: 'active' | 'inactive';
-  price?: number;
+  status?: 'active' | 'inactive';
   tags: string[];
   productDetails?: ProductData;
 }

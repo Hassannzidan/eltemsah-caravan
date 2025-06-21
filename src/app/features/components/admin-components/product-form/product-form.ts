@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import type { Product } from '../../../../data/product.types';
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  category: string;
-  subcategory?: string;
-  status: 'active' | 'inactive';
-  price?: number;
-  tags: string[];
-}
+// interface Product {
+//   id: number;
+//   name: string;
+//   description: string;
+//   image: string;
+//   category: string;
+//   subcategory?: string;
+//   status: 'active' | 'inactive';
+//   price?: number;
+//   tags: string[];
+// }
 
 @Component({
   selector: 'app-product-form',
@@ -29,11 +30,10 @@ export class ProductForm {
   formData = {
     name: '',
     description: '',
-    image: '',
+    images: [] as string[],
     category: '',
     subcategory: '',
     status: 'active' as 'active' | 'inactive',
-    price: 0,
     tags: [] as string[]
   };
 
@@ -58,11 +58,10 @@ export class ProductForm {
       this.formData = {
         name: this.product.name,
         description: this.product.description,
-        image: this.product.image,
+        images: Array.isArray(this.product.images) ? [...this.product.images] : [],
         category: this.product.category,
         subcategory: this.product.subcategory ?? '',
-        status: this.product.status,
-        price: this.product.price ?? 0,
+        status: this.product.status ?? 'active',
         tags: [...this.product.tags]
       };
     }
@@ -81,7 +80,11 @@ export class ProductForm {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.formData.image = e.target?.result as string;
+        if (this.formData.images.length === 0) {
+          this.formData.images.push(e.target?.result as string);
+        } else {
+          this.formData.images[0] = e.target?.result as string;
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -92,7 +95,11 @@ export class ProductForm {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.formData.image = e.target?.result as string;
+        if (this.formData.images.length === 0) {
+          this.formData.images.push(e.target?.result as string);
+        } else {
+          this.formData.images[0] = e.target?.result as string;
+        }
       };
       reader.readAsDataURL(file);
     }

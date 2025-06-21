@@ -15,7 +15,6 @@ export class BasicProductForm {
     category: string;
     subcategory: string;
     status: 'active' | 'inactive';
-    price: number;
   };
 
   @Input() categories: string[] = [];

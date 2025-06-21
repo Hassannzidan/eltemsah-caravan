@@ -46,8 +46,8 @@
        />
    
       <app-product-image-upload
-       [image]="formData().image"
-       (imageChange)="updateImage($event)"
+        [images]="productImages"
+        (imagesChange)="productImages = $event"
       />
    
      <app-product-tags-manager
@@ -62,13 +62,7 @@
          [productDetails]="productDetails()"
          (productDetailsChange)="productDetails.set($event)"
        />
-   <!-- 
-       <app-lead-time-form
-         [leadTime]="productDetails().leadTime"
-         [availability]="productDetails().availability"
-         (leadTimeChange)="updateLeadTime($event)"
-         (availabilityChange)="updateAvailability($event)"
-       /> -->
+
      </div>
    
      <!-- Buttons -->
@@ -76,12 +70,20 @@
        <button type="button"
          class="px-4 py-2 border border-gray-400 rounded"
          (click)="cancel.emit()">Cancel</button>
+         
        <button type="submit"
          class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded">
          {{ product ? 'Update Product' : 'Create Product' }}
        </button>
      </div>
 
-     <!-- End of Tabs Content -->
+
    </div>
 </form>
+   <!-- 
+       <app-lead-time-form
+         [leadTime]="productDetails().leadTime"
+         [availability]="productDetails().availability"
+         (leadTimeChange)="updateLeadTime($event)"
+         (availabilityChange)="updateAvailability($event)"
+       /> -->

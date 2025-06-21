@@ -1,8 +1,4 @@
 <div class="space-y-6">
-  <!-- <app-section-toggle
-    [sections]="productDetails.sections"
-    (toggleSection)="toggleSectionVisibility.emit($event)"
-  /> -->
 
  <app-section-toggle
   [sections]="productDetails.sections"
@@ -30,4 +26,29 @@
     (updateFeature)="handleUpdateFeature('features', $event.id, $event.content)"
     (deleteFeature)="handleDeleteFeature('features', $event)"
   />
+
+
+<app-specifications-manager
+  [specifications]="productDetails.specifications"
+  (toggleSpecVisibility)="toggleSpecificationVisibility($event)"
+  (addCategory)="addSpecificationCategory($event)"
+  (addSpecification)="addSpecification($event)"
+  (updateCategory)="updateSpecificationCategory($event)"
+  (updateSpecification)="updateSpecification($event)"
+  (deleteSpecification)="deleteSpecification($event)"
+></app-specifications-manager>
+
+<app-customization-manager
+  [customizations]="productDetails.customizations"
+  (toggleCategoryVisibility)="toggleCustomizationCategoryVisibility($event)"
+  (toggleOptionVisibility)="toggleCustomizationOptionVisibility($event)"
+  (addCategory)="addCustomizationCategory($event)"
+  (addOption)="addCustomizationOption($event)"
+  (updateCategory)="updateCustomizationCategory($event)"
+  (updateOption)="updateCustomizationOption($event)"
+  (deleteCategory)="deleteCustomizationCategory($event)"
+  (deleteOption)="deleteCustomizationOption($event)"
+></app-customization-manager>
+
+
 </div>

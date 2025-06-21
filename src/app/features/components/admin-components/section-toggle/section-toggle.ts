@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
+import { lucideEye, lucideEyeClosed, lucideEyeOff } from '@ng-icons/lucide';
 
 export interface ProductSection {
   id: string;
@@ -16,7 +16,8 @@ export interface ProductSection {
   styleUrl: './section-toggle.css',
   viewProviders: [provideIcons({
     lucideEye,
-    lucideEyeOff
+    lucideEyeOff,
+    lucideEyeClosed
   })]
 })
 export class SectionToggle {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, type OnInit, type OnChanges, type SimpleChanges } from '@angular/core';
 import { ComprehensiveProductForm } from "../comprehensive-product-form/comprehensive-product-form";
 
 @Component({
@@ -9,19 +9,30 @@ import { ComprehensiveProductForm } from "../comprehensive-product-form/comprehe
   styleUrl: './add-product-dialog.css'
 })
 export class AddProductDialog {
+ 
   @Input() isOpen: boolean = false;
   @Input() editingProduct: any = null;
   @Input() categories: any[] = [];
 
-  @Output() save = new EventEmitter<any>();
+
+  // @Output() save = new EventEmitter<any>();
+  @Output() closeDialog  = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  onSave(product: any) {
-    this.save.emit(product);
-  }
+
+  
+  // onSave(product: any) {
+  //   this.save.emit(product);
+    // this.isOpen = false;
+  // }
 
   onCancel() {
     this.cancel.emit();
   }
+
+  handleSaveSuccess() {
+    this.closeDialog.emit();
+  }
+
 
 }

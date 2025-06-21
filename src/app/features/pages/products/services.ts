@@ -3,9 +3,10 @@ import { HeroSectionProducts } from "../../components/products-components/hero-s
 import { SearchFilterBar } from "../../components/products-components/search-filter-bar/search-filter-bar";
 import { ProductGrid } from "../../components/products-components/product-grid/product-grid";
 import { ProductList } from "../../components/products-components/product-list/product-list";
-import { services, allProducts, allCategories, type Product, type Service } from '../../../data/products.data';
+import { services, allProducts, allCategories, Service } from '../../../data/products.data';
 import { CommonModule } from '@angular/common';
 import { NoResult } from "../../components/products-components/no-result/no-result";
+import type { Product } from '../../../data/product.types';
 
 @Component({
   selector: 'app-services',
@@ -18,6 +19,11 @@ export class Services {
   searchTerm: string = '';
   selectedCategory: string = 'all';
   viewMode: 'grid' | 'list' = 'grid';
+  tags: string[] = [
+    'Hassan',
+    'Ali',
+    'Manar'
+  ];
   // filteredProductsCount: number = 0;
   
   categories = [

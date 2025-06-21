@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { lucideUpload } from '@ng-icons/lucide';
@@ -11,12 +11,37 @@ import { lucideUpload } from '@ng-icons/lucide';
   styleUrl: './product-image-upload.css',
   viewProviders:[provideIcons({lucideUpload})]
 })
-export class ProductImageUpload {
+export class ProductImageUpload implements OnInit {
 
 
-  @Input() image: string = '';
-  @Output() imageChange = new EventEmitter<string>();
+  @Input() images: File[] = [];
+  @Output() imagesChange = new EventEmitter<File[]>();
   dragActive = false;
+  previewUrls: string[] = [];
+
+
+  ngOnInit() {
+  document.addEventListener('paste', this.handlePaste.bind(this));
+  }
+
+  handlePaste(event: ClipboardEvent) {
+  const items = event.clipboardData?.items;
+  if (items) {
+    const files: File[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item.type.startsWith('image/')) {
+        const file = item.getAsFile();
+        if (file) {
+          files.push(file);
+        }
+      }
+    }
+    if (files.length) {
+      this.readFiles(files);
+    }
+  }
+}
 
   handleDrag(event: DragEvent) {
     event.preventDefault();
@@ -30,35 +55,60 @@ export class ProductImageUpload {
   }
 
   handleDrop(event: DragEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.dragActive = false;
+  event.preventDefault();
+  event.stopPropagation();
+  this.dragActive = false;
 
-    const file = event.dataTransfer?.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        this.imageChange.emit(result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const files = event.dataTransfer?.files;
+  if (files) {  
+      this.readFiles(Array.from(files));
+  }
   }
 
   handleFileInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        this.imageChange.emit(result);
-      };
-      reader.readAsDataURL(file);
-    }
+const input = event.target as HTMLInputElement;
+const files = input.files;
+if (!files || !files[0] || !files[0].type.startsWith('image/')) {
+  alert('Only image files are allowed!');
+  return;
+}
+
+  if (files && files.length > 0) {
+    this.readFiles(Array.from(files));
   }
 
-  removeImage() {
-    this.imageChange.emit('');
+  input.value = '';
   }
+
+
+ readFiles(files: File[]) {
+  const maxImages = 5;
+  const newImages: File[] = [];
+  const newUrls: string[] = [];
+  const currentCount = this.images.length;
+
+  files.forEach((file) => {
+    if (file.type.startsWith('image/') && currentCount + newImages.length < maxImages) {
+      newImages.push(file);
+      newUrls.push(URL.createObjectURL(file));
+    }
+  });
+
+  if (newImages.length > 0) {
+    this.imagesChange.emit([...this.images, ...newImages]);
+    this.previewUrls.push(...newUrls);  // أضف URLs
+  }
+  }
+
+
+
+
+ removeImage(index: number) {
+  const updated = [...this.images];
+  updated.splice(index, 1);
+  this.imagesChange.emit(updated);
+  this.previewUrls.splice(index, 1);
+}
+
+
 }

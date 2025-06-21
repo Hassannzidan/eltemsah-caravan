@@ -5,7 +5,7 @@
   >
     <div class="relative h-48 overflow-hidden rounded-t-lg">
       <img
-        [src]="product.image"
+        [src]="product.images"
         [alt]="product.name"
         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
       />
@@ -16,6 +16,7 @@
           {{ product.subcategory }}
         </span>
       </div>
+
     </div>
 
     <div class="flex flex-col space-y-1.5 p-6">
@@ -31,6 +32,13 @@
       <p class="text-slate-600 text-sm mb-4">
         {{ product.description }}
       </p>
+      
+      <div *ngIf="product.tags?.length" class="flex flex-wrap gap-2 mb-4">
+        <span *ngFor="let tag of product.tags" class="badge border border-gray-300/50 bg-white text-slate-800 px-2 py-1 text-xs rounded-xl">
+          {{ tag }}
+        </span>
+      </div>
+
       <a
         [routerLink]="['/product', product.id]"
         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-red-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-white/90 hover:bg-red-100/70 hover:text-red-800/90 w-full h-10 px-4 py-2"

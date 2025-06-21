@@ -1,0 +1,84 @@
+<div class="bg-white shadow rounded-lg p-6">
+  <h2 class="text-xl font-bold flex items-center gap-2 mb-4 text-purple-600">
+    🎨 Customization Options
+  </h2>
+
+  <div class="flex gap-2 mb-4">
+    <input [(ngModel)]="newCategory"
+           (keypress.enter)="handleAddCategory()"
+           placeholder="Add new customization category..."
+           class="flex-1 border rounded px-3 py-2 text-sm" />
+    <button (click)="handleAddCategory()" class="bg-purple-600 text-white px-3 py-1 rounded text-sm">+</button>
+  </div>
+
+  <div *ngFor="let category of customizations" class="border rounded-lg p-4 mb-4 space-y-3">
+    <!-- Category Header -->
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3 flex-1">
+        <span [class.text-green-500]="category.isVisible" [class.text-gray-400]="!category.isVisible">👁</span>
+
+        <ng-container *ngIf="editingCategory === category.id; else displayCategory">
+          <input [(ngModel)]="editCategoryName"
+                 (keypress.enter)="saveEditCategory()"
+                 class="flex-1 border px-2 py-1 text-sm rounded" />
+        </ng-container>
+        <ng-template #displayCategory>
+          <h4 [class.text-gray-400]="!category.isVisible" class="font-semibold">
+            {{ category.category }}
+          </h4>
+        </ng-template>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input type="checkbox"
+               [checked]="category.isVisible"
+               (change)="toggleCategoryVisibility.emit(category.id)" />
+
+        <ng-container *ngIf="editingCategory === category.id; else editCategoryBtns">
+          <button (click)="saveEditCategory()" class="text-xs bg-green-500 text-white px-2 py-1 rounded">💾</button>
+          <button (click)="editingCategory=null" class="text-xs bg-gray-300 px-2 py-1 rounded">❌</button>
+        </ng-container>
+        <ng-template #editCategoryBtns>
+          <button (click)="startEditCategory(category)" class="text-xs bg-blue-500 text-white px-2 py-1 rounded">✏️</button>
+          <button (click)="deleteCategory.emit(category.id)" class="text-xs bg-red-500 text-white px-2 py-1 rounded">🗑</button>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Add new option -->
+    <div class="flex gap-2 ml-6">
+      <input [(ngModel)]="newOptions[category.id]"
+             (keypress.enter)="handleAddOption(category.id)"
+             placeholder="Add new option..."
+             class="flex-1 border px-2 py-1 text-sm rounded" />
+      <button (click)="handleAddOption(category.id)" class="bg-purple-600 text-white px-3 py-1 rounded text-sm">+</button>
+    </div>
+
+    <!-- Options List -->
+    <div *ngFor="let option of category.options" class="flex items-center gap-2 ml-6 p-2 bg-gray-100 rounded">
+      <span [class.text-green-500]="option.isVisible" [class.text-gray-400]="!option.isVisible" class="text-sm">👁</span>
+
+      <ng-container *ngIf="editingOption === option.id; else displayOption">
+        <input [(ngModel)]="editOptionName"
+               (keypress.enter)="saveEditOption(category.id)"
+               class="flex-1 border px-2 py-1 text-sm rounded" />
+      </ng-container>
+      <ng-template #displayOption>
+        <span [class.text-gray-400]="!option.isVisible" class="flex-1 text-sm">{{ option.option }}</span>
+      </ng-template>
+
+      <input type="checkbox"
+             [checked]="option.isVisible"
+             (change)="toggleOptionVisibility.emit({ categoryId: category.id, optionId: option.id })" />
+
+      <ng-container *ngIf="editingOption === option.id; else editOptionBtns">
+        <button (click)="saveEditOption(category.id)" class="text-xs bg-green-500 text-white px-2 py-1 rounded">💾</button>
+        <button (click)="editingOption=null" class="text-xs bg-gray-300 px-2 py-1 rounded">❌</button>
+      </ng-container>
+      <ng-template #editOptionBtns>
+        <button (click)="startEditOption(option.id, option.option)" class="text-xs bg-blue-500 text-white px-2 py-1 rounded">✏️</button>
+        <button (click)="deleteOption.emit({ categoryId: category.id, optionId: option.id })" class="text-xs bg-red-500 text-white px-2 py-1 rounded">🗑</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

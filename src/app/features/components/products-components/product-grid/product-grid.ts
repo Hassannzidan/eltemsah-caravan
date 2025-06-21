@@ -14,6 +14,7 @@ import { allCategories, allProducts, services, type Product, type Service } from
 })
 export class ProductGrid {
     @Input() products: Product[] = [];
+    @Input() tags: string[] = [] ;
 
 
 }

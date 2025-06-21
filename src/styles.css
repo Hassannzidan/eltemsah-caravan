@@ -20,3 +20,15 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.snackbar-success {
+  background-color: #10b981 !important; /* أخضر */
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #dc2626 !important; /* أحمر */
+  color: white;
+}

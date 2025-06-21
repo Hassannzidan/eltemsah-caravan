@@ -5,10 +5,10 @@
       <label for="name">Product Name</label>
       <input id="name" [(ngModel)]="formData.name" name="name" required class="input" />
     </div>
-    <div class="space-y-2">
+    <!-- <div class="space-y-2">
       <label for="price">Price ($)</label>
       <input id="price" type="number" [(ngModel)]="formData.price" name="price" class="input" />
-    </div>
+    </div> -->
   </div>
 
   <div class="space-y-2">
@@ -54,9 +54,11 @@
         (dragleave)="handleDrag($event, false)"
         (drop)="handleDrop($event)"
       >
-        <div *ngIf="formData.image; else uploadBlock">
-          <img [src]="formData.image" alt="Preview" class="mx-auto max-h-48 rounded-lg object-cover" />
-          <button type="button" class="button-outline mt-2" (click)="formData.image = ''">Remove Image</button>
+        <div *ngIf="formData.images; else uploadBlock">
+          <img [src]="formData.images[0]" *ngIf="formData.images.length" alt="Preview" class="mx-auto max-h-48 rounded-lg object-cover"/>
+
+          <!-- <img [src]="formData.image"  /> -->
+          <button type="button" class="button-outline mt-2" (click)="formData.images[0] = ''">Remove Image</button>
         </div>
         <ng-template #uploadBlock>
           <div class="space-y-2">
@@ -95,3 +97,5 @@
     </button>
   </div>
 </form>
+
+<!-- this is page is not useful more #606 -->

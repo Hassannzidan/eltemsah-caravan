@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
-import { Header } from "./features/layout/header/header/header";
-import { Footer } from "./features/layout/footer/footer/footer";
+import { Header } from './features/layout/header/header/header';
+import { Footer } from './features/layout/footer/footer/footer';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer,CommonModule],
+  imports: [
+    RouterOutlet, 
+    Header, 
+    Footer, 
+    CommonModule,
+    MatSnackBarModule
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected title = 'eltemsah-caravan';
@@ -19,5 +26,4 @@ export class App {
       this.showLayout = !this.router.url.includes('/login');
     });
   }
-
 }

@@ -3,13 +3,16 @@ import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
+import { BasicProductForm } from './forms/basic-product-form/basic-product-form';
+import { ProductImageUpload } from './forms/product-image-upload/product-image-upload';
+import { ProductTagsManager } from './forms/product-tags-manager/product-tags-manager';
+import { LeadTimeForm } from './forms/lead-time-form/lead-time-form';
+import { ProductDetailsForm } from './forms/product-details-form/product-details-form';
+import { ProductService } from '../../../../services/product/product.service';
+import { Router } from '@angular/router';
 import type { Product, ProductData } from '../../../../data/product.types';
-import { BasicProductForm } from "./forms/basic-product-form/basic-product-form";
-import { ProductImageUpload } from "./forms/product-image-upload/product-image-upload";
-import { ProductTagsManager } from "./forms/product-tags-manager/product-tags-manager";
-import { LeadTimeForm } from "./forms/lead-time-form/lead-time-form";
-import { ProductDetailsForm } from "./forms/product-details-form/product-details-form";
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule,  MatSnackBar } from '@angular/material/snack-bar';
 
 type Category =
   | 'Multi-purpose Caravans'
@@ -23,25 +26,82 @@ type Category =
   | 'Vehicle Customization'
   | 'General Steel Structure Fabrication';
 
-
-
 @Component({
   selector: 'app-comprehensive-product-form',
-  imports: [CommonModule, FormsModule, BasicProductForm, ProductImageUpload, ProductTagsManager, ProductDetailsForm],
+  imports: [
+    CommonModule,
+    FormsModule,
+    BasicProductForm,
+    ProductImageUpload,
+    ProductTagsManager,
+    ProductDetailsForm,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './comprehensive-product-form.html',
   styleUrl: './comprehensive-product-form.css',
-  viewProviders: [provideIcons({
-    lucideEye,
-    lucideEyeOff
-  })]
+  viewProviders: [
+    provideIcons({
+      lucideEye,
+      lucideEyeOff,
+    }),
+  ],
 })
 export class ComprehensiveProductForm {
-[x: string]: any;
+  [x: string]: any;
+  isLoading = false;
 
   @Input() product: Product | null = null;
   @Input() categories: string[] = [];
-  @Output() save = new EventEmitter<Omit<Product, 'id'>>();
+  // @Output() save = new EventEmitter<Omit<Product, 'id'>>();
+  // @Output() save = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
+  @Output() saveSuccess = new EventEmitter<void>();
+
+  
+  productDetails = signal<ProductData>(this.getDefaultProductDetails());
+  productImages: File[] = [];
+  activeTab = signal<'basic' | 'details'>('basic');
+
+  subcategories: Record<string, string[]> = {
+    'Multi-purpose Caravans': ['Travel', 'Office', 'Workshop'],
+    'Food Trucks': ['Gourmet', 'Street Food', 'Ice Cream'],
+    'Kiosks and Booths': ['Retail', 'Information', 'Security'],
+    'Container Modifications': ['Office', 'Storage', 'Workshop'],
+    Trailers: ['Cargo', 'Car Carrier', 'Equipment'],
+    'Mobile Food Outlets': ['Coffee', 'Juice', 'Snacks'],
+    'Custom Utility Vehicles': ['Maintenance', 'Medical', 'Emergency'],
+    'Bicycles and Tricycles': ['Cargo', 'Vending', 'Delivery'],
+    'Vehicle Customization': ['Interior', 'Exterior', 'Branding'],
+    'General Steel Structure Fabrication': [
+      'Industrial',
+      'Commercial',
+      'Components',
+    ],
+  };
+
+  ngOnInit() {
+    if (this.product) {
+      this.formData.set({
+        name: this.product.name,
+        description: this.product.description,
+        image: this.product.images[0] ?? '',
+        category: this.product.category,
+        subcategory: this.product.subcategory ?? '',
+        status: this.product.status ?? 'active',
+        tags: this.product.tags,
+      });
+      this.productDetails.set(
+        this.product.productDetails ?? this.getDefaultProductDetails()
+      );
+    }
+  }
+
+  constructor(
+    private productService: ProductService, 
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   formData = signal({
     name: '',
@@ -50,96 +110,193 @@ export class ComprehensiveProductForm {
     category: '',
     subcategory: '',
     status: 'active' as 'active' | 'inactive',
-    price: 0,
-    tags: [] as string[]
+    tags: [] as string[],
   });
 
-  productDetails = signal<ProductData>(this.getDefaultProductDetails());
-
-  activeTab = signal<'basic' | 'details'>('basic');
-
-  subcategories: Record<string, string[]> = {
-    'Multi-purpose Caravans': ['Travel', 'Office', 'Workshop'],
-    'Food Trucks': ['Gourmet', 'Street Food', 'Ice Cream'],
-    'Kiosks and Booths': ['Retail', 'Information', 'Security'],
-    'Container Modifications': ['Office', 'Storage', 'Workshop'],
-    'Trailers': ['Cargo', 'Car Carrier', 'Equipment'],
-    'Mobile Food Outlets': ['Coffee', 'Juice', 'Snacks'],
-    'Custom Utility Vehicles': ['Maintenance', 'Medical', 'Emergency'],
-    'Bicycles and Tricycles': ['Cargo', 'Vending', 'Delivery'],
-    'Vehicle Customization': ['Interior', 'Exterior', 'Branding'],
-    'General Steel Structure Fabrication': ['Industrial', 'Commercial', 'Components']
-  };
-
-  ngOnInit() {
-    if (this.product) {
-      this.formData.set({
-        name: this.product.name,
-        description: this.product.description,
-        image: this.product.image,
-        category: this.product.category,
-        subcategory: this.product.subcategory ?? '',
-        status: this.product.status,
-        price: this.product.price ?? 0,
-        tags: this.product.tags
-      });
-      this.productDetails.set(this.product.productDetails ?? this.getDefaultProductDetails());
-    }
-  }
-
   get availableSubcategories(): string[] {
-    return this.formData().category ? this.subcategories[this.formData().category] || [] : [];
+    return this.formData().category
+      ? this.subcategories[this.formData().category] || []
+      : [];
   }
+
+  // handleSubmit() {
+  //   this.isLoading = true;
+
+  //   const productToSubmit: Omit<Product, 'id'> = {
+  //     ...this.formData(),
+  //     images: this.productImages.length
+  //       ? this.productImages
+  //       : [this.formData().image],
+  //     productDetails: this.productDetails(),
+  //   };
+
+  //   // Check if updating or creating
+  //   if (this.product?.id) {
+  //     this.productService.updateProduct(this.product.id, productToSubmit).subscribe({
+  //       next: () => {
+  //         this.snackBar.open('Product updated successfully!', 'Close', {
+  //           duration: 3000,
+  //           horizontalPosition: 'right',
+  //           verticalPosition: 'top',
+  //         });
+
+  //         this.isLoading = false;
+  //         this.save.emit(productToSubmit); // بدل التنقل، ابعت المنتج
+  //       },
+  //       error: (err) => {
+  //         this.isLoading = false;
+  //         console.error('Update failed', err);
+  //       },
+  //     });
+  //   } else {
+  //     this.productService.createProduct(productToSubmit).subscribe({
+  //       next: () => {
+  //         this.snackBar.open('Product created successfully!', 'Close', {
+  //           duration: 3000,
+  //           horizontalPosition: 'right',
+  //           verticalPosition: 'top',
+  //           panelClass: ['snackbar-success'],
+  //         });
+
+  //         this.isLoading = false;
+  //         this.save.emit(productToSubmit); // ابعت المنتج الجديد
+  //       },
+  //       error: (err) => console.error('Create failed', err),
+  //     });
+  //   }
+
+  // }
 
   handleSubmit() {
-    this.save.emit({
-      ...this.formData(),
-      productDetails: this.productDetails()
-    });
-  }
+  this.isLoading = true;
+
+  const formData = new FormData();
+  formData.append('name', this.formData().name);
+  formData.append('description', this.formData().description);
+  formData.append('category', this.formData().category);
+  formData.append('subcategory', this.formData().subcategory);
+  formData.append('status', this.formData().status);
+  formData.append('tags', JSON.stringify(this.formData().tags));
+  formData.append('productDetails', JSON.stringify(this.productDetails()));
+
+  // 👇 إرسال أكثر من صورة
+  this.productImages.forEach((file, index) => {
+    formData.append('images', file); // الاسم 'images' مهم ومتطابق مع backend
+  });
+
+  // 👇 استدعاء الـ service
+  this.productService.createProduct(formData).subscribe({
+    next: () => {
+      this.snackBar.open('Product created successfully!', 'Close', {
+
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-success'],
+      });
+      this.isLoading = false;
+      this['saveSuccess'].emit();
+    },
+    error: (err) => {
+      this.isLoading = false;
+      console.error('Create failed', err);
+    },
+  });
+}
 
   getDefaultProductDetails(): ProductData {
     return {
       id: 1,
       sections: [
         { id: 'benefits', name: 'Key Benefits', isVisible: true, order: 1 },
-        { id: 'features', name: 'Features Included', isVisible: true, order: 2 },
-        { id: 'specifications', name: 'Technical Specifications', isVisible: true, order: 3 },
-        { id: 'customization', name: 'Customization Options', isVisible: true, order: 4 },
-        { id: 'availability', name: 'Lead Times & Availability', isVisible: true, order: 5 },
+        {
+          id: 'features',
+          name: 'Features Included',
+          isVisible: true,
+          order: 2,
+        },
+        {
+          id: 'specifications',
+          name: 'Technical Specifications',
+          isVisible: true,
+          order: 3,
+        },
+        {
+          id: 'customization',
+          name: 'Customization Options',
+          isVisible: true,
+          order: 4,
+        },
+        {
+          id: 'availability',
+          name: 'Lead Times & Availability',
+          isVisible: true,
+          order: 5,
+        },
         { id: 'inquiry', name: 'Inquiry Form', isVisible: true, order: 6 },
         { id: 'cta', name: 'Call to Action', isVisible: true, order: 7 },
-        { id: 'trust', name: 'Trust Indicators', isVisible: true, order: 8 }
+        { id: 'trust', name: 'Trust Indicators', isVisible: true, order: 8 },
       ],
       benefits: [
-        { id: 'b1', sectionId: 'benefits', content: 'Save 40% on accommodation costs during travel', isVisible: true, order: 1 },
-        { id: 'b2', sectionId: 'benefits', content: 'Complete independence and freedom to explore', isVisible: true, order: 2 }
+        {
+          id: 'b1',
+          sectionId: 'benefits',
+          content: 'Save 40% on accommodation costs during travel',
+          isVisible: true,
+          order: 1,
+        },
+        {
+          id: 'b2',
+          sectionId: 'benefits',
+          content: 'Complete independence and freedom to explore',
+          isVisible: true,
+          order: 2,
+        },
       ],
       features: [
-        { id: 'f1', sectionId: 'features', content: 'Luxury interior with premium finishes', isVisible: true, order: 1 },
-        { id: 'f2', sectionId: 'features', content: 'Full kitchen with modern appliances', isVisible: true, order: 2 }
+        {
+          id: 'f1',
+          sectionId: 'features',
+          content: 'Luxury interior with premium finishes',
+          isVisible: true,
+          order: 1,
+        },
+        {
+          id: 'f2',
+          sectionId: 'features',
+          content: 'Full kitchen with modern appliances',
+          isVisible: true,
+          order: 2,
+        },
       ],
       specifications: [],
       customizations: [],
       leadTime: {
         production: '8-12 weeks',
         delivery: '1-2 weeks (domestic)',
-        customization: 'Add 2-4 weeks for custom modifications'
+        customization: 'Add 2-4 weeks for custom modifications',
       },
       availability: 'Available - 3 units in production queue',
       orderProcess: [
-        { id: 'o1', step: 'Submit inquiry with your requirements', isVisible: true },
-        { id: 'o2', step: 'Receive detailed quote within 24 hours', isVisible: true }
-      ]
+        {
+          id: 'o1',
+          step: 'Submit inquiry with your requirements',
+          isVisible: true,
+        },
+        {
+          id: 'o2',
+          step: 'Receive detailed quote within 24 hours',
+          isVisible: true,
+        },
+      ],
     };
   }
-
   updateFormData(partialData: Partial<ReturnType<typeof this.formData>>): void {
     this.formData.set({ ...this.formData(), ...partialData });
   }
 
   updateImage(image: string): void {
-  this.formData.set({ ...this.formData(), image });
+    this.formData.set({ ...this.formData(), image });
   }
 
   updateTags(tags: string[]): void {
@@ -153,110 +310,4 @@ export class ComprehensiveProductForm {
   updateAvailability(availability: string): void {
     this.productDetails.set({ ...this.productDetails(), availability });
   }
-
 }
-// export class ComprehensiveProductForm {
-
-//   @Input() product: Product | null = null;
-//   @Input() categories: string[] = [];
-//   @Output() onSave = new EventEmitter<Omit<Product, 'id'>>();
-//   @Output() onCancel = new EventEmitter<void>();
-
-//   tabs = signal<'basic' | 'details'>('basic');
-
-//   formData = signal({
-//     name: '',
-//     description: '',
-//     image: '',
-//     category: '',
-//     subcategory: '',
-//     status: 'active' as 'active' | 'inactive',
-//     price: 0,
-//     tags: [] as string[]
-//   });
-
-//   productDetails = signal<ProductData>(this.getDefaultProductDetails());
-
-//   ngOnInit() {
-//     if (this.product) {
-//       this.formData.set({
-//         name: this.product.name,
-//         description: this.product.description,
-//         image: this.product.image,
-//         category: this.product.category,
-//         subcategory: this.product.subcategory || '',
-//         status: this.product.status,
-//         price: this.product.price || 0,
-//         tags: [...this.product.tags]
-//       });
-
-//       if (this.product.productDetails) {
-//         this.productDetails.set(this.product.productDetails);
-//       }
-//     }
-//   }
-
-//  get availableSubcategories(): string[] {
-//   const all: Record<Category, string[]> = {
-//     'Multi-purpose Caravans': ['Travel', 'Office', 'Workshop'],
-//     'Food Trucks': ['Gourmet', 'Street Food', 'Ice Cream'],
-//     'Kiosks and Booths': ['Retail', 'Information', 'Security'],
-//     'Container Modifications': ['Office', 'Storage', 'Workshop'],
-//     'Trailers': ['Cargo', 'Car Carrier', 'Equipment'],
-//     'Mobile Food Outlets': ['Coffee', 'Juice', 'Snacks'],
-//     'Custom Utility Vehicles': ['Maintenance', 'Medical', 'Emergency'],
-//     'Bicycles and Tricycles': ['Cargo', 'Vending', 'Delivery'],
-//     'Vehicle Customization': ['Interior', 'Exterior', 'Branding'],
-//     'General Steel Structure Fabrication': ['Industrial', 'Commercial', 'Components']
-//   };
-
-//   const category = this.formData().category as Category;
-//   return all[category] || [];
-// }
-
-//   private getDefaultProductDetails(): ProductData {
-//     return {
-//       id: 1,
-//       sections: [
-//         { id: 'benefits', name: 'Key Benefits', isVisible: true, order: 1 },
-//         { id: 'features', name: 'Features Included', isVisible: true, order: 2 },
-//         { id: 'specifications', name: 'Technical Specifications', isVisible: true, order: 3 },
-//         { id: 'customization', name: 'Customization Options', isVisible: true, order: 4 },
-//         { id: 'availability', name: 'Lead Times & Availability', isVisible: true, order: 5 },
-//         { id: 'inquiry', name: 'Inquiry Form', isVisible: true, order: 6 },
-//         { id: 'cta', name: 'Call to Action', isVisible: true, order: 7 },
-//         { id: 'trust', name: 'Trust Indicators', isVisible: true, order: 8 }
-//       ],
-//       benefits: [
-//         { id: 'b1', sectionId: 'benefits', content: 'Save 40% on accommodation costs during travel', isVisible: true, order: 1 },
-//         { id: 'b2', sectionId: 'benefits', content: 'Complete independence and freedom to explore', isVisible: true, order: 2 }
-//       ],
-//       features: [
-//         { id: 'f1', sectionId: 'features', content: 'Luxury interior with premium finishes', isVisible: true, order: 1 },
-//         { id: 'f2', sectionId: 'features', content: 'Full kitchen with modern appliances', isVisible: true, order: 2 }
-//       ],
-//       specifications: [],
-//       customizations: [],
-//       leadTime: {
-//         production: '8-12 weeks',
-//         delivery: '1-2 weeks (domestic)',
-//         customization: 'Add 2-4 weeks for custom modifications'
-//       },
-//       availability: 'Available - 3 units in production queue',
-//       orderProcess: [
-//         { id: 'o1', step: 'Submit inquiry with your requirements', isVisible: true },
-//         { id: 'o2', step: 'Receive detailed quote within 24 hours', isVisible: true }
-//       ]
-//     };
-//   }
-
-//   submitForm(e: Event) {
-//     e.preventDefault();
-//     this.onSave.emit({
-//       ...this.formData(),
-//       productDetails: this.productDetails()
-//     });
-//   }
-
-
-// }
