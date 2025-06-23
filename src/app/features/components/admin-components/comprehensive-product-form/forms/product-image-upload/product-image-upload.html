@@ -13,7 +13,6 @@
         >
           <ng-container *ngIf="images.length > 0; else uploadPrompt">
             <div class="preview" *ngFor="let img of images; let i = index">
-              <!-- <img [src]="img" alt="Preview" /> -->
               <img [src]="previewUrls[i]" alt="Preview" />
               <button type="button" (click)="removeImage(i)">Remove Image</button>
             </div>
@@ -26,27 +25,30 @@
               </span>
               <p class="title">Drop your image here</p>
               <p class="subtitle">or click to browse</p>
-                <input
-              type="file"
-              hidden
-              accept="image/*"
-              #fileInput
-              (change)="handleFileInput($event)"
-              multiple
-            />
-               <button
+
+              <!-- الصورة القديمة تظهر هنا -->
+              <div *ngIf="existingImage && images.length === 0" class="mt-4 w-48 h-32 rounded overflow-hidden border">
+                <img [src]="existingImage" class="object-cover w-full h-full" alt="Current Image" />
+              </div>
+
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                #fileInput
+                (change)="handleFileInput($event)"
+                multiple
+              />
+
+              <button
               type="button"
               (click)="fileInput.click()"
               class="bg-amber-400 rounded-xl px-3 py-1.5 mt-3 cursor-pointer hover:rounded-lg hover:-translate-y-1 hover:bg-amber-400/80 transform transition-all duration-200"
-            >
+              >
               Choose File
             </button>
             </div>
-
-          
-
-           
-
+            
           </ng-template>
         </div>
       </div>

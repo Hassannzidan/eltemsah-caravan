@@ -1,8 +1,5 @@
-<div
-class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacity-50  "
->
-<!-- *ngIf="isOpen" -->
-<!--  -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacity-50">
+
 
   <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
     <div class="mb-4">
@@ -16,8 +13,9 @@ class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacit
       [product]="editingProduct"
       [categories]="categories"
       (cancel)="onCancel()"
-      (saveSuccess)="handleSaveSuccess()"
-    ></app-comprehensive-product-form>
+      (saveSuccess)="handleSaveSuccess($event)"
+      ></app-comprehensive-product-form>
+      <!-- (saveSuccess)="handleSaveSuccess()" -->
   </div>
 </div>
 

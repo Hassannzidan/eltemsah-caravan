@@ -1,17 +1,6 @@
 <form (ngSubmit)="handleSubmit()" class="space-y-6">
   <!-- Tabs -->
    <div class="TABS w-full">
-     <!-- <div class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid grid-cols-2 w-full  ">
-       <button type="button"
-         class="py-2 text-center border-b-2 "
-         [class.border-orange-600]="activeTab() === 'basic'"
-         (click)="activeTab.set('basic')">Basic Information</button>
-   
-       <button type="button"
-         class="py-2 text-center border-b-2"
-         [class.border-orange-600]="activeTab() === 'details'"
-         (click)="activeTab.set('details')">Product Details</button>
-     </div> -->
      <div class="h-12 p-1 items-center justify-center rounded-md bg-gray-100/80  text-gray-500 grid grid-cols-2 w-full border border-gray-300/20">
         <button type="button"
           class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer"
@@ -47,6 +36,7 @@
    
       <app-product-image-upload
         [images]="productImages"
+        [existingImage]="formData().image"
         (imagesChange)="productImages = $event"
       />
    

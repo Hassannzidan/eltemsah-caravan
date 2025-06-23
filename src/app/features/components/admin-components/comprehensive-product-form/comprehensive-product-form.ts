@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
 import { BasicProductForm } from './forms/basic-product-form/basic-product-form';
-import { ProductImageUpload } from './forms/product-image-upload/product-image-upload';
 import { ProductTagsManager } from './forms/product-tags-manager/product-tags-manager';
 import { LeadTimeForm } from './forms/lead-time-form/lead-time-form';
 import { ProductDetailsForm } from './forms/product-details-form/product-details-form';
@@ -13,6 +12,7 @@ import { Router } from '@angular/router';
 import type { Product, ProductData } from '../../../../data/product.types';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule,  MatSnackBar } from '@angular/material/snack-bar';
+import { ProductImageUpload } from './forms/product-image-upload/product-image-upload';
 
 type Category =
   | 'Multi-purpose Caravans'
@@ -53,10 +53,8 @@ export class ComprehensiveProductForm {
 
   @Input() product: Product | null = null;
   @Input() categories: string[] = [];
-  // @Output() save = new EventEmitter<Omit<Product, 'id'>>();
-  // @Output() save = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
-  @Output() saveSuccess = new EventEmitter<void>();
+  @Output() saveSuccess = new EventEmitter<Product>();
 
   
   productDetails = signal<ProductData>(this.getDefaultProductDetails());
@@ -119,90 +117,83 @@ export class ComprehensiveProductForm {
       : [];
   }
 
-  // handleSubmit() {
-  //   this.isLoading = true;
 
-  //   const productToSubmit: Omit<Product, 'id'> = {
-  //     ...this.formData(),
-  //     images: this.productImages.length
-  //       ? this.productImages
-  //       : [this.formData().image],
-  //     productDetails: this.productDetails(),
-  //   };
+//   handleSubmit() {
+//   this.isLoading = true;
 
-  //   // Check if updating or creating
-  //   if (this.product?.id) {
-  //     this.productService.updateProduct(this.product.id, productToSubmit).subscribe({
-  //       next: () => {
-  //         this.snackBar.open('Product updated successfully!', 'Close', {
-  //           duration: 3000,
-  //           horizontalPosition: 'right',
-  //           verticalPosition: 'top',
-  //         });
+//   const formData = new FormData();
+//   formData.append('name', this.formData().name);
+//   formData.append('description', this.formData().description);
+//   formData.append('category', this.formData().category);
+//   formData.append('subcategory', this.formData().subcategory);
+//   formData.append('status', this.formData().status);
+//   formData.append('tags', JSON.stringify(this.formData().tags));
+//   formData.append('productDetails', JSON.stringify(this.productDetails()));
 
-  //         this.isLoading = false;
-  //         this.save.emit(productToSubmit); // بدل التنقل، ابعت المنتج
-  //       },
-  //       error: (err) => {
-  //         this.isLoading = false;
-  //         console.error('Update failed', err);
-  //       },
-  //     });
-  //   } else {
-  //     this.productService.createProduct(productToSubmit).subscribe({
-  //       next: () => {
-  //         this.snackBar.open('Product created successfully!', 'Close', {
-  //           duration: 3000,
-  //           horizontalPosition: 'right',
-  //           verticalPosition: 'top',
-  //           panelClass: ['snackbar-success'],
-  //         });
+//   this.productImages.forEach((file, index) => {
+//     formData.append('images', file); 
+//     });
 
-  //         this.isLoading = false;
-  //         this.save.emit(productToSubmit); // ابعت المنتج الجديد
-  //       },
-  //       error: (err) => console.error('Create failed', err),
-  //     });
-  //   }
 
-  // }
+//   this.productService.createProduct(formData).subscribe({
+//     next: (response) => {
+//       this.snackBar.open('Product created successfully!', 'Close', {
+//         duration: 3000,
+//         horizontalPosition: 'right',
+//         verticalPosition: 'top',
+//         panelClass: ['snackbar-success'],
+//       });
+//       this.isLoading = false;
+//       const createdProduct = response; 
+//       console.log(response);
+//       this.saveSuccess.emit(createdProduct);
 
+//       // this['saveSuccess'].emit();
+//     },
+//     error: (err) => {
+//       this.isLoading = false;
+//       console.error('Create failed', err);
+//     },
+//   });
+// }
   handleSubmit() {
-  this.isLoading = true;
+    this.isLoading = true;
 
-  const formData = new FormData();
-  formData.append('name', this.formData().name);
-  formData.append('description', this.formData().description);
-  formData.append('category', this.formData().category);
-  formData.append('subcategory', this.formData().subcategory);
-  formData.append('status', this.formData().status);
-  formData.append('tags', JSON.stringify(this.formData().tags));
-  formData.append('productDetails', JSON.stringify(this.productDetails()));
+    const formData = new FormData();
+    formData.append('name', this.formData().name);
+    formData.append('description', this.formData().description);
+    formData.append('category', this.formData().category);
+    formData.append('subcategory', this.formData().subcategory);
+    formData.append('status', this.formData().status);
+    formData.append('tags', JSON.stringify(this.formData().tags));
+    formData.append('productDetails', JSON.stringify(this.productDetails()));
 
-  // 👇 إرسال أكثر من صورة
-  this.productImages.forEach((file, index) => {
-    formData.append('images', file); // الاسم 'images' مهم ومتطابق مع backend
-  });
+    this.productImages.forEach((file) => {
+      formData.append('images', file);
+    });
 
-  // 👇 استدعاء الـ service
-  this.productService.createProduct(formData).subscribe({
-    next: () => {
-      this.snackBar.open('Product created successfully!', 'Close', {
+    // ✅ لو في منتج موجود، نعمل Update
+    const request$ = this.product?._id
+      ? this.productService.updateProduct(this.product._id, formData)
+      : this.productService.createProduct(formData);
 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['snackbar-success'],
-      });
-      this.isLoading = false;
-      this['saveSuccess'].emit();
-    },
-    error: (err) => {
-      this.isLoading = false;
-      console.error('Create failed', err);
-    },
-  });
-}
+    request$.subscribe({
+      next: (response) => {
+        this.snackBar.open(
+          this.product ? 'Product updated successfully!' : 'Product created successfully!',
+          'Close',
+          { duration: 3000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['snackbar-success'] }
+        );
+        this.isLoading = false;
+        this.saveSuccess.emit(response); // ✅ يرجع للـ parent سواء كان جديد أو معدل
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Operation failed', err);
+      },
+    });
+  }
+
 
   getDefaultProductDetails(): ProductData {
     return {

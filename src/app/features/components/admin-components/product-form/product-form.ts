@@ -28,6 +28,7 @@ export class ProductForm {
   @Output() onCancel = new EventEmitter<void>();
 
   formData = {
+    _id:'',
     name: '',
     description: '',
     images: [] as string[],
@@ -56,6 +57,7 @@ export class ProductForm {
   ngOnInit() {
     if (this.product) {
       this.formData = {
+        _id:this.product._id,
         name: this.product.name,
         description: this.product.description,
         images: Array.isArray(this.product.images) ? [...this.product.images] : [],

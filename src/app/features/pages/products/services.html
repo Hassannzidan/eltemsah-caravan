@@ -2,10 +2,10 @@
     <app-hero-section-products></app-hero-section-products> 
 
   <app-search-filter-bar
-  [searchTerm]="searchTerm"
-  (searchTermChange)="searchTerm = $event"
-  [selectedCategory]="selectedCategory"
-  (selectedCategoryChange)="selectedCategory = $event"
+  [searchTerm]="searchTerm()"
+  (searchTermChange)="searchTerm.set($event)"
+  [selectedCategory]="selectedCategory()"
+  (selectedCategoryChange)="selectedCategory.set($event)"
   [viewMode]="viewMode"
   (viewModeChange)="viewMode = $event"
   [categories]="categories"
@@ -15,11 +15,11 @@
   <div class="container mx-auto px-6 lg:px-8">
     <app-product-list
     *ngIf="viewMode === 'list'"
-    [products]="filteredProducts"
+    [products]="filteredProducts()"
     />
     <app-product-grid
     *ngIf="viewMode === 'grid'"
-    [products]="filteredProducts"
+    [products]="filteredProducts()"
     />
   </div>
   <ng-container *ngIf="filteredProducts.length === 0">

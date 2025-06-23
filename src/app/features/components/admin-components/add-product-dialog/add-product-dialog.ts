@@ -13,25 +13,16 @@ export class AddProductDialog {
   @Input() isOpen: boolean = false;
   @Input() editingProduct: any = null;
   @Input() categories: any[] = [];
-
-
-  // @Output() save = new EventEmitter<any>();
-  @Output() closeDialog  = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
-
-
   
-  // onSave(product: any) {
-  //   this.save.emit(product);
-    // this.isOpen = false;
-  // }
+  @Output() cancel = new EventEmitter<void>();
+  @Output() saveSuccess = new EventEmitter<any>();
 
   onCancel() {
     this.cancel.emit();
   }
 
-  handleSaveSuccess() {
-    this.closeDialog.emit();
+  handleSaveSuccess(Product:any) {
+    this.saveSuccess.emit(Product);
   }
 
 

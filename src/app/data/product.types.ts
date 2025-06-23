@@ -46,7 +46,7 @@ export interface ProductData {
 }
 
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   images: string[];

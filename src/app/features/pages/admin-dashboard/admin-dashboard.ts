@@ -1,8 +1,12 @@
-import { Component, signal, computed, type OnInit } from '@angular/core';
+import {
+  Component,
+  signal,
+  computed,
+  type OnInit,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProductTagsManager } from '../../components/admin-components/comprehensive-product-form/forms/product-tags-manager/product-tags-manager';
-import { ComprehensiveProductForm } from '../../components/admin-components/comprehensive-product-form/comprehensive-product-form';
 import { provideIcons, NgIconsModule } from '@ng-icons/core';
 import {
   lucidePlus,
@@ -32,52 +36,25 @@ import { Product } from '../../../data/product.types';
     lucideTrash2,
     lucideSquarePen,
     lucideSettings,
-    lucidePlus
+    lucidePlus,
   }),
 })
 export class AdminDashboard {
-
+  // Icons
   lucideSettings = 'lucideSettings';
   lucidePlus = 'lucidePlus';
-  dialogOpen = false; 
 
-  productTags: string[] = ['electronics', 'gadgets'];
+  // Filters
+  searchTerm = signal('');
+  selectedCategory = signal('all');
+  statusFilter = signal('all');
+  viewMode = signal<'grid' | 'list'>('grid');
 
-  products = signal<Product[]>([
-    {
-      id: '1',
-      name: 'Travel Caravan Deluxe',
-      description: 'Luxury travel caravan with modern amenities',
-      images:
-        ['https://images.unsplash.com/photo-1563783850023-077d97825802?w=400&h=300&fit=crop'],
-      category: 'Multi-purpose Caravans',
-      subcategory: 'Travel',
-      status: 'active',
-      tags: ['luxury', 'travel', 'family'],
-    },
-    {
-      id: '4',
-      name: 'Gourmet Food Truck',
-      description: 'High-end food truck with premium equipment',
-      images:['https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=400&h=300&fit=crop'],
-      category: 'Food Trucks',
-      subcategory: 'Gourmet',
-      status: 'active',
-      tags: ['food', 'business', 'mobile'],
-    },
-    {
-      id: '7',
-      name: 'Shopping Mall Kiosk',
-      description: 'Premium retail kiosk for malls',
-      images:
-        ['https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop'],
-      category: 'Kiosks and Booths',
-      subcategory: 'Retail',
-      status: 'inactive',
-      tags: ['retail', 'mall', 'commercial'],
-    },
-  ]);
+  // Dialogs and Editing
+  editingProduct = signal<Product | null>(null);
+  isFormOpen = signal(false);
 
+  // Categories
   categories = [
     'Multi-purpose Caravans',
     'Food Trucks',
@@ -91,142 +68,107 @@ export class AdminDashboard {
     'General Steel Structure Fabrication',
   ];
 
-  searchTerm = signal('');
-  selectedCategory = signal('all');
-  statusFilter = signal('all');
-  viewMode = signal<'grid' | 'list'>('grid');
-  editingProduct = signal<Product | null>(null);
-  isFormOpen = signal(false);
+  // Shared Signal from Service
+  get products() {
+    return this.productService.products;
+  }
 
+  dialogOpen = false;
+  productTags: string[] = ['electronics', 'gadgets'];
 
   constructor(private productService: ProductService) {
-  this.loadProducts(); 
-  }
-  loadProducts() {
-    this.productService.getAllProducts().subscribe((data) => {
-      this.products.set(data);
-    });
+    this.productService.loadProductsFromBackend();
   }
 
-
+  
   filteredProducts = computed(() => {
     const search = this.searchTerm().toLowerCase();
     const category = this.selectedCategory();
     const status = this.statusFilter();
+    const allProducts = this.productService.products();
 
-    return this.products().filter((product) => {
+    return allProducts.filter((product) => {
       const matchesSearch =
-        product.name.toLowerCase().includes(search) ||
-        product.description.toLowerCase().includes(search) ||
-        product.tags.some((tag) => tag.toLowerCase().includes(search));
+        (product.name?.toLowerCase().includes(search) ?? false) ||
+        (product.description?.toLowerCase().includes(search) ?? false) ||
+        (product.tags?.some((tag) => tag?.toLowerCase().includes(search)) ??
+          false);
+
       const matchesCategory =
         category === 'all' || product.category === category;
       const matchesStatus = status === 'all' || product.status === status;
+
       return matchesSearch && matchesCategory && matchesStatus;
     });
   });
 
-
-  toggleStatus(productId: string) {
-    const updated = this.products().map((p) =>
-      p.id === productId.toString()
-        ? {
-            ...p,
-            status: (p.status === 'active' ? 'inactive' : 'active') as
-              | 'active'
-              | 'inactive',
-          }
-        : p
-    );
-    this.products.set(updated);
-  }
-
+  // ✅ حذف المنتج
   deleteProduct(productId: string) {
-    this.products.set(this.products().filter((p) => p.id !== productId.toString()));
+    if (!productId) {
+      console.error('❌ Product ID is undefined!');
+      return;
+    }
+    this.productService.deleteProduct(productId).subscribe({
+      next: () => {
+        // ممكن تضيف toastr أو snackBar هنا
+        console.log('Product deleted successfully');
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+      },
+    });
   }
 
+  // ✅ تعديل حالة المنتج
+  toggleStatus(productId: string) {
+
+    console.log('Sending toggle for product ID:', productId); // 👈
+    this.productService.toggleProductStatus(productId).subscribe({
+      next: () => {
+        console.log('Status toggled successfully');
+      },
+      error: (err) => {
+        console.error('Status toggle failed', err);
+      },
+    });
+  }
+
+  // ✅ فتح نموذج الإضافة
   openAddForm() {
-    console.log('Opening add form');
+
     this.editingProduct.set(null);
     this.isFormOpen.set(true);
   }
-  
 
+  // ✅ فتح نموذج التعديل
   openEditForm(product: Product) {
     this.editingProduct.set(product);
     this.isFormOpen.set(true);
   }
 
-  // saveProduct(productData: Omit<Product, 'id'>) {
-  //   const editing = this.editingProduct();
-  //   if (editing) {
-  //     const updated = this.products().map((p) =>
-  //       p.id === editing.id ? { ...productData, id: editing.id } : p
-  //     );
-  //     this.products.set(updated);
-  //   } else {
-  //     const newId = Math.max(...this.products().map((p) => p.id)) + 1;
-  //     this.products.set([...this.products(), { ...productData, id: newId }]);
-  //   }
+  // ✅ بعد الإضافة الناجحة
+  // addCreatedProduct(product: Product) {
+  //   this.productService.addProduct(product);
+
   //   this.isFormOpen.set(false);
   //   this.editingProduct.set(null);
+  //   this.isFormOpen.set(false);
+  //   this.editingProduct.set(null);
+
+  //   this.searchTerm.set(this.searchTerm());
+  //   this.selectedCategory.set(this.selectedCategory());
+  //   this.statusFilter.set(this.statusFilter());
+
+  //   console.log('Product added successfully');
+  //   console.log(
+  //     '📦 جميع المنتجات بعد الإضافة:',
+  //     this.productService.products()
+  //   );
   // }
-
-//   saveProduct(productData: Omit<Product, 'id'>) {
-//   const editing = this.editingProduct();
-
-//   if (editing) {
-//     this.productService.updateProduct(editing.id.toString(), productData).subscribe(() => {
-//       this.loadProducts(); // ✅ Reload from backend
-//     });
-//   } else {
-//     this.productService.createProduct(productData).subscribe(() => {
-//       this.loadProducts(); // ✅ Reload from backend
-//     });
-//   }
-
-//   this.isFormOpen.set(false);
-//   this.editingProduct.set(null);
-// }
-
- saveProduct(productData: Omit<Product, 'id'>) {
-  console.log('🔥 saveProduct triggered');
-
-  console.log('💡 isFormOpen before:', this.isFormOpen());
-
-  const editing = this.editingProduct();
-  const formData = new FormData();
-
-  Object.entries(productData).forEach(([key, value]) => {
-  if (Array.isArray(value)) {
-    value.forEach((v) => formData.append(`${key}[]`, String(v)));
-  } else if (value instanceof File) {
-    formData.append(key, value); // الصورة
-  } else {
-    formData.append(key, String(value)); // أي حاجة تانية
+  addCreatedProduct(product: Product) {
+  this.productService.updateLocalProduct(product);
+  this.editingProduct.set(null);
+  this.isFormOpen.set(false);
   }
-});
-
-  if (editing) {
-    this.productService.updateProduct(editing.id.toString(), formData).subscribe(() => {
-      this.loadProducts();
-      console.log('Before closing dialog');
-      this.isFormOpen.set(false);
-      console.log('After closing dialog');
-      this.editingProduct.set(null);
-    });
-  } else {
-    this.productService.createProduct(formData).subscribe(() => {
-      this.loadProducts();
-      console.log('Before closing dialog');
-      this.isFormOpen.set(false);
-      console.log('After closing dialog');
-      this.editingProduct.set(null);
-    });
-  }
-  }
-
-
-
-
+  
 }

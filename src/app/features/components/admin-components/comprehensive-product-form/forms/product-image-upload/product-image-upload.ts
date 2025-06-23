@@ -13,7 +13,7 @@ import { lucideUpload } from '@ng-icons/lucide';
 })
 export class ProductImageUpload implements OnInit {
 
-
+  @Input() existingImage: string = '';
   @Input() images: File[] = [];
   @Output() imagesChange = new EventEmitter<File[]>();
   dragActive = false;

@@ -7,6 +7,7 @@ import { services, allProducts, allCategories, Service } from '../../../data/pro
 import { CommonModule } from '@angular/common';
 import { NoResult } from "../../components/products-components/no-result/no-result";
 import type { Product } from '../../../data/product.types';
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
   selector: 'app-services',
@@ -15,17 +16,12 @@ import type { Product } from '../../../data/product.types';
   styleUrl: './services.css'
 })
 export class Services { 
-  // for the search filter bar
-  searchTerm: string = '';
-  selectedCategory: string = 'all';
+  // searchTerm: string = '';
+  // selectedCategory: string = 'all';
+  searchTerm = signal('');
+  selectedCategory = signal('all');
+
   viewMode: 'grid' | 'list' = 'grid';
-  tags: string[] = [
-    'Hassan',
-    'Ali',
-    'Manar'
-  ];
-  // filteredProductsCount: number = 0;
-  
   categories = [
   'Multi-purpose caravans',
   'Food trucks',
@@ -39,20 +35,32 @@ export class Services {
   'General steel structure fabrication'
 ];
   allServices: Service[] = services;
-  products: Product[] = allProducts;
   categoriesGrid: string[] = allCategories;
-  
-  get filteredProducts(): Product[] {
-  return this.products.filter(product => {
-    const matchesCategory =
-      this.selectedCategory === 'all' ||
-      product.category.toLowerCase() === this.selectedCategory.toLowerCase();
-    const matchesSearch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-}
+  constructor(private productService: ProductService){}
 
-  get filteredProductsCount(): number {
+  get products() {
+  return this.productService.products;
+  }
+
+  filteredProducts = computed(() => {
+    return this.products().filter((p: Product) => {
+      const search = this.searchTerm().toLowerCase();
+      const category = this.selectedCategory().toLowerCase();
+      return (
+        p.status === 'active' &&  // ✅ يظهر فقط المنتجات المفعّلة
+        p.name.toLowerCase().includes(search) &&
+        (category === 'all' || p.category.toLowerCase() === category)
+      );
+    });
+  });
+
+
+
+    get filteredProductsCount(): number {
     return this.filteredProducts.length;
   }
+
+  
+  
 }
+

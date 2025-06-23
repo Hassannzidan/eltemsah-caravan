@@ -32,15 +32,14 @@
                   Add Product
             </button>
 
-            <!-- *ngIf="isFormOpen()" -->
-            <!-- (save)="saveProduct($event)" -->
             <app-add-product-dialog
                 *ngIf="isFormOpen()" 
-                (closeDialog)="isFormOpen.set(false)"
                 [editingProduct]="editingProduct()"
                 [categories]="categories"
                 (cancel)="isFormOpen.set(false)"
-              ></app-add-product-dialog>
+                (closeDialog)="isFormOpen.set(false)"
+                (saveSuccess)="addCreatedProduct($event)"
+                ></app-add-product-dialog>
 
             </div>
           </div>
@@ -70,6 +69,7 @@
         *ngSwitchCase="'grid'"
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
+
         <!-- Card -->
         <div
           *ngFor="let product of filteredProducts()"
@@ -131,7 +131,7 @@
                     type="checkbox"
                     class="sr-only peer"
                     [checked]="product.status === 'active'"
-                    (change)="toggleStatus(product.id)"
+                    (change)="toggleStatus(product._id)"
                   />
                   <div
                     class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform after:duration-500 dark:border-gray-600 peer-checked:bg-red-800 after:transform"
@@ -149,7 +149,7 @@
                 </button>
                 <button
                   class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
-                  (click)="deleteProduct(product.id)"
+                  (click)="deleteProduct(product._id)"
                 >
                   <span>
                     <ng-icon name="lucideTrash2" class="w-4 h-4"></ng-icon>
@@ -216,7 +216,7 @@
                       type="checkbox"
                       class="sr-only peer"
                       [checked]="product.status === 'active'"
-                      (change)="toggleStatus(product.id)"
+                      (change)="toggleStatus(product._id)"
                     />
                     <div
                       class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform after:duration-500 dark:border-gray-600 peer-checked:bg-red-800 after:transform"
@@ -234,7 +234,7 @@
                   </button>
                   <button
                     class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
-                    (click)="deleteProduct(product.id)"
+                    (click)="deleteProduct(product._id)"
                   >
                     <span>
                       <ng-icon name="lucideTrash2" class="w-4 h-4"></ng-icon>
