@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { ProductData } from '../../../../../../data/product.types';
+import type {
+  ProductData,
+  ProductFeature,
+  ProductSpecificationCategory,
+} from '../../../../../../data/product.types';
 import { CommonModule } from '@angular/common';
 import { SectionToggle } from '../../../section-toggle/section-toggle';
 import { FeatureManager } from '../../../feature-manager/feature-manager';
@@ -7,6 +11,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideShield, lucideStar } from '@ng-icons/lucide';
 import { SpecificationsManager } from '../../../specifications-manager/specifications-manager';
 import { CustomizationManager } from '../../../customization-manager/customization-manager';
+import { ProductService } from '../../../../../../services/product/product.service';
 
 @Component({
   selector: 'app-product-details-form',
@@ -28,6 +33,7 @@ import { CustomizationManager } from '../../../customization-manager/customizati
 })
 export class ProductDetailsForm {
   @Input() productDetails!: ProductData;
+  @Input() productId!: string;
 
   @Output() productDetailsChange = new EventEmitter<ProductData>();
   @Output() toggleFeatureVisibility = new EventEmitter<{
@@ -48,13 +54,23 @@ export class ProductDetailsForm {
     sectionType: 'benefits' | 'features';
   }>();
 
+  constructor(public productService: ProductService) {}
   handleToggleFeature(sectionType: 'benefits' | 'features', id: string) {
     this.toggleFeatureVisibility.emit({ id, sectionType });
   }
 
   handleAddFeature(sectionType: 'benefits' | 'features', content: string) {
-    this.addFeature.emit({ sectionType, content });
-  }
+  const feature: ProductFeature = {
+    id: crypto.randomUUID(),
+    sectionId: sectionType,
+    content,
+    isVisible: true,
+    order: this.productDetails.features.length + 1,
+  };
+
+  this.productDetails.features.push(feature);
+  this.productDetailsChange.emit(structuredClone(this.productDetails));
+}
 
   handleUpdateFeature(
     sectionType: 'benefits' | 'features',
@@ -76,166 +92,47 @@ export class ProductDetailsForm {
       section.isVisible = !section.isVisible;
       this.productDetailsChange.emit(structuredClone(this.productDetails));
     }
-  }
-  // المواصفات (specifications)
 
-  addSpecificationCategory(category: any) {
-    this.productDetails.specifications.push(category);
-    this.productDetailsChange.emit(structuredClone(this.productDetails));
+    // ابعت التحديث للـ backend
+    // this.productService
+    //   .updateProductSections(this.productId, this.productDetails.sections)
+    //   .subscribe();
   }
 
-  addSpecification(spec: any) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === spec.categoryId
+  onAddCategory(category: ProductSpecificationCategory) {
+    // Send category to backend using ProductService
+    // this.productService.addCategory(this.productId, category).subscribe();
+  }
+
+  onAddSpecification(event: { categoryId: string; spec: any }) {
+    // this.productService.addSpecification(this.productId, event.categoryId, event.spec).subscribe();
+  }
+
+  onUpdateCategory(event: { id: string; title: string }) {
+    // this.productService.updateCategory(this.productId, event.id, event.title).subscribe();
+  }
+
+  onUpdateSpecification(event: {
+    categoryId: string;
+    specId: string;
+    key: string;
+    value: string;
+  }) {
+    // this.productService.updateSpecification(this.productId, event.categoryId, event.specId, event.key, event.value).subscribe();
+  }
+
+  onDeleteCategory(categoryId: string) {
+    // this.productService.deleteCategory(this.productId, categoryId).subscribe();
+  }
+
+  onDeleteSpecification(event: { categoryId: string; specId: string }) {
+    // this.productService.deleteSpecification(this.productId, event.categoryId, event.specId).subscribe();
+  }
+
+  isSectionVisible(sectionId: string): boolean {
+    const section = this.productDetails.sections.find(
+      (sec) => sec.id === sectionId
     );
-    if (category) {
-      category.specifications.push(spec);
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  updateSpecificationCategory(updated: any) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === updated.id
-    );
-    if (category) {
-      Object.assign(category, updated);
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  updateSpecification(updated: any) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === updated.categoryId
-    );
-    if (category) {
-      const spec = category.specifications.find((s) => s.id === updated.id);
-      if (spec) {
-        Object.assign(spec, updated);
-        this.productDetailsChange.emit(structuredClone(this.productDetails));
-      }
-    }
-  }
-
-  deleteSpecificationCategory(categoryId: string) {
-    this.productDetails.specifications =
-      this.productDetails.specifications.filter((c) => c.id !== categoryId);
-    this.productDetailsChange.emit(structuredClone(this.productDetails));
-  }
-
-  deleteSpecification(specToDelete: any) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === specToDelete.categoryId
-    );
-    if (category) {
-      category.specifications = category.specifications.filter(
-        (s) => s.id !== specToDelete.id
-      );
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  toggleSpecificationCategoryVisibility(categoryId: string) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === categoryId
-    );
-    if (category) {
-      category.isVisible = !category.isVisible;
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  toggleSpecificationVisibility(specToToggle: any) {
-    const category = this.productDetails.specifications.find(
-      (c) => c.id === specToToggle.categoryId
-    );
-    if (category) {
-      const spec = category.specifications.find(
-        (s) => s.id === specToToggle.id
-      );
-      if (spec) {
-        spec.isVisible = !spec.isVisible;
-        this.productDetailsChange.emit(structuredClone(this.productDetails));
-      }
-    }
-  }
-
-  addCustomizationCategory(category: any) {
-    this.productDetails.customizations.push(category);
-    this.productDetailsChange.emit(structuredClone(this.productDetails));
-  }
-
-  addCustomizationOption(option: any) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === option.categoryId
-    );
-    if (category) {
-      category.options.push(option);
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  updateCustomizationCategory(updated: any) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === updated.id
-    );
-    if (category) {
-      Object.assign(category, updated);
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  updateCustomizationOption(updated: any) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === updated.categoryId
-    );
-    if (category) {
-      const option = category.options.find((o) => o.id === updated.id);
-      if (option) {
-        Object.assign(option, updated);
-        this.productDetailsChange.emit(structuredClone(this.productDetails));
-      }
-    }
-  }
-
-  deleteCustomizationCategory(categoryId: string) {
-    this.productDetails.customizations =
-      this.productDetails.customizations.filter((c) => c.id !== categoryId);
-    this.productDetailsChange.emit(structuredClone(this.productDetails));
-  }
-
-  deleteCustomizationOption(optionToDelete: any) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === optionToDelete.categoryId
-    );
-    if (category) {
-      category.options = category.options.filter(
-        (o) => o.id !== optionToDelete.id
-      );
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  toggleCustomizationCategoryVisibility(categoryId: string) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === categoryId
-    );
-    if (category) {
-      category.isVisible = !category.isVisible;
-      this.productDetailsChange.emit(structuredClone(this.productDetails));
-    }
-  }
-
-  toggleCustomizationOptionVisibility(optionToToggle: any) {
-    const category = this.productDetails.customizations.find(
-      (c) => c.id === optionToToggle.categoryId
-    );
-    if (category) {
-      const option = category.options.find((o) => o.id === optionToToggle.id);
-      if (option) {
-        option.isVisible = !option.isVisible;
-        this.productDetailsChange.emit(structuredClone(this.productDetails));
-      }
-    }
+    return section?.isVisible ?? true;
   }
 }

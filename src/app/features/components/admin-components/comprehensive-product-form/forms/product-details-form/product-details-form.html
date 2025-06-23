@@ -5,50 +5,26 @@
   (onToggleSection)="toggleSectionVisibility($event)"
 />
 
-
-
-  <app-feature-manager
-    title="Key Benefits"
-    iconName="lucideStar"
-    [features]="productDetails.benefits"
-    (toggleFeature)="handleToggleFeature('benefits', $event)"
-    (addFeature)="handleAddFeature('benefits', $event)"
-    (updateFeature)="handleUpdateFeature('benefits', $event.id, $event.content)"
-    (deleteFeature)="handleDeleteFeature('benefits', $event)"
-  />
-
   <app-feature-manager
     title="Features Included"
     iconName="lucideShield"
     [features]="productDetails.features"
+    [disabled]="!isSectionVisible('features')"
     (toggleFeature)="handleToggleFeature('features', $event)"
     (addFeature)="handleAddFeature('features', $event)"
     (updateFeature)="handleUpdateFeature('features', $event.id, $event.content)"
     (deleteFeature)="handleDeleteFeature('features', $event)"
   />
 
-
 <app-specifications-manager
   [specifications]="productDetails.specifications"
-  (toggleSpecVisibility)="toggleSpecificationVisibility($event)"
-  (addCategory)="addSpecificationCategory($event)"
-  (addSpecification)="addSpecification($event)"
-  (updateCategory)="updateSpecificationCategory($event)"
-  (updateSpecification)="updateSpecification($event)"
-  (deleteSpecification)="deleteSpecification($event)"
+  [disabled]="!isSectionVisible('specifications')"
+  (addCategory)="onAddCategory($event)"
+  (addSpecification)="onAddSpecification($event)"
+  (updateCategory)="onUpdateCategory($event)"
+  (updateSpecification)="onUpdateSpecification($event)"
+  (deleteCategoryEvent)="onDeleteCategory($event)"
+  (deleteSpecificationEvent)="onDeleteSpecification($event)"
 ></app-specifications-manager>
-
-<app-customization-manager
-  [customizations]="productDetails.customizations"
-  (toggleCategoryVisibility)="toggleCustomizationCategoryVisibility($event)"
-  (toggleOptionVisibility)="toggleCustomizationOptionVisibility($event)"
-  (addCategory)="addCustomizationCategory($event)"
-  (addOption)="addCustomizationOption($event)"
-  (updateCategory)="updateCustomizationCategory($event)"
-  (updateOption)="updateCustomizationOption($event)"
-  (deleteCategory)="deleteCustomizationCategory($event)"
-  (deleteOption)="deleteCustomizationOption($event)"
-></app-customization-manager>
-
 
 </div>

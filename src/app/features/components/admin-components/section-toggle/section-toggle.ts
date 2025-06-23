@@ -22,15 +22,9 @@ export interface ProductSection {
 })
 export class SectionToggle {
   @Input() sections: ProductSection[] = [];
-  // @Output() onToggleSection = new EventEmitter<string>();
-
-  // toggleSection(sectionId: string) {
-  //   this.onToggleSection.emit(sectionId);
-  // }
   @Output() onToggleSection = new EventEmitter<string>();
 
   toggleSection(sectionId: string) {
     this.onToggleSection.emit(sectionId);
   }
-
 }

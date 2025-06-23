@@ -16,11 +16,7 @@ export const routes: Routes = [
   { path: 'login', component: Login , title: 'Login' },
   { path: 'admin', component: AdminDashboard , title: 'Admin Dashboard' },
   { path: 'verify-otp', component: OtpComponent , title: 'Verification Step' },
-  
-  {
-    path: 'product/:id',
-    loadComponent: () => import('./features/pages/product-details/product-details').then(m => m.ProductDetails)
-  },
+  { path: 'product/:id', component: ProductDetails },
    {
     path: 'admin/product-details',
     component: ProductDetails,

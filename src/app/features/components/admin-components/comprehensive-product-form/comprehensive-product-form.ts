@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
@@ -47,7 +47,7 @@ type Category =
     }),
   ],
 })
-export class ComprehensiveProductForm {
+export class ComprehensiveProductForm implements OnInit{
   [x: string]: any;
   isLoading = false;
 
@@ -117,48 +117,10 @@ export class ComprehensiveProductForm {
       : [];
   }
 
-
-//   handleSubmit() {
-//   this.isLoading = true;
-
-//   const formData = new FormData();
-//   formData.append('name', this.formData().name);
-//   formData.append('description', this.formData().description);
-//   formData.append('category', this.formData().category);
-//   formData.append('subcategory', this.formData().subcategory);
-//   formData.append('status', this.formData().status);
-//   formData.append('tags', JSON.stringify(this.formData().tags));
-//   formData.append('productDetails', JSON.stringify(this.productDetails()));
-
-//   this.productImages.forEach((file, index) => {
-//     formData.append('images', file); 
-//     });
-
-
-//   this.productService.createProduct(formData).subscribe({
-//     next: (response) => {
-//       this.snackBar.open('Product created successfully!', 'Close', {
-//         duration: 3000,
-//         horizontalPosition: 'right',
-//         verticalPosition: 'top',
-//         panelClass: ['snackbar-success'],
-//       });
-//       this.isLoading = false;
-//       const createdProduct = response; 
-//       console.log(response);
-//       this.saveSuccess.emit(createdProduct);
-
-//       // this['saveSuccess'].emit();
-//     },
-//     error: (err) => {
-//       this.isLoading = false;
-//       console.error('Create failed', err);
-//     },
-//   });
-// }
   handleSubmit() {
     this.isLoading = true;
 
+    // BiscProduct Data
     const formData = new FormData();
     formData.append('name', this.formData().name);
     formData.append('description', this.formData().description);
@@ -166,7 +128,18 @@ export class ComprehensiveProductForm {
     formData.append('subcategory', this.formData().subcategory);
     formData.append('status', this.formData().status);
     formData.append('tags', JSON.stringify(this.formData().tags));
-    formData.append('productDetails', JSON.stringify(this.productDetails()));
+
+
+
+    // productDetails Data
+    const productDetails = {
+      sections: this.productDetails()['sections'],
+      features: this.productDetails()['features'],
+      specifications: this.productDetails()['specifications']
+    };
+    formData.append('productDetails', JSON.stringify(productDetails));
+
+
 
     this.productImages.forEach((file) => {
       formData.append('images', file);
@@ -199,50 +172,18 @@ export class ComprehensiveProductForm {
     return {
       id: 1,
       sections: [
-        { id: 'benefits', name: 'Key Benefits', isVisible: true, order: 1 },
         {
           id: 'features',
           name: 'Features Included',
           isVisible: true,
-          order: 2,
+          order: 1,
         },
         {
           id: 'specifications',
           name: 'Technical Specifications',
           isVisible: true,
-          order: 3,
-        },
-        {
-          id: 'customization',
-          name: 'Customization Options',
-          isVisible: true,
-          order: 4,
-        },
-        {
-          id: 'availability',
-          name: 'Lead Times & Availability',
-          isVisible: true,
-          order: 5,
-        },
-        { id: 'inquiry', name: 'Inquiry Form', isVisible: true, order: 6 },
-        { id: 'cta', name: 'Call to Action', isVisible: true, order: 7 },
-        { id: 'trust', name: 'Trust Indicators', isVisible: true, order: 8 },
-      ],
-      benefits: [
-        {
-          id: 'b1',
-          sectionId: 'benefits',
-          content: 'Save 40% on accommodation costs during travel',
-          isVisible: true,
-          order: 1,
-        },
-        {
-          id: 'b2',
-          sectionId: 'benefits',
-          content: 'Complete independence and freedom to explore',
-          isVisible: true,
           order: 2,
-        },
+        }
       ],
       features: [
         {
@@ -261,27 +202,9 @@ export class ComprehensiveProductForm {
         },
       ],
       specifications: [],
-      customizations: [],
-      leadTime: {
-        production: '8-12 weeks',
-        delivery: '1-2 weeks (domestic)',
-        customization: 'Add 2-4 weeks for custom modifications',
-      },
-      availability: 'Available - 3 units in production queue',
-      orderProcess: [
-        {
-          id: 'o1',
-          step: 'Submit inquiry with your requirements',
-          isVisible: true,
-        },
-        {
-          id: 'o2',
-          step: 'Receive detailed quote within 24 hours',
-          isVisible: true,
-        },
-      ],
     };
   }
+
   updateFormData(partialData: Partial<ReturnType<typeof this.formData>>): void {
     this.formData.set({ ...this.formData(), ...partialData });
   }
@@ -294,11 +217,4 @@ export class ComprehensiveProductForm {
     this.formData.set({ ...this.formData(), tags });
   }
 
-  updateLeadTime(leadTime: any): void {
-    this.productDetails.set({ ...this.productDetails(), leadTime });
-  }
-
-  updateAvailability(availability: string): void {
-    this.productDetails.set({ ...this.productDetails(), availability });
-  }
 }

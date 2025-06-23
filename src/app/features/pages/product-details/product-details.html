@@ -17,18 +17,23 @@
           [name]="product.name"
           [category]="product.category"
           [subcategory]="product.subcategory"
-          [longDescription]="product.longDescription" />
+          [longDescription]="product.description" />
 
-        <app-product-benefits [benefits]="product.benefits" />
-        <app-product-features [features]="product.features" />
-        <!-- <app-product-specifications [specifications]="product.specifications" /> -->
-         <app-product-specification [specifications]="productSpecifications"></app-product-specification>
-        <app-product-cta />
-        <app-trust-indicators />
+          <div class="mt-5">
+
+          </div>
+         <app-product-features [features]="features" />
+        <app-product-specification
+          [specifications]="getFlatSpecifications(product.productDetails?.specifications)"
+        ></app-product-specification>        
+        <!-- <app-product-cta />
+        <app-trust-indicators /> -->
+      
       </div>
     </div>
   </div>
 
+  
   <ng-template #notFound>
     <div class="min-h-screen flex items-center justify-center">
       <div class="text-center">

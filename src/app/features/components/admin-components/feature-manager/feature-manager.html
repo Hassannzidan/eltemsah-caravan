@@ -1,7 +1,10 @@
-<div class="rounded-lg border-gray-200 bg-white shadow-sm my-5">
+<div class="rounded-lg border-gray-400/80 bg-white shadow-sm my-5"
+[ngClass]="{ 'opacity-50 pointer-events-none cursor-not-allowed': disabled }">
   <div class="flex items-center gap-2 p-6 text-2xl font-semibold">
     <!-- <span *ngIf="icon" [innerHTML]="icon"></span> -->
-     <ng-icon *ngIf="iconName" [name]="iconName" class="w-5 h-5 text-blue-500"></ng-icon>
+     <span class="text-orange-500/80">
+       <ng-icon *ngIf="iconName" [name]="iconName" class="w-5 h-5"></ng-icon>
+     </span>
     {{ title }}
   </div>
 
@@ -9,10 +12,11 @@
     <!-- Add Feature -->
     <div class="flex gap-2">
       <input
+        [disabled]="disabled"
         [(ngModel)]="newFeature"
         (keydown.enter)="handleAddFeature()"
         [placeholder]="'Add new ' + title.toLowerCase() + '...'"
-        class="flex h-10 w-full rounded-md border px-3 py-2 text-base text-black placeholder:text-gray-400"
+        class="flex h-10 w-full rounded-md border border-gray-400/80 px-3 py-2 text-base text-black placeholder:text-gray-400"
       />
       <button (click)="handleAddFeature()" class="h-9 px-3 bg-red-800 text-white rounded-md cursor-pointer">
         <ng-icon name="lucidePlus" class="w-4 h-4" />
@@ -25,7 +29,7 @@
         *ngFor="let feature of features"
         class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg"
       >
-        <div class="flex items-center gap-2 flex-1">
+        <div class="flex items-center gap-2 flex-1" >
           <ng-container *ngIf="feature.isVisible; else hiddenIcon">
             <span class="text-green-500">
               <ng-icon name="lucideEye" class="w-4 h-4 " />
@@ -39,9 +43,10 @@
 
           <ng-container *ngIf="editingId === feature.id; else displayContent">
             <input
+              [disabled]="disabled"
               [(ngModel)]="editContent"
               (keydown.enter)="saveEdit()"
-              class="flex-1 rounded border px-2 py-1 text-sm"
+              class="flex-1 rounded border border-gray- px-2 py-1 text-sm"
             />
           </ng-container>
 
@@ -60,19 +65,16 @@
 
         <!-- Controls -->
         <div class="flex items-center gap-1">
-          <label class="inline-flex relative items-center cursor-pointer">
-            <input type="checkbox" class="sr-only peer" [checked]="feature.isVisible" (change)="toggleFeature.emit(feature.id)" />
-            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-500 transition-all duration-200">
-              <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition peer-checked:translate-x-full"></div>
-            </div>
-          </label>
-
           <ng-container *ngIf="editingId === feature.id; else editButtons">
             <button (click)="saveEdit()" class="h-9 w-9 rounded-md border">
-              💾
+              <span>
+                <ng-icon class="h-5 w-5" name="lucideSave"/>
+              </span>
             </button>
             <button (click)="cancelEdit()" class="h-9 w-9 rounded-md border">
-              ❌
+              <span>
+                <ng-icon class="h-5 w-5" name="lucideX"/>
+              </span>
             </button>
           </ng-container>
 
@@ -89,4 +91,3 @@
     </div>
   </div>
 </div>
-<ng-icon [name]="iconName" class="w-5 h-5 text-red-800"></ng-icon>

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideEyeClosed, lucideShield, lucideSquarePen, lucideStar, lucideTrash2 } from '@ng-icons/lucide';
+import { lucideEye, lucideEyeClosed, lucideSave, lucideShield, lucideSquarePen, lucideStar, lucideTrash2, lucideX } from '@ng-icons/lucide';
 
 // export interface ProductFeature {
 //   id: string;
@@ -31,13 +31,16 @@ export interface ProductFeature {
       lucideTrash2,
       lucideEye,
       lucideEyeClosed,
+      lucideSave,
+      lucideX
     })
   ]
 })
 export class FeatureManager {
   
-  @Input() iconName!: string;
+  @Input() disabled: boolean = false;
 
+  @Input() iconName!: string;
   @Input() title!: string;
   @Input() icon!: string | null;
   @Input() features: ProductFeature[] = [];

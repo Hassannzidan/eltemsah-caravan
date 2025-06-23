@@ -51,6 +51,8 @@
        <app-product-details-form
          [productDetails]="productDetails()"
          (productDetailsChange)="productDetails.set($event)"
+
+         
        />
 
      </div>
@@ -70,10 +72,3 @@
 
    </div>
 </form>
-   <!-- 
-       <app-lead-time-form
-         [leadTime]="productDetails().leadTime"
-         [availability]="productDetails().availability"
-         (leadTimeChange)="updateLeadTime($event)"
-         (availabilityChange)="updateAvailability($event)"
-       /> -->

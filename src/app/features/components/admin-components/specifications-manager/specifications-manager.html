@@ -1,153 +1,238 @@
-<div class="bg-white rounded-lg shadow p-6 my-10">
-  <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-slate-700">
-    <span class="material-icons text-slate-500">build</span>
+<div class="bg-white rounded-lg shadow p-6 my-10"
+[ngClass]="{ 'opacity-50 pointer-events-none cursor-not-allowed': disabled }">
+  <h2 class="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900">
+    <span class="h-5 w-5 text-gray-500 text-xl">
+      <ng-icon name="lucideWrench" />
+    </span>
     Technical Specifications
   </h2>
 
   <!-- Add Category -->
   <div class="flex gap-2 mb-6">
     <input
-      class="border rounded px-3 py-1 flex-1"
+      class="border border-gray-400/80 rounded px-3 py-2 flex-1 placeholder:text-gray-400"
+      [disabled]="disabled"
       [(ngModel)]="newCategory"
       (keydown.enter)="handleAddCategory()"
       placeholder="Add new specification category..."
     />
-    <button 
-    class="bg-blue-600 text-white px-3 rounded" 
-    type="button"
-    (click)="handleAddCategory()">+</button>
+
+    <button
+      class="bg-red-800 text-white px-3 rounded-md"
+      type="button"
+      (click)="handleAddCategory()"
+    >
+      <span>
+        <ng-icon name="lucidePlus" class="w-4 h-4" />
+      </span>
+    </button>
   </div>
 
   <!-- Category List -->
-    <div *ngFor="let category of specifications" class="border p-4 rounded-lg mb-4 space-y-3">
-      
-      <div class="flex justify-between items-center">
-        <div class="flex gap-2 items-center flex-1">
-          <span [ngClass]="category.isVisible ? 'text-green-500' : 'text-gray-400'" class="material-icons text-sm">
+  <div
+    *ngFor="let category of specifications"
+    class="border p-4 rounded-lg mb-4 space-y-3"
+  >
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2 items-center flex-1">
+        <!-- <span [ngClass]="category.isVisible ? 'text-green-500' : 'text-gray-400'" class="material-icons text-sm">
             {{ category.isVisible ? 'visibility' : 'visibility_off' }}
-          </span>
+          </span> -->
 
-          <ng-container *ngIf="editingCategory === category.id; else viewCategory">
-            <input
-              class="border rounded px-2 py-1 flex-1"
-              [(ngModel)]="editCategoryName"
-              (keydown.enter)="saveEditCategory()"
-            />
-          </ng-container>
-          <ng-template #viewCategory>
-            <h4 [ngClass]="category.isVisible ? 'text-slate-900' : 'text-gray-400'" class="font-medium">
-              {{ category.title }}
-            </h4>
-          </ng-template>
-        </div>
-
-        <div class="flex gap-2">
-          <input type="checkbox" [checked]="category.isVisible" (change)="toggleCategoryVisibility(category.id)" />
-          <ng-container *ngIf="editingCategory === category.id; else viewControls">
-            <button 
-            type="button"
-            class="text-sm px-2" (click)="saveEditCategory()">💾</button>
-            <button 
-            type="button"
-            class="text-sm px-2" (click)="editingCategory = null">❌</button>
-          </ng-container>
-          <ng-template #viewControls>
-            <button 
-            type="button"
-            class="text-sm px-2" (click)="startEditCategory(category)">✏️</button>
-            <button 
-            type="button"
-            class="text-sm px-2" (click)="deleteCategory(category.id)">🗑️</button>
-          </ng-template>
-        </div>
-      </div>
-
-      <!-- Add Spec -->
-      <div class="grid grid-cols-2 gap-2 ml-5">
-        <!-- Key (Name) -->
-        <input
-          class="border rounded px-2 py-1"
-          [ngModel]="getSpecKey(category.id)"
-          (ngModelChange)="setSpecKey(category.id, $event)"
-          placeholder="Specification name..."
-        />
-
-        <!-- Value -->
-        <div class="flex gap-2">
-          <input
-            class="border rounded px-2 py-1 flex-1"
-            [ngModel]="getSpecValue(category.id)"
-            (ngModelChange)="setSpecValue(category.id, $event)"
-            (keydown.enter)="handleAddSpecification(category.id)"
-            placeholder="Value..."
-          />
-          <button 
-          class="bg-green-600 text-white px-2 rounded" 
-          type="button"
-          (click)="handleAddSpecification(category.id)">+</button>
-        </div>
-      </div>
-
-
-      <!-- Specs List -->
-      <div class="space-y-2 ml-5">
-        <div
-          *ngFor="let spec of category.specifications"
-          class="flex items-center gap-2 p-2 bg-gray-50 rounded"
+        <ng-container
+          *ngIf="editingCategory === category.id; else viewCategory"
         >
-          <span [ngClass]="spec.isVisible ? 'text-green-500' : 'text-gray-400'" class="material-icons text-sm">
-            {{ spec.isVisible ? 'visibility' : 'visibility_off' }}
+          <input
+            class="border border-gray-400/80 rounded px-2 py-1 flex-1"
+            [disabled]="disabled"
+            [(ngModel)]="editCategoryName"
+            (keydown.enter)="saveEditCategory()"
+          />
+        </ng-container>
+        <ng-template #viewCategory>
+          <h4
+            [ngClass]="category.isVisible ? 'text-slate-900' : 'text-gray-400'"
+            class="font-medium"
+          >
+            {{ category.title }}
+          </h4>
+        </ng-template>
+      </div>
+
+      <div class="flex gap-2">
+        <!-- <input type="checkbox" [checked]="category.isVisible" (change)="toggleCategoryVisibility(category.id)" /> -->
+        <ng-container
+          *ngIf="editingCategory === category.id; else viewControls"
+        >
+          <button
+            type="button"
+            class="text-sm px-2"
+            (click)="saveEditCategory()"
+          >
+            <span>
+              <ng-icon class="h-5 w-5" name="lucideSave" />
+            </span>
+          </button>
+          <button
+            type="button"
+            class="text-sm px-2"
+            (click)="editingCategory = null"
+          >
+            <span>
+              <ng-icon class="h-5 w-5" name="lucideX" />
+            </span>
+          </button>
+        </ng-container>
+        <ng-template #viewControls>
+          <button
+            type="button"
+            class="text-gray-900 text-sm cursor-pointer"
+            (click)="startEditCategory(category)"
+          >
+            <span
+              class="h-5 w-5 border border-gray-300 rounded-md hover:bg-red-100/80 px-1.5 py-1.5"
+            >
+              <!-- <ng-icon name="lucidePencil" /> -->
+              <ng-icon name="lucideSquarePen" />
+            </span>
+          </button>
+          <button
+            type="button"
+            class="text-gray-900 text-sm cursor-pointer"
+            (click)="deleteCategory(category.id)"
+          >
+            <span
+              class="h-5 w-5 border border-gray-300 rounded-md hover:bg-red-100/80 px-1.5 py-1.5"
+            >
+              <!-- <ng-icon name="lucideTrash" /> -->
+              <ng-icon name="lucideTrash2" />
+            </span>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Add Spec -->
+    <div class="grid grid-cols-2 gap-2 ml-5">
+      <!-- Key (Name) -->
+      <input
+        class="border border-gray-400/80 rounded px-2 py-1"
+        [disabled]="disabled"
+        [ngModel]="getSpecKey(category.id)"
+        (ngModelChange)="setSpecKey(category.id, $event)"
+        placeholder="Specification name..."
+      />
+
+      <!-- Value -->
+      <div class="flex gap-2">
+        <input
+          class="border border-gray-400/80 rounded px-2 py-1 flex-1"
+          [disabled]="disabled"
+          [ngModel]="getSpecValue(category.id)"
+          (ngModelChange)="setSpecValue(category.id, $event)"
+          (keydown.enter)="handleAddSpecification(category.id)"
+          placeholder="Value..."
+        />
+        <button
+          class="bg-indigo-600 text-white px-2 rounded h-8 w-8 cursor-pointer"
+          type="button"
+          (click)="handleAddSpecification(category.id)"
+        >
+          <span class="w-5 h-5">
+            <ng-icon name="lucidePlus" />
           </span>
+        </button>
+      </div>
+    </div>
 
-          <ng-container *ngIf="editingSpec === spec.id; else viewSpec">
-            <input
-              class="border rounded px-2 py-1 text-sm"
-              [(ngModel)]="editSpecData.key"
-              placeholder="Key"
-            />
-            <input
-              class="border rounded px-2 py-1 text-sm"
-              [(ngModel)]="editSpecData.value"
-              (keydown.enter)="saveEditSpec(category.id)"
-              placeholder="Value"
-            />
-          </ng-container>
-          <ng-template #viewSpec>
-            <div class="flex-1">
-              <span [ngClass]="spec.isVisible ? 'text-slate-900' : 'text-gray-400'" class="text-sm font-medium">
-                {{ spec.key }}:
-              </span>
-              <span [ngClass]="spec.isVisible ? 'text-slate-700' : 'text-gray-400'" class="text-sm ml-2">
-                {{ spec.value }}
-              </span>
-            </div>
-          </ng-template>
+    <!-- Specs List -->
+    <div class="space-y-2 ml-5">
+      <div
+        *ngFor="let spec of category.specifications"
+        class="flex items-center gap-2 p-2 bg-gray-50 rounded"
+      >
+        <!-- <span [ngClass]="spec.isVisible ? 'text-green-500' : 'text-gray-400'" class="material-icons text-sm">
+            {{ spec.isVisible ? 'visibility' : 'visibility_off' }}
+          </span> -->
 
-          <div class="flex gap-1 items-center">
-            <input
+        <ng-container *ngIf="editingSpec === spec.id; else viewSpec">
+          <input
+            class="border rounded px-2 py-1 text-sm"
+            [disabled]="disabled"
+            [(ngModel)]="editSpecData.key"
+            placeholder="Key"
+          />
+          <input
+            class="border rounded px-2 py-1 text-sm"
+            [disabled]="disabled"
+            [(ngModel)]="editSpecData.value"
+            (keydown.enter)="saveEditSpec(category.id)"
+            placeholder="Value"
+          />
+        </ng-container>
+        <ng-template #viewSpec>
+          <div class="flex-1">
+            <span
+              [ngClass]="spec.isVisible ? 'text-slate-900' : 'text-gray-400'"
+              class="text-sm font-medium"
+            >
+              {{ spec.key }}:
+            </span>
+            <span
+              [ngClass]="spec.isVisible ? 'text-slate-700' : 'text-gray-400'"
+              class="text-sm ml-2"
+            >
+              {{ spec.value }}
+            </span>
+          </div>
+        </ng-template>
+
+        <div class="flex gap-1 items-center">
+          <!-- <input
               type="checkbox"
               [checked]="spec.isVisible"
               (change)="toggleSpecVisibility( category.id, spec.id )"
-            />
-            <ng-container *ngIf="editingSpec === spec.id; else viewSpecControls">
-              <button 
+            /> -->
+          <ng-container *ngIf="editingSpec === spec.id; else viewSpecControls">
+            <button
               type="button"
-              class="text-xs" (click)="saveEditSpec(category.id)">💾</button>
-              <button 
+              class="text-xs"
+              (click)="saveEditSpec(category.id)"
+            >
+              <span class="w-5 h-5 text-gray-900">
+                <ng-icon  name="lucideSave" />
+                save
+              </span>
+            </button>
+            <button type="button" class="text-xs" (click)="editingSpec = null">
+              <span class="w-5 h-5 text-gray-900">
+                <ng-icon  name="lucideX" />
+                X
+              </span>
+            </button>
+          </ng-container>
+          <ng-template #viewSpecControls>
+            <button
               type="button"
-              class="text-xs" (click)="editingSpec = null">❌</button>
-            </ng-container>
-            <ng-template #viewSpecControls>
-              <button 
+              class="text-xs"
+              (click)="startEditSpec(spec.id, spec.key, spec.value)"
+            >
+              <span class="w-6 h-5">
+                <ng-icon name="lucidePencil"></ng-icon>
+              </span>
+            </button>
+            <button
               type="button"
-              class="text-xs" (click)="startEditSpec(spec.id, spec.key, spec.value)">✏️</button>
-              <button 
-              type="button"
-              class="text-xs" (click)="deleteSpecification(category.id, spec.id)">🗑️</button>
-            </ng-template>
-          </div>
+              class="text-xs"
+              (click)="deleteSpecification(category.id, spec.id)"
+            >
+              <span class="w-5 h-5">
+                <ng-icon name="lucideTrash"></ng-icon>
+              </span>
+            </button>
+          </ng-template>
         </div>
       </div>
     </div>
-  
+  </div>
 </div>

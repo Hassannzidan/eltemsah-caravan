@@ -12,12 +12,12 @@ export class ProductService {
   private _products = signal<Product[]>([]);
   public products = this._products.asReadonly();
 
-   constructor() {
+  constructor() {
     this.loadProductsFromBackend();
   }
 
   getAllProducts(): Observable<Product[]> {
-  return this.http.get<Product[]>(this.baseUrl);
+    return this.http.get<Product[]>(this.baseUrl);
   }
 
   loadProductsFromBackend() {
@@ -30,7 +30,7 @@ export class ProductService {
   deleteProduct(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
       tap(() => {
-        this._products.set(this._products().filter(p => p._id !== id));
+        this._products.set(this._products().filter((p) => p._id !== id));
       })
     );
   }
@@ -40,23 +40,28 @@ export class ProductService {
   }
 
   updateProduct(productId: string, productData: FormData): Observable<Product> {
-  return this.http.patch<Product>(`${this.baseUrl}/${productId}`, productData);
+    return this.http.patch<Product>(
+      `${this.baseUrl}/${productId}`,
+      productData
+    );
   }
 
   updateLocalProduct(product: Product) {
-  const current = this._products();
-  const index = current.findIndex(p => p._id === product._id);
-  if (index !== -1) {
-    const updated = [...current];
-    updated[index] = product;
-    this._products.set(updated);
-  } else {
-    this._products.set([...current, product]);
+    const current = this._products();
+    const index = current.findIndex((p) => p._id === product._id);
+    if (index !== -1) {
+      const updated = [...current];
+      updated[index] = product;
+      this._products.set(updated);
+    } else {
+      this._products.set([...current, product]);
+    }
   }
-}
 
   updateProductInState(updated: Product) {
-    this._products.set(this._products().map(p => p._id === updated._id ? updated : p));
+    this._products.set(
+      this._products().map((p) => (p._id === updated._id ? updated : p))
+    );
   }
 
   get productsSnapshot() {
@@ -65,33 +70,27 @@ export class ProductService {
 
   createProduct(productFormData: FormData): Observable<Product> {
     return this.http.post<Product>(this.baseUrl, productFormData).pipe(
-    tap((product) => {
-      this.addProduct(product); 
-    })
-  );
+      tap((product) => {
+        this.addProduct(product);
+      })
+    );
   }
 
   toggleProductStatus(productId: string): Observable<Product> {
-  return this.http.patch<Product>(`${this.baseUrl}/${productId}/status`, {}).pipe(
-    tap((updatedProduct) => {
-      this.updateProductInState(updatedProduct);
-    })
-  );
-}
+    return this.http
+      .patch<Product>(`${this.baseUrl}/${productId}/status`, {})
+      .pipe(
+        tap((updatedProduct) => {
+          this.updateProductInState(updatedProduct);
+        })
+      );
+  }
 
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.baseUrl}/${id}`);
+  }
 
-
-  // updateProduct(id: string, productFormData: FormData): Observable<Product> {
-  //   return this.http.put<Product>(`${this.baseUrl}/${id}`, productFormData);
+  // updateProductSections(productId: string, sections: any[]) {
+  //   return this.http.patch(`${this.baseUrl}/${productId}/sections`, { sections });
   // }
-
-
-
-
-
-  // ✅ إضافة منتج جديد إلى ال signal
-  // addProductToState(product: Product) {
-  //   this._products.set([product, ...this._products()]);
-  // }
-
 }

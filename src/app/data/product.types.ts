@@ -32,17 +32,8 @@ export interface CustomizationCategory {
 export interface ProductData {
   id: number;
   sections: ProductSection[];
-  benefits: ProductFeature[];
   features: ProductFeature[];
   specifications: ProductSpecificationCategory[];
-  customizations: CustomizationCategory[];
-  leadTime: {
-    production: string;
-    delivery: string;
-    customization?: string;
-  };
-  availability: string;
-  orderProcess: { id: string; step: string; isVisible: boolean }[];
 }
 
 export interface Product {
