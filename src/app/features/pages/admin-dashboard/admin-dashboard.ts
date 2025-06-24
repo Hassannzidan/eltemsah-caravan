@@ -9,16 +9,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { provideIcons, NgIconsModule } from '@ng-icons/core';
 import {
+  lucideLogOut,
   lucidePlus,
   lucideSettings,
   lucideSquarePen,
   lucideTrash2,
 } from '@ng-icons/lucide';
 import { SearchFilterBar } from '../../components/products-components/search-filter-bar/search-filter-bar';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AddProductDialog } from '../../components/admin-components/add-product-dialog/add-product-dialog';
 import { ProductService } from '../../../services/product/product.service';
 import { Product } from '../../../data/product.types';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -37,6 +39,7 @@ import { Product } from '../../../data/product.types';
     lucideSquarePen,
     lucideSettings,
     lucidePlus,
+    lucideLogOut,
   }),
 })
 export class AdminDashboard {
@@ -76,11 +79,14 @@ export class AdminDashboard {
   dialogOpen = false;
   productTags: string[] = ['electronics', 'gadgets'];
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.productService.loadProductsFromBackend();
   }
 
-  
   filteredProducts = computed(() => {
     const search = this.searchTerm().toLowerCase();
     const category = this.selectedCategory();
@@ -121,7 +127,6 @@ export class AdminDashboard {
 
   // ✅ تعديل حالة المنتج
   toggleStatus(productId: string) {
-
     console.log('Sending toggle for product ID:', productId); // 👈
     this.productService.toggleProductStatus(productId).subscribe({
       next: () => {
@@ -135,7 +140,6 @@ export class AdminDashboard {
 
   // ✅ فتح نموذج الإضافة
   openAddForm() {
-
     this.editingProduct.set(null);
     this.isFormOpen.set(true);
   }
@@ -146,29 +150,14 @@ export class AdminDashboard {
     this.isFormOpen.set(true);
   }
 
-  // ✅ بعد الإضافة الناجحة
-  // addCreatedProduct(product: Product) {
-  //   this.productService.addProduct(product);
-
-  //   this.isFormOpen.set(false);
-  //   this.editingProduct.set(null);
-  //   this.isFormOpen.set(false);
-  //   this.editingProduct.set(null);
-
-  //   this.searchTerm.set(this.searchTerm());
-  //   this.selectedCategory.set(this.selectedCategory());
-  //   this.statusFilter.set(this.statusFilter());
-
-  //   console.log('Product added successfully');
-  //   console.log(
-  //     '📦 جميع المنتجات بعد الإضافة:',
-  //     this.productService.products()
-  //   );
-  // }
   addCreatedProduct(product: Product) {
-  this.productService.updateLocalProduct(product);
-  this.editingProduct.set(null);
-  this.isFormOpen.set(false);
+    this.productService.updateLocalProduct(product);
+    this.editingProduct.set(null);
+    this.isFormOpen.set(false);
   }
-  
+
+  logout() {
+    this.authService.logout();          // يحدث signal ويشيل التوكن
+    this.router.navigate(['/login']);   // يرجع المستخدم لصفحة تسجيل الدخول
+  }
 }
