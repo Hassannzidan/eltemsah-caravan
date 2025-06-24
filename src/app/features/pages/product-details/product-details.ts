@@ -65,5 +65,12 @@ getFlatSpecifications(categories: ProductSpecificationCategory[] = []): Record<s
   return specs;
 }
 
+isSectionVisible(sectionId: string): boolean {
+  if (!this.product) {
+    return true;
+  }
+  return this.product.productDetails?.sections?.find(s => s.id === sectionId)?.isVisible ?? true;
+}
+
 
 }

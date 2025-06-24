@@ -22,12 +22,15 @@
           <div class="mt-5">
 
           </div>
-         <app-product-features [features]="features" />
+         <app-product-features 
+          *ngIf="isSectionVisible('features')"
+            [features]="features" />
         <app-product-specification
           [specifications]="getFlatSpecifications(product.productDetails?.specifications)"
-        ></app-product-specification>        
-        <!-- <app-product-cta />
-        <app-trust-indicators /> -->
+          *ngIf="isSectionVisible('specifications')"
+        />      
+        <app-product-cta />
+        <app-trust-indicators />
       
       </div>
     </div>
