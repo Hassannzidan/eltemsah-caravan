@@ -1,34 +1,24 @@
 {
-  "home": {
-    "brochure": {
-      "hero": {
-        "subheading": "Dedicated Customer Teams & An Agile Services",
-        "heading": "Serving Impressive List Of Long Term Clients",
-        "description": "Our worldwide presence ensures timeliness, cost efficiency and compliance adherence required to ensure your timelines are met. Serving with experience and expertise in multiple industries, as one of the World's leading Corporation!",
-        "button": "Download Our Brochure",
-        "quote": {
-          "text": "You are helping to lead the charge. We can help you build on your past successes and prepare for your great future.",
-          "name": "Martin",
-          "title": "CEO, Industic"
-        }
-      }
-    },
-    "companyFeatures": {
-        "smallTitle": "Smart Design, Practical Performance – Vehicles That Meet All Your Needs",
-        "headline": {
-          "highlight": "Multi-Purpose Vehicles"
-        },
-        "descriptions": {
-          "paragraph1": "We specialize in creating innovative, durable, and versatile vehicles that adapt to your unique business requirements. From mobile food solutions to custom industrial applications, our engineering excellence ensures every vehicle delivers outstanding performance and reliability.",
-          "paragraph2": "Our commitment to quality craftsmanship and cutting-edge design has made us the preferred choice for businesses seeking dependable mobile solutions that drive success."
-        },
-        "button": {
-          "label": "Discover Our Solutions"
-        },
-        "image": {
-          "alt": "Modern Manufacturing Facility",
-          "badge": "Premium Quality"
-        }
-    }
+  "brand": {
+    "line1": "TEMSAH",
+    "line2": "CARAVAN"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "contact": "Contact"
+  },
+  "language": {
+    "toggle": "AR",
+    "label": "English"
+  },
+  "phone": {
+    "desktop": "+20 110 201 2009",
+    "mobile": "0111 375 8909"
+  },
+  "cta": {
+    "desktop": "Get Started Now",
+    "mobile": "Get A Quote"
   }
 }

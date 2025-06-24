@@ -4,6 +4,8 @@ import { Header } from './features/layout/header/header/header';
 import { Footer } from './features/layout/footer/footer/footer';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageService } from './services/language/language.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +14,26 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     Header, 
     Footer, 
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TranslateModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected title = 'eltemsah-caravan';
+  // protected title = 'eltemsah-caravan';
+
   showLayout = true;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router , 
+    private translate: TranslateService,
+    private languageService: LanguageService
+  ) {
+    this.translate.addLangs(['de', 'en']);
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+
     this.router.events.subscribe(() => {
       this.showLayout = !this.router.url.includes('/login');
     });
