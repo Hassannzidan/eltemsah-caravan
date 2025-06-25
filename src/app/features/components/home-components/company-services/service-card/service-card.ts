@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-service-card',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,TranslateModule],
   templateUrl: './service-card.html',
   styleUrl: './service-card.css'
 })

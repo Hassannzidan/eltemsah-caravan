@@ -1,0 +1,87 @@
+<!-- Notification Toast -->
+<div *ngIf="hasShownNotification() && !isOpen()" class="fixed bottom-24 right-6 z-50 animate-scale-in">
+  <div class="bg-orange-500 text-white p-4 rounded-xl shadow-2xl max-w-xs relative">
+    <button
+      (click)="hasShownNotification.set(false)"
+      class="absolute -top-2 -right-2 w-6 h-6 bg-white text-orange-600 rounded-full text-xs font-bold">
+      ×
+    </button>
+    <div class="flex items-start space-x-3">
+      <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">✨</div>
+      <div>
+        <p class="font-semibold text-sm">Hi! I'm Carvy 🚐</p>
+        <p class="text-xs mt-1">Got questions about our caravans?</p>
+        <button (click)="openChat()" class="mt-2 bg-white text-orange-600 text-xs h-7 px-3 rounded">Chat with me</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chat Button -->
+<div *ngIf="!isOpen()" class="fixed bottom-6 right-6 z-50">
+  <button
+    (click)="openChat()"
+    class="w-14 h-14 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xl shadow-xl">
+    💬
+  </button>
+</div>
+
+<!-- Chat Window -->
+<div *ngIf="isOpen()" class="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-white shadow-2xl border-2 border-orange-200 rounded-xl flex flex-col overflow-hidden animate-scale-in">
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">🚚</div>
+      <div>
+        <p class="text-lg font-bold">Carvy</p>
+        <p class="text-sm text-orange-100">Manufacturing Assistant</p>
+      </div>
+    </div>
+    <button (click)="closeChat()" class="hover:bg-white/20 p-1 rounded-full">×</button>
+  </div>
+
+  <!-- Messages -->
+  <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-orange-50/50">
+    <div *ngFor="let message of messages()" [ngClass]="message.isBot ? 'justify-start' : 'justify-end'" class="flex">
+      <div [ngClass]="message.isBot
+        ? 'bg-white text-gray-800 border border-gray-200'
+        : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white'"
+        class="max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm">
+        {{ message.text }}
+      </div>
+    </div>
+
+    <!-- Preset Questions -->
+    <div *ngIf="showQuestions() && messages().length > 0" class="space-y-3 mt-6">
+      <p class="text-xs text-gray-500 text-center font-medium">Quick questions to get started:</p>
+      <button
+        *ngFor="let question of presetQuestions"
+        (click)="handleQuestionClick(question)"
+        class="w-full text-left justify-start text-xs h-auto py-3 px-4 hover:bg-orange-50 border border-gray-200 rounded-xl flex items-center space-x-2">
+        <span class="text-orange-600">{{ question.icon }}</span>
+        <span>{{ question.text }}</span>
+      </button>
+    </div>
+
+    <div #messagesEndRef></div>
+  </div>
+
+  <!-- Input -->
+  <div class="border-t bg-white p-4">
+    <div class="flex space-x-3">
+      <input
+        type="text"
+        [value]="inputValue()"
+        (input)="onInputChange($event)"
+        (keydown)="handleKeyDown($event)"
+        placeholder="Ask about our caravans..."
+        class="flex-1 text-sm border border-gray-300 focus:border-orange-500 focus:ring-orange-500 rounded-xl px-3 py-2"
+      />
+      <button
+        (click)="handleSendMessage()"
+        class="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl px-4">
+        ➤
+      </button>
+    </div>
+  </div>
+</div>

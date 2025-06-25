@@ -6,17 +6,19 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './services/language/language.service';
+import { ChatBot } from "./features/components/chat-bot/chat-bot";
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet, 
-    Header, 
-    Footer, 
+    RouterOutlet,
+    Header,
+    Footer,
     CommonModule,
     MatSnackBarModule,
-    TranslateModule
-  ],
+    TranslateModule,
+    ChatBot
+],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

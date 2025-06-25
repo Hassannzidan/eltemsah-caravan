@@ -112,3 +112,12 @@
 .carousel-track img {
   animation: zoomOut 3s ease-in-out;
 }
+
+
+@media (max-width: 400px) {
+  h2 {
+    font-size: 1.25rem; /* optional tweak */
+  }
+}
+
+

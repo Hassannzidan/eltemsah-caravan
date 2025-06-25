@@ -46,10 +46,10 @@ export class Header {
 
   currentLang: 'en' | 'ar' = 'en';
  navigation = [
-  { name: 'nav.home', href: '/' },
-  { name: 'nav.about', href: '/about' },
-  { name: 'nav.products', href: '/services' },
-  { name: 'nav.contact', href: '/contact' },
+  { name: 'heading.nav.home', href: '/' },
+  { name: 'heading.nav.about', href: '/about' },
+  { name: 'heading.nav.products', href: '/services' },
+  { name: 'heading.nav.contact', href: '/contact' },
 ];
 
   constructor(private languageService: LanguageService, public router: Router) {

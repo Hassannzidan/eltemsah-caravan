@@ -1,50 +1,45 @@
-<section class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 relative overflow-hidden">
+<section class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-red-50 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
       <!-- Left Content -->
-      <div class="text-gray-800 z-10 relative space-y-8">
+      <div #leftContent
+            class="text-gray-800 z-10 relative space-y-8 order-2 lg:order-1">
         <div class="space-y-6">
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            <span class="text-slate-800">Temsah Group is a leading</span>
-            <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-              MENA region
+            <span class="text-slate-800">{{ 'videoShowCase.hero.headline' | translate }}</span>
+            <span class="bg-gradient-to-r from-orange-500 to-red-700 bg-clip-text text-transparent">
+              {{ 'videoShowCase.hero.highlight' | translate }}
             </span>
-            <span class="text-slate-800">in steel fabrication & industrial solutions!</span>
+            <span class="text-slate-800">{{ 'videoShowCase.hero.subheadline' | translate }}</span>
           </h2>
 
           <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
-            For over 40 years, Temsah has driven innovation and integrity across industries, from oil & gas to infrastructure.
+           {{ 'videoShowCase.hero.description' | translate }}
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-          <div *ngFor="let feature of features">
-            <div class="flex items-center space-x-3 group">
-              <div class="w-5 h-5 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+        <div #featuresList class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div *ngFor="let i of [0,1,2,3,4,5,6,7]">
+            <div class="feature-item flex items-center space-x-3 group">
+              <div class="w-5 h-5 bg-gradient-to-r from-red-400 to-red-500 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
                 <div class="w-2 h-2 bg-white rounded-full"></div>
               </div>
-              <span class="text-slate-700 font-medium group-hover:text-slate-900 transition-colors">{{ feature }}</span>
+              <span class="text-slate-700 font-medium group-hover:text-slate-900 transition-colors">{{ 'videoShowCase.hero.features.' + i | translate }}</span>
             </div>
           </div>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <button class="cursor-pointer bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-0 px-8 py-3 rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
-            Schedule An Appointment
+          <button class="cursor-pointer bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0 px-8 py-3 rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+            {{ 'videoShowCase.hero.appointment_button' | translate }}
           </button>
-
-          <!-- <button class="text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300 group">
-            Explore All Features
-            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
-              <span class="text-white font-bold text-lg">→</span>
-            </div>
-          </button> -->
         </div>
       </div>
 
       <!-- Right Section -->
-      <div class="relative">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-orange-100 p-1">
+      <div #rightContent
+            class="relative order-1 lg:order-2">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-red-100 p-1">
           <div class="rounded-3xl overflow-hidden bg-white">
             <!-- Background Image -->
             <div class="relative w-full h-[70vh] bg-cover bg-center bg-no-repeat"
@@ -58,17 +53,17 @@
             >
               <!-- Play Button -->
               <div *ngIf="!isVideoPlaying ">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-orange-900/20 flex items-center justify-center ">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-red-900/20 flex items-center justify-center ">
                   <button
-                    aria-label="Play promotional video"
+                    [attr.aria-label]="'videoShowCase.hero.video.play_label' | translate"
                     (click)="playVideo()"
-                    class="group relative w-24 h-24 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-500 shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    class="group relative w-24 h-24 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-500 shadow-2xl focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
-                    <svg class="w-10 h-10 text-orange-500 ml-1 group-hover:text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-10 h-10 text-red-500 ml-1 group-hover:text-red-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M6 4l15 8-15 8z" />
                     </svg>
                     <div class="absolute inset-0 rounded-full border-4 border-white/30 animate-ping"></div>
-                    <div class="cursor-pointer absolute inset-0 rounded-full border-2 border-orange-200/50 scale-125 animate-pulse"></div>
+                    <div class="cursor-pointer absolute inset-0 rounded-full border-2 border-red-200/50 scale-125 animate-pulse"></div>
                   </button>
                 </div>
               </div>
@@ -80,12 +75,12 @@
                   class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
                   role="dialog"
                   aria-modal="true"
-                  aria-label="Promotional video modal"
+                  [attr.aria-label]="'videoShowCase.hero.video.modal_label' | translate"
               >
                 <button
                   (click)="closeVideo()"
-                  aria-label="Close video"
-                  class="absolute top-4 right-4 w-10 h-10 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/90 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  [attr.aria-label]="'videoShowCase.hero.video.close_label' | translate"
+                  class="absolute top-4 right-4 w-10 h-10 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/90 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -111,7 +106,7 @@
                     <div class="relative">
                       <button
                         (click)="toggleTooltip(button.id)"
-                        class="cursor-pointer w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 animate-pulse focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        class="cursor-pointer w-10 h-10 bg-gradient-to-r from-orange-500 to-red-700 rounded-full flex items-center justify-center text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110 animate-pulse focus:outline-none focus:ring-2 focus:ring-red-500"
                       >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                           <path d="M12 5v14m-7-7h14" />
@@ -119,8 +114,8 @@
                       </button>
 
                       <div *ngIf="activeTooltip() === button.id"
-                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 bg-white text-slate-800 px-4 py-3 rounded-xl shadow-xl whitespace-nowrap font-semibold border border-orange-100 animate-fade-in">
-                        {{ button.text }}
+                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 bg-white text-slate-800 px-4 py-3 rounded-xl shadow-xl whitespace-nowrap font-semibold border border-red-100 animate-fade-in">
+                          {{ button.textKey | translate }}
                         <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-6 border-transparent border-t-white"></div>
                       </div>
                     </div>

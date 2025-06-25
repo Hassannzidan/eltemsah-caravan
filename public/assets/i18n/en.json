@@ -1,24 +1,181 @@
 {
-  "brand": {
-    "line1": "TEMSAH",
-    "line2": "CARAVAN"
+  "heading": {
+    "brand": {
+      "line1": "TEMSAH",
+      "line2": "CARAVAN"
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "products": "Products",
+      "contact": "Contact"
+    },
+    "language": {
+      "toggle": "AR",
+      "label": "English"
+    },
+    "phone": {
+      "desktop": "+20 110 201 2009",
+      "mobile": "0111 375 8909"
+    },
+    "cta": {
+      "desktop": "Get Started Now",
+      "mobile": "Get A Quote"
+    }
   },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "products": "Products",
-    "contact": "Contact"
+  "carousel": {
+    "slide1": {
+      "title": "Stand-Out Food Trucks",
+      "description": "Drive your brand forward with custom-designed food trucks built to impress and perform."
+    },
+    "slide2": {
+      "title": "Next-Level Caravans",
+      "description": "Multi-purpose caravans crafted to serve, sell, and shine — wherever you go."
+    },
+    "slide3": {
+      "title": "Kiosks that Sell More",
+      "description": "Sleek, smart kiosks that grab attention and elevate your business presence."
+    },
+    "slide4": {
+      "title": "Containers with a Twist",
+      "description": "Transform shipping containers into stylish cafés, pop-up shops, or mobile offices."
+    },
+    "slide5": {
+      "title": "Carts that Catch Eyes",
+      "description": "From food stands to street carts — compact, creative, and ready to roll."
+    },
+    "slide6": {
+      "title": "Steel Builds. Bold Moves.",
+      "description": "From custom vehicle mods to solid steel structures — built to last, built to lead."
+    },
+    "buttons": {
+      "about": "About Us",
+      "services": "Our Services"
+    }
   },
-  "language": {
-    "toggle": "AR",
-    "label": "English"
+  "vehicle": {
+    "smallTitle": "Smart Mobile Solutions",
+    "mainTitle1": "We design and manufacture",
+    "mainTitle2": "Multi-Purpose Vehicles",
+    "paragraph1": "We are a leading company in designing and manufacturing caravans, trailers, and smart mobility solutions. We offer a comprehensive range of products that serve various sectors such as food trucks, commercial kiosks, mobile sales units, and container modifications.",
+    "paragraph2": "With extensive experience and cutting-edge technologies, we provide customized and efficient solutions that help our clients succeed in their industries.",
+    "paragraph3": "In a rapidly changing world, we don't just follow trends—we create them. Through innovation, quality, and flexible manufacturing, we help turn your idea into a real mobile project that opens up new possibilities",
+    "paragraph4": "We don't just build vehicles—we create opportunities and deliver experiences.",
+    "buttonMore": "Show More",
+    "buttonLess": "Show Less",
+    "cta": "Get a Free Consultation",
+    "imageAlt": "Manufacturing Professional with Vehicle",
+    "imageBadge": "Premium Quality"
   },
-  "phone": {
-    "desktop": "+20 110 201 2009",
-    "mobile": "0111 375 8909"
+  "trustedSponsors": {
+    "trusted_by": "Trusted by",
+    "industry_leaders": "Industry Leaders",
+    "trusted_description": " We're proud to partner with world-class brands who trust us to deliver exceptional manufacturing solutions that drive their global success.",
+    "global_partners": "Global Partners",
+    "countries_served": "Countries Served",
+    "client_satisfaction": "Client Satisfaction",
+    "support_available": "Support Available"
   },
-  "cta": {
-    "desktop": "Get Started Now",
-    "mobile": "Get A Quote"
+  "companyService": {
+    "serviceCard": {
+      "exploreMore": "Explore More"
+    },
+    "title": "Manufacturing Services",
+    "description": "Delivering precision-engineered solutions across diverse manufacturing sectors with cutting-edge technology and uncompromising quality standards."
+  },
+  "services": {
+    "1": {
+      "title": "Multi-use Caravans",
+      "category": "Mobile Solutions",
+      "description": "Custom-built multi-purpose caravans designed for versatility and durability, perfect for various commercial and recreational applications."
+    },
+    "2": {
+      "title": "Food Trucks",
+      "category": "Mobile Kitchens",
+      "description": "Professional food truck manufacturing with state-of-the-art kitchen equipment and eye-catching designs to boost your mobile business."
+    },
+    "3": {
+      "title": "Kiosks",
+      "category": "Retail Solutions",
+      "description": "Modern kiosk designs for retail, information, and service applications with weather-resistant materials and contemporary aesthetics."
+    },
+    "4": {
+      "title": "Container Modifications",
+      "category": "Industrial Solutions",
+      "description": "Expert container modifications for storage, offices, workshops, and specialized industrial applications with precision engineering."
+    },
+    "5": {
+      "title": "Trailers",
+      "category": "Transport Solutions",
+      "description": "Heavy-duty trailer manufacturing for cargo, equipment transport, and specialized hauling needs with robust construction."
+    },
+    "6": {
+      "title": "Food Stands",
+      "category": "Street Food",
+      "description": "Compact and efficient food stands designed for high-traffic areas with optimized workflow and attractive presentation."
+    },
+    "7": {
+      "title": "Karts",
+      "category": "Mobile Retail",
+      "description": "Lightweight and maneuverable retail karts perfect for markets, events, and mobile selling with customizable configurations."
+    },
+    "8": {
+      "title": "Bikes & Tricycles",
+      "category": "Eco Transport",
+      "description": "Custom-built commercial bikes and tricycles for delivery, vending, and eco-friendly transportation solutions."
+    },
+    "9": {
+      "title": "Van/Vehicle Modifications",
+      "category": "Fleet Solutions",
+      "description": "Professional vehicle modifications for commercial fleets, mobile workshops, and specialized transportation requirements."
+    },
+    "10": {
+      "title": "General Steel Structures",
+      "category": "Construction",
+      "description": "Robust steel structure fabrication for industrial, commercial, and residential projects with precision welding and finishing."
+    }
+  },
+  "videoShowCase": {
+    "hero": {
+      "headline": "Temsah Group is a leading",
+      "highlight": "MENA region",
+      "subheadline": "in steel fabrication & industrial solutions!",
+      "description": "For over 40 years, Temsah has driven innovation and integrity across industries, from oil & gas to infrastructure.",
+      "appointment_button": "Schedule An Appointment",
+      "features": [
+        "Certified Quality Systems",
+        "Guaranteed Client Satisfaction",
+        "Professionally Trained Staff",
+        "Accurate and Reliable Testing",
+        "Precision Craftsmanship",
+        "Qualified Engineering Personnel",
+        "Environmentally Safe Practices",
+        "Tailored Industrial Solutions"
+      ],
+      "video": {
+        "play_label": "Play promotional video",
+        "close_label": "Close video",
+        "modal_label": "Promotional video modal"
+      },
+      "tooltip": {
+        "plusButtons": {
+          "employees": "400 Employees",
+          "sustainable": "696 Sustainable",
+          "projects": "1,200+ Projects",
+          "experience": "60+ Years Experience"
+        }
+      }
+    }
+  },
+  "brochure":{
+    "smallHeading":"Dedicated Customer Teams & An Agile Services",
+    "Heading":"Serving Impressive List Of Long Term Clients",
+    "description":"Our worldwide presence ensures timeliness, cost efficiency and compliance adherence required to ensure your timelines are met. Serving with experience and expertise in multiple industries, as one of the World's leading Corporation!",
+    "downloadButton":"Download Our Brochure",
+    "qoute":"You are helping to lead the charge. We can help you build on your past successes and prepare for your great future.",
+    "qouteBy":"Mohamed Hassan",
+    "qoutePosition":"CEO, Industic",
+    "brochure.qoute":"M",
+    "previewButton": "Preview Brochure"
   }
 }

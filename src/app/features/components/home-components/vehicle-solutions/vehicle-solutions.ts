@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vehicle-solutions',
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './vehicle-solutions.html',
   styleUrl: './vehicle-solutions.css'
 })
