@@ -1,17 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NgIconsModule, provideIcons } from '@ng-icons/core';
+import { lucideChevronRight, lucideFacebook, lucideInstagram } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-footer',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgIconsModule],
   templateUrl: './footer.html',
-  styleUrl: './footer.css'
+  styleUrl: './footer.css',
+  viewProviders: [provideIcons({ 
+    lucideFacebook, 
+    lucideInstagram,
+    lucideChevronRight
+  
+  })],
 })
 export class Footer {
   emailControl = new FormControl('');
 
-   onSubmit() {
+  onSubmit() {
     console.log('Newsletter signup:', this.emailControl.value);
     this.emailControl.reset();
   }

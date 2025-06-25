@@ -9,21 +9,22 @@
       </p>
       <div class="flex items-center gap-3">
         <!-- <app-lucide-phone class="w-5 h-5 text-orange-500"></app-lucide-phone> -->
-        <span class="text-xl font-bold text-orange-500">55 654 5417</span>
+        <span class="text-xl font-bold text-orange-500">011 0201 2009</span>
       </div>
       <div class="space-y-2 text-gray-300">
-        <p>2307 Beverley Rd Brooklyn, New York</p>
-        <p>11226 United States.</p>
+        <p>28 Alex desert road, beside smart village Giza,</p>
+        <p>Giza Governorate, Egypt .</p>
       </div>
       <div class="flex gap-3 pt-2">
         <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-          <!-- <app-lucide-facebook class="w-5 h-5"></app-lucide-facebook> -->
+          <span class="w-5 h-5 text-xl">
+            <ng-icon name="lucideFacebook" />
+          </span> 
         </div>
         <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-          <!-- <app-lucide-twitter class="w-5 h-5"></app-lucide-twitter> -->
-        </div>
-        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-          <!-- <app-lucide-instagram class="w-5 h-5"></app-lucide-instagram> -->
+          <span class="w-5 h-5 text-xl">
+            <ng-icon name="lucideInstagram" />
+          </span> 
         </div>
       </div>
     </div>
@@ -32,9 +33,13 @@
     <div class="space-y-6">
       <h3 class="text-xl font-bold">Company</h3>
       <ul class="space-y-3">
-        <li *ngFor="let item of ['About Us', 'Meet Our Team', 'News & Media', 'Case Studies Grid', 'Contact Us', 'Careers']">
+        <li *ngFor="let item of ['Home','About Us', 'Contact Us', 'Our Products']">
           <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
-            <span class="text-orange-500">→</span> {{ item }}
+            <span class="text-orange-500">
+              <span class="w-5 h-5 text-lg">
+                <ng-icon name="lucideChevronRight" />
+              </span>
+            </span> {{ item }}
           </a>
         </li>
       </ul>
@@ -44,47 +49,25 @@
     <div class="space-y-6">
       <h3 class="text-xl font-bold">Industries</h3>
       <ul class="space-y-3">
-        <li *ngFor="let item of ['Retail & Consumer', 'Sciences & Healthcare', 'Industrial & Chemical', 'Power Generation', 'Food & Beverage', 'Oil & Gas']">
+        <li *ngFor="let item of ['Multi-purpose caravans', 'Food trucks', 'Kiosks and booths', 'Container modifications', 'Trailers', 'Mobile food outlets','Custom utility vehicles','Bicycles and tricycles for commercial use',' Vehicle customization','General steel structure fabrication']">
           <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
-            <span class="text-orange-500">→</span> {{ item }}
+            <span class="text-orange-500">
+              <span class="w-5 h-5 text-lg">
+                <ng-icon name="lucideChevronRight" />
+              </span>
+            </span> {{ item }}
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Newsletter Signup -->
-    <div class="space-y-6">
-      <p class="text-white font-medium leading-relaxed">
-        Sign up for industry alerts, our latest news, thoughts, and insights from Koira.
-      </p>
-      <form (ngSubmit)="onSubmit()" class="space-y-4">
-        <div class="relative">
-          <input
-            type="email"
-            [formControl]="emailControl"
-            placeholder="Your Email Address"
-            required
-            class="w-full h-12 rounded-full bg-transparent border-2 border-orange-500 px-4 pr-12 placeholder:text-gray-400 text-white focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
-          />
-          <button
-            type="submit"
-            class="absolute right-1 top-1 h-10 w-10 rounded-full bg-orange-500 hover:bg-orange-600 p-0 flex items-center justify-center"
-          >
-            <!-- <app-lucide-arrow-right class="w-4 h-4"></app-lucide-arrow-right> -->
-          </button>
-        </div>
-      </form>
-      <p class="text-gray-400 text-sm">
-        You may withdraw your consent at any time!
-      </p>
-    </div>
   </div>
 
   <!-- Bottom Footer -->
   <div class="border-t border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
-        <h2 class="text-2xl font-bold order-2 lg:order-1">Koira</h2>
+        <h2 class="text-2xl font-bold order-2 lg:order-1">TEMSAH COMPANY</h2>
         <div class="flex flex-wrap justify-center lg:justify-end gap-6 text-sm order-1 lg:order-2">
           <a href="#" class="text-gray-300 hover:text-white transition-colors">Terms & Conditions</a>
           <a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
@@ -94,7 +77,7 @@
       </div>
       <div class="text-center lg:text-right mt-4">
         <p class="text-gray-400 text-sm">
-          ©2025 Koira. All Rights Reserved. With Love by <span class="text-orange-500">CMSSuperHeroes</span>
+          ©2025 Temsah. All Rights Reserved. With Love by <span class="text-orange-500">Hassan Zidan</span>
         </p>
       </div>
     </div>
