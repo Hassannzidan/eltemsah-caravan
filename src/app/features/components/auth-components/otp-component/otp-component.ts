@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
+import { environment } from '../../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-otp-component',
@@ -28,7 +29,7 @@ export class OtpComponent {
     const code = `${this.otp1}${this.otp2}${this.otp3}${this.otp4}`;
 
     this.http
-      .post<{ token: string }>('http://localhost:3000/auth/verify-code', {
+      .post<{ token: string }>(`${environment.apiUrl}/auth/verify-code`, {
         code,
       })
       .subscribe({

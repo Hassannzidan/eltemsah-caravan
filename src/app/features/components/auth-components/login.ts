@@ -7,6 +7,7 @@ import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { featherEye, featherEyeOff } from '@ng-icons/feather-icons';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { environment } from '../../../../environments/environment.prod';
 
 
 @Component({
@@ -56,7 +57,7 @@ export class Login {
   this.isLoading = true;
   const { email, password } = this.form.value;
 
-  this.http.post('http://localhost:3000/auth/login', { email, password }).subscribe({
+  this.http.post(`${environment.apiUrl}/auth/login`, { email, password }).subscribe({
     next: () => {
       this.router.navigate(['/verify-otp']);
     },

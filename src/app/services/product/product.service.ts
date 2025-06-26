@@ -2,11 +2,12 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import type { Product } from '../../data/product.types';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3000/products';
+  private baseUrl = `${environment.apiUrl}/products`;
 
   // Signal لتخزين المنتجات
   private _products = signal<Product[]>([]);
