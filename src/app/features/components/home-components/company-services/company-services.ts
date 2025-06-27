@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input,  ChangeDetectorRef, type OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectorRef,
+  type OnInit,
+} from '@angular/core';
 import { NgIconsModule } from '@ng-icons/core';
 import { ServiceCard } from './service-card/service-card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +21,7 @@ export interface Service {
   templateUrl: './company-services.html',
   styleUrl: './company-services.css',
 })
-export class CompanyServices implements OnInit  {
+export class CompanyServices implements OnInit {
   @Input() services: any[] = [];
   currentIndex = 0;
   isHovered = false;
@@ -24,8 +29,10 @@ export class CompanyServices implements OnInit  {
   private resizeTimeout: any;
   arrowShake = false;
   isRTL = false;
+  touchStartX = 0;
+  touchEndX = 0;
 
-  constructor(private cdr: ChangeDetectorRef){}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngDoCheck() {
     const dir = document.documentElement.dir;
@@ -39,8 +46,9 @@ export class CompanyServices implements OnInit  {
   ngOnInit(): void {
     this.updateCardsPerView();
     window.addEventListener('resize', this.updateCardsPerView.bind(this));
-    
-    this.isRTL = document.dir === 'rtl' || document.documentElement.dir === 'rtl';
+
+    this.isRTL =
+      document.dir === 'rtl' || document.documentElement.dir === 'rtl';
   }
 
   updateCardsPerView(): void {
@@ -75,9 +83,6 @@ export class CompanyServices implements OnInit  {
     return Array.from({ length: this.maxIndex + 1 }, (_, i) => i);
   }
 
-  // handleNext() {
-  //   this.currentIndex = Math.min(this.maxIndex, this.currentIndex + 1);
-  // }
   handleNext() {
     if (this.currentIndex < this.maxIndex) {
       this.currentIndex++;
@@ -85,10 +90,6 @@ export class CompanyServices implements OnInit  {
       this.shakeArrow();
     }
   }
-
-  // handlePrevious() {
-  //   this.currentIndex = Math.max(0, this.currentIndex - 1);
-  // }
 
   handlePrevious() {
     if (this.currentIndex > 0) {
@@ -112,5 +113,33 @@ export class CompanyServices implements OnInit  {
   get totalPages(): number {
     return Math.ceil(this.services.length / this.cardsPerView);
   }
-  
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchMove(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd() {
+    const diff = this.touchStartX - this.touchEndX;
+
+    // الحد الأدنى للمسافة عشان نعتبرها Swipe
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swipe Left → Next
+        this.handleNext();
+      } else {
+        // Swipe Right → Previous
+        this.handlePrevious();
+      }
+    }
+
+    // Reset
+    this.touchStartX = 0;
+    this.touchEndX = 0;
+  }
 }
