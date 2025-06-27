@@ -1,19 +1,31 @@
-<section class="py-10 pb-20  bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+<section
+  class="py-10 pb-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden"
+>
   <!-- Background decorative elements -->
-  <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 via-transparent to-red-600/5"></div>
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-400/10 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-red-500/5 via-transparent to-red-600/5"
+  ></div>
+  <div
+    class="absolute top-0 left-1/4 w-96 h-96 bg-red-400/10 rounded-full blur-3xl"
+  ></div>
+  <div
+    class="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
+  ></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative h-screen">
     <div class="text-center mb-10">
-      <p class="text-red-600 font-semibold text-lg mb-4">Our Purpose</p>
-      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Mission & Vision</h2>
+      <p class="text-red-600 font-semibold text-lg mb-4">
+        {{ 'about.missionVision.sectionSubtitle' | translate }}
+      </p>
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        {{ 'about.missionVision.sectionTitle' | translate }}
+      </h2>
       <p class="text-gray-600 max-w-3xl mx-auto text-lg">
-        Driving excellence through our core mission and visionary goals that shape our industry leadership.
+        {{ 'about.missionVision.sectionDescription' | translate }}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto py-3 ">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto py-3">
       <!-- Mission Card -->
       <div
         class="group hover:shadow-2xl transition-all duration-500 bg-white/20 backdrop-blur-md border border-white/30 hover:border-red-200/50 hover:bg-white/30 rounded-lg text-card-foreground shadow-sm"
@@ -21,23 +33,22 @@
         <div class="p-10">
           <div class="flex items-center gap-4 mb-8">
             <div
-              class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
+              class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
             >
-              <!-- Replace with Angular Icon or SVG -->
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 19l9 2-7-8 7-8-9 2-2-9-2 9-9-2 7 8-7 8 9-2 2 9 2-9z" />
-              </svg>
+              <span class="text-3xl text-white flex items-center justify-center w-full h-full">
+                <ng-icon name="lucideStar" />
+              </span>
             </div>
-            <h3 class="text-3xl font-bold text-gray-900">Our Mission</h3>
+            <h3 class="text-3xl font-bold text-gray-900">
+              {{ 'about.missionVision.missionTitle' | translate }}
+            </h3>
           </div>
           <p class="text-gray-700 leading-relaxed text-lg mb-6">
-            Our mission is to deliver premium-quality caravan trailers and exceptional services, tailored to our 
-            clients' unique needs. We are committed to providing innovative solutions that not only meet but surpass 
-            customer expectations, ensuring reliability, craftsmanship, and excellence in every project.
+            {{ 'about.missionVision.missionDescription' | translate }}
           </p>
           <div class="flex items-center gap-3 text-red-600 font-semibold">
             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-            Excellence in Manufacturing & Service
+            {{ 'about.missionVision.missionTagline' | translate }}
           </div>
         </div>
       </div>
@@ -52,31 +63,37 @@
               class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
             >
               <!-- Replace with Angular Icon or SVG -->
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
                 <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path
                   d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z"
                 />
               </svg>
             </div>
-            <h3 class="text-3xl font-bold text-gray-900">Our Vision</h3>
+            <h3 class="text-3xl font-bold text-gray-900">
+              {{ 'about.missionVision.visionTitle' | translate }}
+            </h3>
           </div>
           <p class="text-gray-700 leading-relaxed text-lg mb-6">
-            Our vision is to set the benchmark for excellence in Egypt's caravan trailer and steel structure industry. 
-            With decades of expertise and an unwavering commitment to quality, we strive to serve both local and 
-            ional markets, delivering innovative solutions that inspire trust and drive progress.
+            {{ 'about.missionVision.visionDescription' | translate }}
           </p>
 
-          <div class="translate-y-6 flex items-center gap-3 text-red-600 font-semibold">
+          <div
+            class="translate-y-6 flex items-center gap-3 text-red-600 font-semibold"
+          >
             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-            Leading Industry Innovation Globally
+            {{ 'about.missionVision.visionTagline' | translate }}
             <!-- {/* Spacer for next section */} -->
-      <!-- <div class="relative z-20 bg-white h-32"></div> -->
+            <!-- <div class="relative z-20 bg-white h-32"></div> -->
           </div>
-          
         </div>
       </div>
     </div>
   </div>
-
 </section>

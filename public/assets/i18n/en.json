@@ -271,6 +271,18 @@
       "projects": "125+ Projects",
       "projectsDesc": "Excellence Achieved Through Success",
       "readMore": "Read More"
+    },
+    "missionVision": {
+      "sectionTitle": "Mission & Vision",
+      "sectionSubtitle": "Our Purpose",
+      "sectionDescription": "Driving excellence through our core mission and visionary goals that shape our industry leadership.",
+      "missionTitle": "Our Mission",
+      "missionDescription": "Our mission is to deliver premium-quality caravan trailers and exceptional services, tailored to our clients' unique needs. We are committed to providing innovative solutions that not only meet but surpass customer expectations, ensuring reliability, craftsmanship, and excellence in every project.",
+      "missionTagline": "Excellence in Manufacturing & Service",
+      "visionTitle": "Our Vision",
+      "visionDescription": "Our vision is to set the benchmark for excellence in Egypt's caravan trailer and steel structure industry. With decades of expertise and an unwavering commitment to quality, we strive to serve both local and regional markets, delivering innovative solutions that inspire trust and drive progress.",
+      "visionTagline": "Leading Industry Innovation Globally"
     }
-  }
+  
+}
 }
