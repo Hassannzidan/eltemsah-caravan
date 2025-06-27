@@ -22,36 +22,55 @@
       "desktop": "Get Started Now",
       "mobile": "Get A Quote"
     }
-    
   },
-  "carousel": {
-    "slide1": {
-      "title": "Stand-Out Food Trucks",
-      "description": "Drive your brand forward with custom-designed food trucks built to impress and perform."
+  "slides": {
+    "1": {
+      "title": "Leading Manufacturing",
+      "description": "Over 60 years of excellence in caravan and steel structure manufacturing with strict quality standards and continuous innovation.",
+      "primary": "Our Services",
+      "secondary": "Learn More"
     },
-    "slide2": {
-      "title": "Next-Level Caravans",
-      "description": "Multi-purpose caravans crafted to serve, sell, and shine — wherever you go."
+    "2": {
+      "title": "Tailored Solutions",
+      "description": "We design and build custom units with expert engineering to meet every detail of your needs.",
+      "primary": "Request Now",
+      "secondary": "Our Process"
     },
-    "slide3": {
-      "title": "Kiosks that Sell More",
-      "description": "Sleek, smart kiosks that grab attention and elevate your business presence."
+    "3": {
+      "title": "Modification & Integration",
+      "description": "Professional modifications for vehicles and containers tailored to business and industrial use.",
+      "primary": "Explore Solutions",
+      "secondary": "Contact Us"
     },
-    "slide4": {
-      "title": "Containers with a Twist",
-      "description": "Transform shipping containers into stylish cafés, pop-up shops, or mobile offices."
+    "4": {
+      "title": "Quality Assurance",
+      "description": "Every product is subjected to rigorous quality control for durability, safety, and high performance.",
+      "primary": "Our Standards",
+      "secondary": "Certifications"
     },
-    "slide5": {
-      "title": "Carts that Catch Eyes",
-      "description": "From food stands to street carts — compact, creative, and ready to roll."
+    "5": {
+      "title": "Continuous Innovation",
+      "description": "Modern, functional designs that respond to market changes and evolving customer needs.",
+      "primary": "Innovation Lab",
+      "secondary": "Our Work"
     },
-    "slide6": {
-      "title": "Steel Builds. Bold Moves.",
-      "description": "From custom vehicle mods to solid steel structures — built to last, built to lead."
+    "6": {
+      "title": "Local & Global Reach",
+      "description": "Serving local and international markets with proven experience and high execution efficiency.",
+      "primary": "Global Services",
+      "secondary": "Our Locations"
     },
-    "buttons": {
-      "about": "About Us",
-      "services": "Our Services"
+    "7": {
+      "title": "Flexible Ownership & Finance",
+      "description": "Units available for sale or rent with financing options through trusted partners and banks.",
+      "primary": "Ownership Plans",
+      "secondary": "Financing"
+    },
+    "8": {
+      "title": "After-Sales Partnership",
+      "description": "We don’t just sell—we stay with you through after-sales service to ensure lasting satisfaction.",
+      "primary": "Customer Service",
+      "secondary": "Support"
     }
   },
   "vehicle": {
@@ -229,8 +248,7 @@
     "privacy": "Privacy Policy",
     "sitemap": "Sitemap",
     "login": "Employee Login",
-    "copyright":
-      "©2025 Temsah. All Rights Reserved. With Love by Hassan Zidan",
+    "copyright": "©2025 Temsah. All Rights Reserved. With Love by Hassan Zidan",
     "companyName": "TEMSAH COMPANY",
     "scrollTop": "Scroll to top",
     "facebook": "Facebook",
@@ -238,5 +256,11 @@
     "gmail": "Gmail",
     "whatsapp": "WhatsApp",
     "phone": "+20 110 201 2009"
+  },
+  "about": {
+    "aboutTitle": "About El-Temsah Caravan",
+    "title_line1": "60 Years of",
+    "title_line2": "Excellence",
+    "description": "Since 1960, pioneering the manufacturing of caravan trailers and steel structures with unmatched quality and innovation."
   }
 }

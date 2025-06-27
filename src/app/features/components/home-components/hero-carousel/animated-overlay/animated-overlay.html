@@ -20,7 +20,7 @@
 
         <!-- Title -->
         <h1
-          class="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-red-200 bg-clip-text text-transparent transition-all duration-[800ms] ease-out"
+          class="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-red-800 via-red-500 to-orange-400 bg-clip-text text-transparent transition-all duration-[800ms] ease-out"
           [ngClass]="{
             'opacity-100 translate-y-0': isActive,
             'opacity-0 translate-y-8': !isActive
@@ -29,12 +29,12 @@
             transitionDelay: isActive ? '1200ms' : '0ms'
           }"
         >
-          {{ slide.title }}
+          {{ slide.title | translate }}
         </h1>
 
         <!-- Description -->
         <p
-          class="text-xl lg:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed transition-all duration-[800ms] ease-out"
+          class="text-xl lg:text-2xl bg-gradient-to-r from-orange-800 via-orange-500 to-orange-100 bg-clip-text text-transparent mb-8 max-w-3xl mx-auto leading-relaxed transition-all duration-[800ms] ease-out"
           [ngClass]="{
             'opacity-100 translate-y-0': isActive,
             'opacity-0 translate-y-8': !isActive
@@ -43,7 +43,7 @@
             transitionDelay: isActive ? '1600ms' : '0ms'
           }"
         >
-          {{ slide.description }}
+          {{ slide.description | translate }}
         </p>
 
         <!-- CTA Buttons -->
@@ -60,10 +60,10 @@
             }"
             (click)="navigateTo(slide.primaryCta.href)"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M20 13V20H4V13M22 10L12 3 2 10M12 3V20" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            {{ slide.primaryCta.text }}
+            <span class="w-5 h-5 text-xl">
+              <ng-icon name="featherHome" />
+            </span>
+            {{ slide.primaryCta.text | translate }}
           </button>
 
           <!-- Secondary -->
@@ -78,7 +78,7 @@
             }"
             (click)="navigateTo(slide.secondaryCta.href)"
           >
-            {{ slide.secondaryCta.text }}
+            {{ slide.secondaryCta.text | translate }}
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>

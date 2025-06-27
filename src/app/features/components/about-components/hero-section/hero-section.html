@@ -1,24 +1,37 @@
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section
+  aria-labelledby="hero-heading"
+  role="region"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
   <!-- Background Image with Parallax Effect -->
-   <div
+  <div
     class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-75"
     [ngStyle]="{
       backgroundImage: 'url(https://images.unsplash.com/photo-1582489853490-cd3a53eb4530?q=80&w=2070&auto=format&fit=crop&w=2070&q=80)',
-      transform: 'translateY(' + scrollY * 0.5 + 'px) scale(1.1)'
+      transform: !isMobile ? 'translateY(' + scrollY * 0.5 + 'px) scale(1.1)' : 'scale(1)'
     }"
   >
     <!-- <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div> -->
-    <div class="absolute inset-0 bg-gradient-to-tr from-red-900/50 via-transparent to-red-600/40"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-blue-800/10 to-blue-900/60"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-tr from-red-900/50 via-transparent to-red-600/40"
+    ></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-transparent via-blue-800/10 to-blue-900/60"
+    ></div>
   </div>
 
   <!-- Animated floating elements -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"
+  ></div>
+
   <div
     class="absolute top-20 left-10 w-40 h-40 bg-red-500/15 rounded-full blur-2xl animate-pulse"
     [ngStyle]="{ transform: 'translateY(' + scrollY * 0.3 + 'px)' }"
   ></div>
   <div
     class="absolute top-1/3 right-16 w-32 h-32 bg-red-400/20 rounded-full blur-xl animate-pulse delay-1000"
+    [ngClass]="isMobile ? '' : 'blur-xl animate-pulse'"
     [ngStyle]="{ transform: 'translateY(' + scrollY * -0.4 + 'px)' }"
   ></div>
   <div
@@ -27,35 +40,54 @@
   ></div>
 
   <!-- Content -->
-  <div class="relative text-center text-white px-4 sm:px-6 lg:px-8 animate-fade-in max-w-5xl">
+  <div
+    class="relative text-center text-white px-4 sm:px-6 lg:px-8 animate-fade-in max-w-5xl"
+  >
     <!-- Inline Badge (No separate component) -->
     <div
       class="inline-flex items-center rounded-full border border-white/30 px-6 py-2 text-lg font-semibold text-white bg-white/20 backdrop-blur-md animate-pulse mb-8"
     >
-      About El-Temsah Caravan
+      {{ 'about.aboutTitle' | translate }}
     </div>
 
-    <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold mb-8 leading-tight">
-      <span class="bg-gradient-to-r from-white via-red-100 to-white bg-clip-text text-transparent drop-shadow-2xl">
-        60 Years of
+    <h1
+      id="hero-heading"
+      class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight"
+    >
+      <span
+        class="bg-gradient-to-r from-white via-red-100 to-white bg-clip-text text-transparent drop-shadow-2xl"
+      >
+        {{ 'about.title_line1' | translate }}
       </span>
       <br />
-      <span class="bg-gradient-to-r from-red-200 via-red-100 to-red-300 bg-clip-text text-transparent drop-shadow-xl">
-        Excellence
+      <span
+        class="bg-gradient-to-r from-red-200 via-red-100 to-red-300 bg-clip-text text-transparent drop-shadow-xl"
+      >
+        {{ 'about.title_line2' | translate }}
       </span>
     </h1>
 
-    <p class="text-xl sm:text-2xl text-red-100 max-w-4xl mx-auto leading-relaxed opacity-95 drop-shadow-lg">
-      Since 1960, pioneering the manufacturing of caravan trailers and steel structures with unmatched quality and innovation.
+    <p
+      class="text-xl sm:text-2xl text-red-100 max-w-4xl mx-auto leading-relaxed opacity-95 drop-shadow-lg"
+    >
+      {{ 'about.description' | translate }}
     </p>
 
     <!-- Decorative elements -->
     <div class="flex justify-center items-center gap-4 mt-12">
-      <div class="w-16 h-1 bg-gradient-to-r from-transparent to-red-300 rounded-full"></div>
+      <div
+        class="w-16 h-1 bg-gradient-to-r from-transparent to-red-300 rounded-full"
+      ></div>
       <div class="w-4 h-4 bg-red-400 rounded-full animate-ping"></div>
-      <div class="w-24 h-1 bg-gradient-to-r from-red-300 to-red-400 rounded-full"></div>
-      <div class="w-4 h-4 bg-red-300 rounded-full animate-pulse delay-300"></div>
-      <div class="w-16 h-1 bg-gradient-to-r from-red-400 to-transparent rounded-full"></div>
+      <div
+        class="w-24 h-1 bg-gradient-to-r from-red-300 to-red-400 rounded-full"
+      ></div>
+      <div
+        class="w-4 h-4 bg-red-300 rounded-full animate-pulse delay-300"
+      ></div>
+      <div
+        class="w-16 h-1 bg-gradient-to-r from-red-400 to-transparent rounded-full"
+      ></div>
     </div>
   </div>
 </section>
