@@ -34,7 +34,7 @@ export class HeroCarousel {
       id: 1,
       image:
         // 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&h=1080&fit=crop',
-        'assets/slides/caravan_slide_one.jpg',
+        'assets/slides/caravan-one.png',
       title: 'Precision Manufacturing',
       description:
         'Advanced manufacturing solutions with cutting-edge technology and uncompromising quality standards for modern industries.',
@@ -45,7 +45,7 @@ export class HeroCarousel {
       id: 2,
       image:
         // 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1920&h=1080&fit=crop',
-        'assets/slides/EL_Dorado-2.jpg',
+        'assets/slides/caravan-five.jpg',
       title: 'Smart Automation',
       description:
         'Revolutionary automated systems that enhance productivity and ensure consistent quality in every manufactured product.',
@@ -56,7 +56,7 @@ export class HeroCarousel {
       id: 3,
       image:
         // 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&h=1080&fit=crop',
-        'assets/slides/tabeee.png',
+        'assets/slides/caravan-three.png',
       title: 'Custom Engineering',
       description:
         'Tailored manufacturing solutions designed to meet your specific requirements with precision engineering expertise.',
@@ -66,7 +66,8 @@ export class HeroCarousel {
     {
       id: 4,
       image:
-        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&h=1080&fit=crop',
+        // 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&h=1080&fit=crop',
+        'assets/slides/caravan-eight.png',
       title: 'Quality Assurance',
       description:
         'Rigorous quality control processes ensuring every product meets the highest industry standards and specifications.',
@@ -76,7 +77,8 @@ export class HeroCarousel {
     {
       id: 5,
       image:
-        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop',
+        // 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop',
+        'assets/slides/caravan-four.jpg',
       title: 'Innovation Hub',
       description:
         "Pioneering next-generation manufacturing technologies that push the boundaries of what's possible in modern production.",
@@ -86,7 +88,8 @@ export class HeroCarousel {
     {
       id: 6,
       image:
-        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1920&h=1080&fit=crop',
+        // 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1920&h=1080&fit=crop',
+        'assets/slides/caravan-six.jpg',
       title: 'Global Reach',
       description:
         'Worldwide manufacturing capabilities delivering excellence across diverse markets and industries with local expertise.',
@@ -96,7 +99,8 @@ export class HeroCarousel {
     {
       id: 7,
       image:
-        'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop',
+        // 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop',
+        'assets/slides/caravan-two.png',
       title: 'Digital Integration',
       description:
         'Seamless integration of digital technologies and IoT solutions for smart, connected manufacturing environments.',
@@ -106,7 +110,7 @@ export class HeroCarousel {
     {
       id: 8,
       image:
-        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&h=1080&fit=crop',
+        'assets/slides/caravan-seven.png',
       title: 'Sustainable Future',
       description:
         'Eco-friendly manufacturing processes and sustainable practices for a greener tomorrow without compromising quality.',
