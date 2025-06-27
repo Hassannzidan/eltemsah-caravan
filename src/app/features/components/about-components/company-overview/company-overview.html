@@ -1,58 +1,73 @@
-<section class="py-24 relative xl:mr-0 lg:mr-5 mr-0">
+<section class="py-24 relative xl:mr-0 lg:mr-5 mr-0" aria-labelledby="about-us-title">
   <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
-    <div class="w-full justify-start items-center xl:gap-12 gap-10 grid lg:grid-cols-2 grid-cols-1">
+    <div class="grid lg:grid-cols-2 grid-cols-1 gap-10 xl:gap-12 items-center">
 
-      <div class="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex order-2 lg:order-1">
-        <div class="w-full flex-col justify-center items-start gap-8 flex">
-          <div class="flex-col justify-start lg:items-start items-center gap-4 flex">
-            <h6 class="text-gray-400 text-base font-normal leading-relaxed">About Us</h6>
-            <div class="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
-              <h2 class="text-red-700 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
-                The Tale of Our Achievement Story
+      <!-- Text Content -->
+      <div class="flex flex-col gap-10 items-center lg:items-start order-2 lg:order-1">
+        <div class="flex flex-col gap-8 w-full">
+          <div class="flex flex-col gap-4 items-center lg:items-start">
+            <h6 id="about-us-title" class="text-gray-400 text-base font-normal leading-relaxed">
+              {{ 'about.overView.title' | translate }}
+            </h6>
+            <div class="flex flex-col gap-3 text-center lg:text-start">
+              <h2 class="text-red-700 text-4xl font-bold leading-normal font-manrope">
+                {{ 'about.overView.heading' | translate }}
               </h2>
-              <p class="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center">
-                Founded in 1960, El-Temsah has been a pioneer in the manufacturing of caravan trailers and steel
-                structures for over 60 years. With a commitment to innovation, quality, and excellence, we’ve
-                established ourselves as a trusted leader in the industry. Our dedicated team, coupled with cutting-edge
-                technology, ensures that every product we deliver meets the highest standards.
+              <p class="text-gray-500 text-base font-normal leading-relaxed">
+                {{ 'about.overView.description' | translate }}
               </p>
             </div>
           </div>
 
-          <div class="w-full flex-col justify-center items-start gap-6 flex">
-            <div class="w-full justify-start items-center gap-8 grid md:grid-cols-2 grid-cols-1">
-              <div
-                class="w-full h-full p-3.5 rounded-xl border border-red-200 hover:border-red-400 transition-all duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg flex-col justify-start items-start gap-2.5 inline-flex">
-                <h4 class="text-red-900 text-2xl font-bold font-manrope leading-9">60+ Years</h4>
-                <p class="text-gray-500 text-base font-normal leading-relaxed">Influencing Digital Landscapes Together</p>
-              </div>
-              <div
-                class="w-full h-full p-3.5 rounded-xl border border-red-200 hover:border-red-400 transition-all duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg flex-col justify-start items-start gap-2.5 inline-flex">
-                <h4 class="text-red-900 text-2xl font-bold font-manrope leading-9">125+ Projects</h4>
-                <p class="text-gray-500 text-base font-normal leading-relaxed">Excellence Achieved Through Success</p>
-              </div>
+          <!-- Features -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="p-4 rounded-xl border border-red-200 hover:border-red-400 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
+              role="region" [attr.aria-label]="'about.years' | translate">
+              <h4 class="text-red-900 text-2xl font-bold font-manrope leading-9">
+                {{ 'about.overView.years' | translate }}
+              </h4>
+              <p class="text-gray-500 text-base font-normal leading-relaxed">
+                {{ 'about.overView.yearsDesc' | translate }}
+              </p>
+            </div>
+            <div
+              class="p-4 rounded-xl border border-red-200 hover:border-red-400 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
+              role="region" [attr.aria-label]="'about.projects' | translate">
+              <h4 class="text-red-900 text-2xl font-bold font-manrope leading-9">
+                {{ 'about.overView.projects' | translate }}
+              </h4>
+              <p class="text-gray-500 text-base font-normal leading-relaxed">
+                {{ 'about.overView.projectsDesc' | translate }}
+              </p>
             </div>
           </div>
         </div>
 
-        <a [routerLink]="'/services'"
-          class="cursor-pointer sm:w-fit w-full group px-3.5 py-2 bg-red-50 hover:bg-red-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex">
-          <span
-            class="px-1.5 text-red-600 text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
-            Read More
+        <!-- Read More Button -->
+        <a
+          [routerLink]="'/services'"
+          class="cursor-pointer sm:w-fit w-full group px-4 py-2 bg-red-50 hover:bg-red-100 rounded-lg shadow transition-all duration-700 flex justify-center items-center"
+          [attr.aria-label]="'about.readMore' | translate">
+          <span class="text-red-600 text-sm font-medium group-hover:-translate-x-0.5 transition duration-700">
+            {{ 'about.overView.readMore' | translate }}
           </span>
-          <svg class="translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"
-            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <svg class="ml-2 group-hover:translate-x-0.5 transition duration-700" xmlns="http://www.w3.org/2000/svg"
+            width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M6.75265 4.49658L11.2528 8.99677L6.75 13.4996" stroke="red" stroke-width="1.6"
               stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </a>
       </div>
 
-      <div class="w-full lg:justify-start justify-center items-start flex order-1 lg:order-2">
-        <div class="sm:w-[564px] w-full sm:bg-red-100 rounded-3xl sm:border border-red-200 relative">
-          <img class="sm:mt-5 sm:ml-5 w-full h-85 rounded-3xl object-cover"
-            src="/assets/backgrounds/about/caravan.png" alt="about Us image" />
+      <!-- Image -->
+      <div class="flex justify-center lg:justify-start order-1 lg:order-2">
+        <div class="relative rounded-3xl border border-red-200 bg-red-100 sm:w-[564px] w-full overflow-hidden">
+          <img
+            class="rounded-3xl object-cover w-full h-auto sm:mt-5 sm:ml-5"
+            src="/assets/backgrounds/about/caravan.png"
+            alt="Illustration of caravan - El-Temsah"
+          />
         </div>
       </div>
 
