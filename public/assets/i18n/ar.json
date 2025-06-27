@@ -177,6 +177,26 @@
     "qoutePosition": "الرئيس التنفيذي، إندستك",
     "brochure.qoute": "م",
     "previewButton": "معاينة الكتيب"
-
+  },
+  "requestQuote": {
+    "title": "اطلب عرض سعر",
+    "description": "من خلال السيطرة الكاملة على منتجاتنا، نضمن لعملائنا الحصول على أفضل جودة وأسعار وخدمات.",
+    "responseTime": "سنرد خلال 24 ساعة، أو يمكنك الاتصال بنا يوميًا من الساعة 09:00 صباحًا حتى 12:00 ظهرًا.",
+    "phone": "+20 110 201 2009",
+    "namePlaceholder": "الاسم",
+    "emailPlaceholder": "البريد الإلكتروني",
+    "phonePlaceholder": "رقم الهاتف",
+    "industryPlaceholder": "حدد صناعتك",
+    "industryOptions": {
+      "manufacturing": "الصناعات",
+      "construction": "البناء",
+      "automotive": "السيارات",
+      "aerospace": "الفضاء",
+      "energy": "الطاقة",
+      "mining": "التعدين",
+      "other": "أخرى"
+    },
+    "detailsPlaceholder": "تفاصيل إضافية!",
+    "submitButton": "إرسال الطلب"
   }
 }
