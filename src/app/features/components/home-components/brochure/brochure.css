@@ -4,3 +4,15 @@
   left: 0;
   z-index: -5;
 }
+:host {
+  display: block;
+  overflow-x: hidden;
+}
+
+section {
+  overflow-x: hidden;
+}
+
+html, body {
+  overflow-x: hidden;
+}
