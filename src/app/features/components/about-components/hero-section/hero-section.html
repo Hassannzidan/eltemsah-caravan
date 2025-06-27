@@ -5,9 +5,9 @@
 >
   <!-- Background Image with Parallax Effect -->
   <div
-    class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-75"
+    class="absolute inset-0 bg-no-repeat transition-transform duration-75 bg-center sm:bg-center md:bg-top bg-cover"
     [ngStyle]="{
-      backgroundImage: 'url(https://images.unsplash.com/photo-1582489853490-cd3a53eb4530?q=80&w=2070&auto=format&fit=crop&w=2070&q=80)',
+      backgroundImage: 'url(' + imageUrl + ')',
       transform: !isMobile ? 'translateY(' + scrollY * 0.5 + 'px) scale(1.1)' : 'scale(1)'
     }"
   >
