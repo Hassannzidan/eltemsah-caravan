@@ -120,11 +120,11 @@
           <span class="text-lg">
             <ng-icon
               [name]="
-                item.name === 'nav.home'
+                item.name === 'heading.nav.home'
                   ? 'lucideHouse'
-                  : item.name === 'nav.about'
+                  : item.name === 'heading.nav.about'
                   ? 'lucideUsersRound'
-                  : item.name === 'nav.products'
+                  : item.name === 'heading.nav.products'
                   ? 'lucideCaravan'
                   : 'lucidePhoneCall'
               "
@@ -142,12 +142,14 @@
         </a>
 
         <!-- Mobile Language -->
-        <div class="px-3 py-2 flex items-center space-x-2">
+        <div 
+          (click)="toggleLanguage()"
+          class="px-3 py-2 flex items-center space-x-2">
           <span class="text-md p-0.5 mt-0.5 text-red-800">
             <ng-icon name="featherGlobe" class="w-5 h-5" />
           </span>
           <span class="text-sm font-medium text-red-800">
-            {{ 'language.label' | translate }}
+            {{ 'heading.language.label' | translate }}
           </span>
         </div>
 
@@ -157,14 +159,14 @@
             <ng-icon name="featherPhone" class="w-4 h-4" />
           </span>
           <span class="text-sm font-medium text-red-800">
-            {{ 'phone.mobile' | translate }}
+            {{ 'heading.phone.mobile' | translate }}
           </span>
         </div>
 
         <!-- Mobile CTA -->
         <div class="px-3 py-2">
           <button class="w-full bg-red-800 hover:bg-orange-800 text-white p-2 rounded-full">
-            {{ 'cta.mobile' | translate }}
+            {{ 'heading.cta.mobile' | translate }}
           </button>
         </div>
       </div>

@@ -16,12 +16,13 @@
     },
     "phone": {
       "desktop": "+20 110 201 2009",
-      "mobile": "0111 375 8909"
+      "mobile": "+20 110 201 2009"
     },
     "cta": {
       "desktop": "Get Started Now",
       "mobile": "Get A Quote"
     }
+    
   },
   "carousel": {
     "slide1": {
