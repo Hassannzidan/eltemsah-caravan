@@ -1,0 +1,43 @@
+<section
+  class="relative h-screen overflow-hidden"
+  (mouseenter)="isAutoPlaying.set(false)"
+  (mouseleave)="isAutoPlaying.set(true)"
+>
+
+
+  <!-- Slides -->
+  <div class="relative w-full h-full">
+    <app-carousel-slide
+      *ngFor="let slide of slideData; let i = index"
+      [slide]="slide"
+      [isActive]="i === currentSlide()"
+      [slideIndex]="i"
+    />
+  </div>
+
+
+  <!-- Navigation -->
+  <app-carousel-navigation
+    [canGoPrev]="true"
+    [canGoNext]="true"
+    (prevClick)="prevSlide()"
+    (nextClick)="nextSlide()"
+  />
+
+  <!-- Indicators -->
+  <app-carousel-indicators
+    [totalSlides]="slideData.length"
+    [currentSlide]="currentSlide()"
+    (onIndicatorClick)="goToSlide($event)"
+  />
+
+  <!-- Progress bar -->
+  <div class="absolute bottom-0 left-0 w-full h-1 bg-black/20">
+    <div
+      class="h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 ease-out"
+      [ngStyle]="{
+            width: ((currentSlide() + 1) / slideData.length) * 100 + '%'
+          }"
+    ></div>
+  </div>
+</section>
