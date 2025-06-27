@@ -1,45 +1,74 @@
-<footer class="bg-gray-900 text-white">
+<footer class="bg-gray-900 text-white" role="contentinfo">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-
+    
     <!-- Quick Contact -->
     <div class="space-y-6">
-      <h3 class="text-xl font-bold">Quick Contact</h3>
+      <h3 class="text-xl font-bold">{{ 'footer.quickContact' | translate }}</h3>
       <p class="text-gray-300 leading-relaxed">
-        If you have any questions or need help, feel free to contact with our team.
+        {{ 'footer.contactNote' | translate }}
       </p>
       <div class="flex items-center gap-3">
-        <!-- <app-lucide-phone class="w-5 h-5 text-orange-500"></app-lucide-phone> -->
-        <span class="text-xl font-bold text-orange-500">011 0201 2009</span>
+        <span class="text-xl font-bold text-red-500">011 0201 2009</span>
       </div>
       <div class="space-y-2 text-gray-300">
-        <p>28 Alex desert road, beside smart village Giza,</p>
-        <p>Giza Governorate, Egypt .</p>
+        <p>{{ 'footer.addressLine1' | translate }}</p>
+        <p>{{ 'footer.addressLine2' | translate }}</p>
       </div>
+
+      <!-- Social media icons -->
       <div class="flex gap-3 pt-2">
-        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-          <span class="w-5 h-5 text-xl">
-            <ng-icon name="lucideFacebook" />
-          </span> 
-        </div>
-        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-          <span class="w-5 h-5 text-xl">
-            <ng-icon name="lucideInstagram" />
-          </span> 
-        </div>
+        <!-- Facebook -->
+        <a [attr.aria-label]="'footer.facebook' | translate" href="https://www.facebook.com/temsahcaravan" target="_blank" class="relative">
+          <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer transform hover:scale-110">
+            <span class="w-5 h-5 text-xl"><ng-icon name="lucideFacebook" /></span>
+          </div>
+          <span class="absolute left-1/2 transform -translate-x-1/2 bottom-12 opacity-0 hover:opacity-100 transition-opacity duration-300 text-white bg-black text-xs rounded py-1 px-2">
+            {{ 'footer.facebook' | translate }}
+          </span>
+        </a>
+
+        <!-- Instagram -->
+        <a [attr.aria-label]="'footer.instagram' | translate" href="https://www.instagram.com/temsahcaravan" target="_blank" class="relative">
+          <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer transform hover:scale-110">
+            <span class="w-5 h-5 text-xl"><ng-icon name="lucideInstagram" /></span>
+          </div>
+          <span class="absolute left-1/2 transform -translate-x-1/2 bottom-12 opacity-0 hover:opacity-100 transition-opacity duration-300 text-white bg-black text-xs rounded py-1 px-2">
+            {{ 'footer.instagram' | translate }}
+          </span>
+        </a>
+
+        <!-- Gmail -->
+        <a [attr.aria-label]="'footer.gmail' | translate" href="mailto:Temsah.caravan@gmail.com" target="_blank" class="relative">
+          <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer transform hover:scale-110">
+            <span class="w-5 h-5 text-xl"><ng-icon name="lucideMail" /></span>
+          </div>
+          <span class="absolute left-1/2 transform -translate-x-1/2 bottom-12 opacity-0 hover:opacity-100 transition-opacity duration-300 text-white bg-black text-xs rounded py-1 px-2">
+            {{ 'footer.gmail' | translate }}
+          </span>
+        </a>
+
+        <!-- WhatsApp -->
+        <a [attr.aria-label]="'footer.whatsapp' | translate" href="https://wa.me/201102012009" target="_blank" class="relative">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors cursor-pointer transform hover:scale-110">
+            <span class="w-5 h-5 text-xl"><ng-icon name="lucideMessageCircle" /></span>
+          </div>
+          <span class="absolute left-1/2 transform -translate-x-1/2 bottom-12 opacity-0 hover:opacity-100 transition-opacity duration-300 text-white bg-black text-xs rounded py-1 px-2">
+            {{ 'footer.whatsapp' | translate }}
+          </span>
+        </a>
       </div>
     </div>
 
     <!-- Company -->
     <div class="space-y-6">
-      <h3 class="text-xl font-bold">Company</h3>
+      <h3 class="text-xl font-bold">{{ 'footer.company' | translate }}</h3>
       <ul class="space-y-3">
-        <li *ngFor="let item of ['Home','About Us', 'Contact Us', 'Our Products']">
-          <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
-            <span class="text-orange-500">
-              <span class="w-5 h-5 text-lg">
-                <ng-icon name="lucideChevronRight" />
-              </span>
-            </span> {{ item }}
+        <li *ngFor="let item of ['Home', 'About Us', 'Contact Us', 'Our Products']">
+          <a [routerLink]="getRoute(item)" class="text-gray-300 hover:text-red-500 flex items-center gap-2 transition-colors">
+            <span class="text-red-500">
+              <span class="w-5 h-5 text-lg"><ng-icon name="lucideChevronRight" /></span>
+            </span>
+            {{ ('footer.pages.' + item) | translate }}
           </a>
         </li>
       </ul>
@@ -47,15 +76,14 @@
 
     <!-- Industries -->
     <div class="space-y-6">
-      <h3 class="text-xl font-bold">Industries</h3>
+      <h3 class="text-xl font-bold">{{ 'footer.industries' | translate }}</h3>
       <ul class="space-y-3">
-        <li *ngFor="let item of ['Multi-purpose caravans', 'Food trucks', 'Kiosks and booths', 'Container modifications', 'Trailers', 'Mobile food outlets','Custom utility vehicles','Bicycles and tricycles for commercial use',' Vehicle customization','General steel structure fabrication']">
-          <a href="#" class="text-gray-300 hover:text-orange-500 flex items-center gap-2 transition-colors">
-            <span class="text-orange-500">
-              <span class="w-5 h-5 text-lg">
-                <ng-icon name="lucideChevronRight" />
-              </span>
-            </span> {{ item }}
+        <li *ngFor="let item of footerSectors">
+          <a href="#" class="text-gray-300 hover:text-red-500 flex items-center gap-2 transition-colors">
+            <span class="text-red-500">
+              <span class="w-5 h-5 text-lg"><ng-icon name="lucideChevronRight" /></span>
+            </span>
+            {{ item | translate }}
           </a>
         </li>
       </ul>
@@ -67,17 +95,19 @@
   <div class="border-t border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
-        <h2 class="text-2xl font-bold order-2 lg:order-1">TEMSAH COMPANY</h2>
+        <h2 class="text-red-800 font-Staatliches tracking-wider text-2xl font-bold order-2 lg:order-1">{{ 'footer.companyName' | translate }}</h2>
         <div class="flex flex-wrap justify-center lg:justify-end gap-6 text-sm order-1 lg:order-2">
-          <a href="#" class="text-gray-300 hover:text-white transition-colors">Terms & Conditions</a>
-          <a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" class="text-gray-300 hover:text-white transition-colors">Sitemap</a>
-          <a href="#" class="text-gray-300 hover:text-white transition-colors">Employee Login</a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">{{ 'footer.terms' | translate }}</a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">{{ 'footer.privacy' | translate }}</a>
+          <a href="https://www.google.com/maps?q=30.059611,31.010531"
+            target="_blank"
+          class="text-gray-300 hover:text-white transition-colors">{{ 'footer.sitemap' | translate }}</a>
+          <a routerLink="/login" [routerLink]="'/login'" class="text-gray-300 hover:text-white transition-colors">{{ 'footer.login' | translate }}</a>
         </div>
       </div>
       <div class="text-center lg:text-right mt-4">
         <p class="text-gray-400 text-sm">
-          ©2025 Temsah. All Rights Reserved. With Love by <span class="text-orange-500">Hassan Zidan</span>
+          {{ 'footer.copyright' | translate }}
         </p>
       </div>
     </div>
@@ -85,8 +115,9 @@
 
   <!-- Scroll to Top -->
   <button
+    [attr.aria-label]="'footer.scrollTop' | translate"
     (click)="scrollToTop()"
-    class="fixed bottom-6 right-6 w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+    class="fixed bottom-6 right-6 w-12 h-12 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
   >
     ↑
   </button>

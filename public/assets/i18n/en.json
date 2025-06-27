@@ -198,5 +198,43 @@
     },
     "detailsPlaceholder": "Additional Details!",
     "submitButton": "Submit Request"
+  },
+  "footer": {
+    "quickContact": "Quick Contact",
+    "contactNote": "If you have any questions or need help, feel free to contact with our team.",
+    "addressLine1": "28 Alex desert road, beside smart village Giza,",
+    "addressLine2": "Giza Governorate, Egypt.",
+    "company": "Company",
+    "industries": "Industries",
+    "pages": {
+      "Home": "Home",
+      "About Us": "About Us",
+      "Contact Us": "Contact Us",
+      "Our Products": "Our Products"
+    },
+    "sectors": [
+      "Multi-purpose caravans",
+      "Food trucks",
+      "Kiosks and booths",
+      "Container modifications",
+      "Trailers",
+      "Mobile food outlets",
+      "Custom utility vehicles",
+      "Bicycles and tricycles for commercial use",
+      "Vehicle customization",
+      "General steel structure fabrication"
+    ],
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "sitemap": "Sitemap",
+    "login": "Employee Login",
+    "copyright":
+      "©2025 Temsah. All Rights Reserved. With Love by Hassan Zidan",
+    "companyName": "TEMSAH COMPANY",
+    "scrollTop": "Scroll to top",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "gmail": "Gmail",
+    "whatsapp": "WhatsApp"
   }
 }
