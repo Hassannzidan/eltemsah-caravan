@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguageService {
     constructor(private translate: TranslateService) {
-    const savedLang = localStorage.getItem('lang') || 'en';
+    const savedLang = localStorage.getItem('app_lang') || 'en';
     this.translate.setDefaultLang('en');
     this.translate.use(savedLang);
   }
@@ -21,4 +21,6 @@ export class LanguageService {
   getCurrentLanguage(): 'en' | 'ar' {
     return (this.translate.currentLang || 'en') as 'en' | 'ar';
   }
+
+  
 }

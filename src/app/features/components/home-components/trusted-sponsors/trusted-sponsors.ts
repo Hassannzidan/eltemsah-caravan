@@ -5,11 +5,12 @@ import {
   inject,
   signal,
   ViewChild,
-  type AfterViewInit,
-  type OnDestroy,
+  AfterViewInit,
+  NgZone,
+  OnDestroy,
   type WritableSignal,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import gsap from 'gsap';
 
 @Component({
@@ -126,9 +127,16 @@ export class TrustedSponsors implements AfterViewInit, OnDestroy {
     support: 0,
   });
 
-  // get duplicatedClients() {
-  //   return [...this.clients, ...this.clients];
-  // }
+  constructor(private translate: TranslateService, private ngZone: NgZone) {
+    this.translate.onLangChange.subscribe(() => {
+      this.ngZone.runOutsideAngular(() => {
+        // ننتظر DOM يتحدث بعد تغيير اللغة
+        setTimeout(() => {
+          this.resetCarouselAnimation();
+        }, 500); // تأخير كفاية
+      });
+    });
+  }
 
   ngAfterViewInit() {
     const observer = new IntersectionObserver(
@@ -159,26 +167,80 @@ export class TrustedSponsors implements AfterViewInit, OnDestroy {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
+  // startScroll() {
+  //   const trackEl = this.track.nativeElement;
+
+  //   // احسبي العرض الحقيقي لواحدة من النصين
+  //   const singleLoopWidth = trackEl.scrollWidth / 2;
+  //   // Reset position to 0
+  //   gsap.set(trackEl, { x: 0 });
+  //   this.loopTimeline = gsap.timeline({
+  //     repeat: -1,
+  //     defaults: { ease: 'none' },
+  //   });
+
+  //   this.loopTimeline.to(trackEl, {
+  //     x: -singleLoopWidth,
+  //     duration: 30 / this.scrollSpeed,
+  //     onComplete: () => {
+  //       // Reset X back to 0 without flicker
+  //       gsap.set(trackEl, { x: 0 });
+  //     },
+  //   });
+  // }
+
   startScroll() {
     const trackEl = this.track.nativeElement;
 
-    // احسبي العرض الحقيقي لواحدة من النصين
+    if (this.loopTimeline?.isActive()) {
+      return;
+    }
+
     const singleLoopWidth = trackEl.scrollWidth / 2;
-    // Reset position to 0
     gsap.set(trackEl, { x: 0 });
+
     this.loopTimeline = gsap.timeline({
       repeat: -1,
       defaults: { ease: 'none' },
     });
 
     this.loopTimeline.to(trackEl, {
-      x: -singleLoopWidth,
+      x: this.getScrollDirection() * singleLoopWidth,
       duration: 30 / this.scrollSpeed,
       onComplete: () => {
-        // Reset X back to 0 without flicker
         gsap.set(trackEl, { x: 0 });
       },
     });
+  }
+  resetCarouselAnimation() {
+    if (!this.track?.nativeElement) return;
+
+    this.loopTimeline?.kill(); // نوقف الأنيميشن القديمة
+    const trackEl = this.track.nativeElement;
+
+    // ننتظر الإطار القادم لضمان تحديث DOM
+    requestAnimationFrame(() => {
+      const singleLoopWidth = trackEl.scrollWidth / 2;
+
+      gsap.set(trackEl, { x: 0 });
+
+      this.loopTimeline = gsap.timeline({
+        repeat: -1,
+        defaults: { ease: 'none' },
+      });
+
+      this.loopTimeline.to(trackEl, {
+        x: this.getScrollDirection() * singleLoopWidth,
+        duration: 30 / this.scrollSpeed,
+        onComplete: () => {
+          gsap.set(trackEl, { x: 0 });
+        },
+      });
+    });
+  }
+  private getScrollDirection(): number {
+    const lang = this.translate.currentLang || 'en';
+    return lang === 'ar' ? 1 : -1;
   }
 
   handleScroll = () => {
