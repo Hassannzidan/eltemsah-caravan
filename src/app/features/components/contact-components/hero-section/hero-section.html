@@ -49,22 +49,51 @@
       <span
         class="bg-gradient-to-r from-white via-red-100 to-white bg-clip-text text-transparent drop-shadow-2xl"
       >
-      {{ 'contactCards.headline_part1' | translate }}
+        {{ 'contactCards.headline_part1' | translate }}
       </span>
       <span
         class="bg-gradient-to-r from-red-200 via-red-100 to-red-300 bg-clip-text text-transparent drop-shadow-xl"
       >
-      {{ 'contactCards.headline_part2' | translate }}
+        {{ 'contactCards.headline_part2' | translate }}
       </span>
     </h1>
 
-    <p class="text-xl sm:text-2xl text-red-100 max-w-4xl mx-auto leading-relaxed opacity-95 drop-shadow-lg"
-        [attr.dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
-            >
-      <span id="typing-text" class="typing-target block"></span>
-    </p>  
+    <!-- 
+    <p
+      class="text-xl sm:text-2xl text-red-100 leading-relaxed opacity-95 drop-shadow-lg w-full max-w-[95vw] px-4 mx-auto break-words whitespace-normal"
+      [attr.dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+    >
+      <span id="typing-text" class="typing-target block w-full"></span>
+    </p> -->
 
-
+    <p
+      class="text-xl sm:text-2xl text-red-100 leading-relaxed opacity-95 drop-shadow-lg w-full max-w-[95vw] px-4 mx-auto break-words whitespace-normal text-center"
+      [attr.dir]="currentLang === 'ar' ? 'rtl' : 'ltr'"
+    >
+      {{ 'contactCards.typing_text' | translate }}
+    </p>
+    <!-- <div class="flex justify-center items-center gap-3 mt-6 mb-6">
+        <div class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600/10  to-red-700/10 rounded-full">
+           <span class="h-5 w-5 text-xl text-red-600">
+            <ng-icon name="lucideStar" />
+           </span>
+          <span class="text-sm font-medium text-red-700">24/7 Support</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-full">
+           <span class="h-5 w-5 text-xl text-red-600">
+            <ng-icon name="lucideShield" />
+           </span>
+          <span class="text-sm font-medium text-red-700">Secure & Reliable</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-full">
+           <span class="h-5 w-5 text-xl text-red-600">
+            <ng-icon name="lucideAward" />
+           </span>
+          <span class="text-sm font-medium text-red-700">Award Winning</span>
+        </div>
+    </div>
+           -->
+        
 
     <!-- Decorative elements -->
     <div class="flex justify-center items-center gap-4 mt-12">

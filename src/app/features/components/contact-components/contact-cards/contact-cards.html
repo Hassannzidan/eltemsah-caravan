@@ -1,59 +1,38 @@
-<div class="relative flex flex-wrap justify-center overflow-visible bg-gray-50 py-6 sm:py-12">
-    <!-- Card 1: Phone -->
-    <div class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl sm:mx-4 sm:max-w-xs sm:rounded-lg sm:px-10 mb-6 sm:mb-0 transform -translate-y-2">
-        <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-sky-500 transition-all duration-300 group-hover:scale-[10]"></span>
-        <div class="relative z-10 mx-auto max-w-md text-center">
-            <!-- Icon -->
-            <span class="grid h-20 w-20 place-items-center rounded-full bg-sky-500 transition-all duration-300 group-hover:bg-sky-400">
-                <!-- Phone Icon -->
-                 <span class="w-12 h-12 text-2xl text-white bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <ng-icon name="lucidePhone" />
-                 </span>
-            </span>
-            <!-- Title -->
-            <h3 class="text-lg font-semibold text-gray-900 mt-4">Phone</h3>
-            <!-- Data (Phone number) -->
-            <p class="text-base text-gray-600 mt-2">+20 110 201 2009</p>
-            <!-- Description -->
-            <p class="text-sm text-gray-500 mt-2">Available Mon-Fri, 9 AM - 6 PM</p>
-        </div>
+<div class="relative flex flex-wrap justify-center gap-6 px-4 py-12 bg-gray-50">
+  <div
+    *ngFor="let item of contactCards"
+    class="group relative w-full sm:max-w-xs overflow-hidden rounded-xl bg-white/90 backdrop-blur-sm shadow-xl transition-all duration-700 hover:shadow-2xl transform hover:-translate-y-2"
+  >
+    <!-- Gradient Hover Overlay -->
+    <div
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+      [ngClass]="item.bgGradient"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-red-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+    <!-- Card Header -->
+    <div class="relative z-10 text-center p-6 pb-2">
+      <div
+        class="w-16 h-16 mx-auto mb-6 rounded-3xl flex items-center justify-center shadow-2xl transform transition-all duration-500 group-hover:scale-110"
+        [ngClass]="item.gradient"
+      >
+      <span class="text-white text-3xl">
+        <ng-icon [name]="item.icon" ></ng-icon>
+      </span>
+      </div>
+      <h3 class="text-xl font-semibold text-red-900 group-hover:text-red-700 transition-colors duration-500">
+        {{ item.titleKey | translate}}
+      </h3>
     </div>
 
-    <!-- Card 2: Email -->
-    <div class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl sm:mx-4 sm:max-w-xs sm:rounded-lg sm:px-10 mb-6 sm:mb-0 transform -translate-y-2">
-        <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-red-700/80 transition-all duration-300 group-hover:scale-[10]"></span>
-        <div class="relative z-10 mx-auto max-w-md text-center">
-            <!-- Icon -->
-            <span class="grid h-20 w-20 place-items-center rounded-full bg-red-700 transition-all duration-300 group-hover:bg-orange-500"> 
-                <span class="w-5 h-5 text-3xl text-white">
-                    <ng-icon name="lucideMail" />
-                 </span>
-            </span>
-            <!-- Title -->
-            <h3 class="text-lg font-semibold text-gray-900 mt-4">Email</h3>
-            <!-- Data (Email) -->
-            <p class="text-base text-gray-600 mt-2">{{email}}</p>
-            <!-- Description -->
-            <p class="text-sm text-gray-500 mt-2">We'll respond within 24 hours</p>
-        </div>
+    <!-- Card Content -->
+    <div class="relative z-10 text-center p-6 pt-0">
+      <p class="font-bold text-lg text-gray-900 mb-3 group-hover:text-red-800 transition-colors duration-500">
+        {{ item.data | translate }}
+      </p>
+      <p class="text-sm text-gray-600 group-hover:text-red-600 transition-colors duration-500">
+        {{ item.descriptionKey | translate }}
+      </p>
     </div>
- 
-    <!-- Card 3: Business Hours -->
-    <div class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl sm:mx-4 sm:max-w-xs sm:rounded-lg sm:px-10 mb-6 sm:mb-0 transform -translate-y-2">
-        <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-green-700 transition-all duration-300 group-hover:scale-[10]"></span>
-        <div class="relative z-10 mx-auto max-w-md text-center">
-            <!-- Icon -->
-            <span class="grid h-20 w-20 place-items-center rounded-full bg-green-700 transition-all duration-300 group-hover:bg-green-500">
-                <!-- Clock Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25a9.75 9.75 0 110 19.5 9.75 9.75 0 010-19.5zM12 6v6.75l4.5 2.25" />
-                </svg>
-            </span>
-            <!-- Title -->
-            <h3 class="text-lg font-semibold text-gray-900 mt-4">Business Hours</h3>
-            <!-- Data (Hours) -->
-            <p class="text-base text-gray-600 mt-2">Mon - Fri: 9:00 AM - 6:00 PM</p>
-            <p class="text-base text-gray-600 mt-2">Sat: 10:00 AM - 4:00 PM</p>
-        </div>
-    </div>
+  </div>
 </div>

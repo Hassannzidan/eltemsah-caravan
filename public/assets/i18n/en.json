@@ -369,8 +369,9 @@
       },
       "hours": {
         "title": "Business Hours",
-        "times": "Mon-Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 4:00 PM",
-        "aria": "Business working hours"
+        "times": "Sat: 10:00 AM - 4:00 PM",
+        "aria": "Business working hours",
+        "data":"Mon - Fri: 9:00 AM - 6:00 PM"
       }
     }
   },
