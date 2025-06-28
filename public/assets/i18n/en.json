@@ -378,7 +378,7 @@
   "contactPage": {
     "title": "Find Us",
     "subtitle": "Kerdasa, Giza Governorate",
-    "visitUs":"Visti Us",
+    "visitUs": "Visti Us",
     "location": {
       "label": "Company Location",
       "address": "Km 28 Alex desert road, beside smart village\nGiza, Egypt",
@@ -412,5 +412,25 @@
       "title": "Our Services",
       "description": "Comprehensive manufacturing solutions across diverse industries with cutting-edge technology and uncompromising quality standards."
     }
+  },
+  "login": {
+    "title": "Admin Login",
+    "subtitle": "Sign in to access the dashboard",
+    "email_label": "Email Address",
+    "email_placeholder": "admin@company.com",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "button": {
+      "submit": "Sign In to Dashboard",
+      "loading": "Signing in..."
+    },
+    "footer": "Secure admin access for authorized personnel only",
+    "errors": {
+      "email_required": "Email is required",
+      "email_invalid": "Enter a valid email address",
+      "password_required": "Password is required",
+      "password_minlength": "Password must be at least {{length}} characters"
+    },
+    "login_failed": "Login failed. Check your credentials."
   }
 }
