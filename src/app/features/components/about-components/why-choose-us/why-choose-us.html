@@ -1,0 +1,62 @@
+<section role="region" aria-label="Why Choose Us" class="py-20 bg-gradient-to-br from-red-50 via-white to-red-100 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-white-500/5 via-transparent to-white-600/5" aria-hidden="true"></div>
+  <!-- <div class="absolute top-1/4 left-0 w-72 h-72 sm:w-96 sm:h-96 bg-red-400/10 rounded-full blur-3xl" aria-hidden="true"></div>
+  <div class="absolute bottom-1/4 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-red-500/10 rounded-full blur-3xl" aria-hidden="true"></div> -->
+
+  <div class="absolute top-1/4 left-0 w-72 h-72 sm:w-96 sm:h-96 bg-white/20 rounded-full " aria-hidden="true"></div>
+<div class="absolute bottom-1/4 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-white/20 rounded-full " aria-hidden="true"></div>
+
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center mb-16">
+      <p class="text-red-600 font-semibold text-base sm:text-lg mb-2 sm:mb-4">
+        {{ 'about.whyChooseUs.subheading' | translate }}
+      </p>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+        {{ 'about.whyChooseUs.heading' | translate }}
+      </h2>
+      <p class="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg">
+        {{ 'about.whyChooseUs.description' | translate }}
+      </p>
+    </div>
+
+    <div class="space-y-8 max-w-5xl mx-auto">
+      <div
+        *ngFor="let reason of reasons; let i = index"
+        #item
+        [attr.data-index]="i"
+        class="transition-all duration-700 ease-out transform"
+        [class.opacity-100]="visibleItems().includes(i)"
+        [class.translate-y-0]="visibleItems().includes(i)"
+        [class.opacity-0]="!visibleItems().includes(i)"
+        [class.translate-y-20]="!visibleItems().includes(i)"
+        [style.transitionDelay]="visibleItems().includes(i) ? reason.delay : '0ms'"
+      >
+        <div class="group transition-all duration-500 bg-white/80 backdrop-blur-sm border border-white/50 hover:border-red-200/50 hover:bg-white/90 rounded-lg shadow-sm p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+            <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                 [ngClass]="reason.gradient">
+              <span class="text-white font-bold text-lg sm:text-xl">{{ reason.number }}</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-4">
+                <!-- <i [class]="'w-6 h-6 sm:w-8 sm:h-8 text-red-600 ' + reason.icon" aria-hidden="true"></i> -->
+                 <span class="w-6 h-6 sm:w-8 sm:h-8 text-red-800 text-3xl">
+                   <ng-icon [name]="reason.icon" aria-hidden="true"></ng-icon>
+                 </span>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">
+                  {{ 'about.whyChooseUs.reasons.' + i + '.title' | translate }}
+                </h3>
+              </div>
+              <p class="text-gray-700 leading-relaxed text-base sm:text-lg">
+                {{ 'about.whyChooseUs.reasons.' + i + '.description' | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="w-full h-1 bg-gradient-to-r mx-auto rounded-full mt-4 sm:mt-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+               [ngClass]="reason.gradient"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

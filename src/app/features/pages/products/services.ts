@@ -16,8 +16,6 @@ import { ProductService } from '../../../services/product/product.service';
   styleUrl: './services.css'
 })
 export class Services { 
-  // searchTerm: string = '';
-  // selectedCategory: string = 'all';
   searchTerm = signal('');
   selectedCategory = signal('all');
 
@@ -47,7 +45,7 @@ export class Services {
       const search = this.searchTerm().toLowerCase();
       const category = this.selectedCategory().toLowerCase();
       return (
-        p.status === 'active' &&  // ✅ يظهر فقط المنتجات المفعّلة
+        p.status === 'active' && 
         p.name.toLowerCase().includes(search) &&
         (category === 'all' || p.category.toLowerCase() === category)
       );

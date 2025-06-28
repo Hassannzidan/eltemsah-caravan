@@ -282,7 +282,102 @@
       "visionTitle": "Our Vision",
       "visionDescription": "Our vision is to set the benchmark for excellence in Egypt's caravan trailer and steel structure industry. With decades of expertise and an unwavering commitment to quality, we strive to serve both local and regional markets, delivering innovative solutions that inspire trust and drive progress.",
       "visionTagline": "Leading Industry Innovation Globally"
+    },
+    "whyChooseUs": {
+      "heading": "Why Choose Us?",
+      "subheading": "Our Advantages",
+      "description": "Discover the key factors that make El-Temsah Company your ideal partner for premium manufacturing solutions.",
+      "reasons": [
+        {
+          "title": "More Than 60 Years of Experience",
+          "description": "This wealth of experience positions us as a reliable and knowledgeable partner for our clients."
+        },
+        {
+          "title": "Quality",
+          "description": "Every product manufactured by El-Temsah undergoes stringent quality control measures to ensure durability, reliability, and safety."
+        },
+        {
+          "title": "Designs",
+          "description": "El-Temsah takes pride in creating aesthetically pleasing and functional designs that cater to the evolving needs of our clients."
+        },
+        {
+          "title": "Aftersale Services",
+          "description": "Our relationship with clients extends beyond the point of sale..."
+        },
+        {
+          "title": "Affordable Prices",
+          "description": "El-Temsah believes in offering competitive and reasonable prices without compromising on quality."
+        }
+      ]
+    },
+    "coreValues": {
+      "sectionTitle": "Our Core Values",
+      "sectionSubtitle": "The principles that define who we are and guide every decision we make",
+      "foundation": "Our Foundation",
+      "finalHeader": "Together We Stand For",
+      "finalTitle": "TEMSAH Manufacturing",
+      "finalDescription": "Six decades of excellence in caravan and specialized vehicle manufacturing, built on these unwavering principles that define our commitment to quality and innovation.",
+      "temsah": [
+        {
+          "letter": "T",
+          "title": "Trust & Transparency",
+          "description": "Building lasting relationships through honest communication, reliable partnerships, and unwavering integrity in every interaction with our clients and stakeholders."
+        },
+        {
+          "letter": "E",
+          "title": "Excellence in Engineering",
+          "description": "Pursuing perfection in every design, manufacturing process, and final product through cutting-edge technology and superior craftsmanship standards."
+        },
+        {
+          "letter": "M",
+          "title": "Manufacturing Mastery",
+          "description": "Six decades of expertise in creating premium caravans and specialized vehicles, combining traditional craftsmanship with modern innovation."
+        },
+        {
+          "letter": "S",
+          "title": "Service Superiority",
+          "description": "Delivering exceptional customer experiences through comprehensive support, personalized solutions, and dedicated after-sales service excellence."
+        },
+        {
+          "letter": "A",
+          "title": "Adaptive Innovation",
+          "description": "Continuously evolving our designs and processes to meet changing market demands while maintaining our commitment to quality and reliability."
+        },
+        {
+          "letter": "H",
+          "title": "Heritage & Heart",
+          "description": "Honoring our rich legacy while infusing passion and dedication into every project, creating vehicles that carry families and dreams."
+        }
+      ]
     }
-  
-}
+  },
+  "contactCards": {
+    "badge": "Contact El-Temsah Caravan",
+    "headline_part1": "Reach",
+    "headline_part2": "Our Team",
+    "typing_text": "We love questions and feedback – Don’t hesitate to reach out. We're here to help!",
+    "contact": {
+      "phone": {
+        "title": "Phone",
+        "desc": "Available Mon-Fri, 9 AM - 6 PM",
+        "aria": "Contact via phone"
+      },
+      "email": {
+        "title": "Email",
+        "desc": "We'll respond within 24 hours",
+        "aria": "Contact via email"
+      },
+      "hours": {
+        "title": "Business Hours",
+        "times": "Mon-Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 4:00 PM",
+        "aria": "Business working hours"
+      }
+    }
+  },
+  "productPage": {
+    "hero": {
+      "title": "Our Services",
+      "description": "Comprehensive manufacturing solutions across diverse industries with cutting-edge technology and uncompromising quality standards."
+    }
+  }
 }

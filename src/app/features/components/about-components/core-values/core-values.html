@@ -1,0 +1,136 @@
+<section
+  id="core-values-section"
+  class="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+>
+  <!-- Background dots pattern -->
+  <div
+    class="absolute inset-0 opacity-5"
+    style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'0.1\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <p class="text-blue-600 font-semibold text-lg mb-4">{{ 'about.coreValues.foundation' | translate }}</p>
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        {{ 'about.coreValues.sectionTitle' | translate }}
+      </h2>
+      <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+        {{ 'about.coreValues.sectionSubtitle' | translate }}
+      </p>
+    </div>
+
+    <!-- TEMSAH Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div
+        *ngFor="let value of temsahValues; index as i"
+        class="transition-all duration-1000 transform"
+        [ngClass]="{
+          'opacity-100 translate-y-0 scale-100':
+            currentLetter() >= i && isVisible(),
+          'opacity-0 translate-y-8 scale-95': currentLetter() < i
+        }"
+        [style.transitionDelay]="i * 200 + 'ms'"
+      >
+        <div
+          class="rounded-lg  border-gray-100 bg-white shadow-sm relative overflow-hidden group h-full p-8"
+        >
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+            [ngClass]="'bg-gradient-to-br ' + value.bgGradient"
+          ></div>
+
+          <div class="flex items-center justify-center mb-6 z-10 relative">
+            <div
+              class="text-8xl font-bold transition-transform duration-500 group-hover:scale-110"
+              [ngClass]="value.letterColor"
+            >
+              {{ value.letter }}
+            </div>
+          </div>
+
+          <div class="flex justify-center mb-6 z-10 relative">
+            <div
+              class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-500"
+              [ngClass]="'bg-gradient-to-br ' + value.gradient"
+            >
+              <i class="text-white text-2xl lucide" [ngClass]="'lucide-' + value.icon"></i>
+            </div>
+          </div>
+
+          <div class="text-center z-10 relative">
+            <h3
+              class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+            >
+              {{ value.title }}
+            </h3>
+            <p
+              class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300"
+            >
+              {{ value.description }}
+            </p>
+          </div>
+
+          <div
+            class="w-full h-1 mx-auto rounded-full mt-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+            [ngClass]="'bg-gradient-to-r ' + value.gradient"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Animation -->
+    <div
+      class="text-center transition-all duration-1000"
+      [ngClass]="{
+        'opacity-100 translate-y-0': showFinalAnimation(),
+        'opacity-0 translate-y-8': !showFinalAnimation()
+      }"
+    >
+      <div
+        class="bg-white rounded-3xl shadow-2xl p-12 max-w-4xl mx-auto border-gray-100"
+      >
+        <p class="text-blue-600 font-semibold text-lg mb-4">
+          Together We Stand For
+        </p>
+
+        <div class="flex justify-center items-center gap-2 sm:gap-4 mb-8">
+          <div
+            *ngFor="let value of temsahValues; index as i"
+            class="transition-all duration-1000 transform"
+            [ngClass]="{
+              'opacity-100 scale-100 rotate-0': showFinalAnimation(),
+              'opacity-0 scale-0 rotate-180': !showFinalAnimation()
+            }"
+            [style.transitionDelay]="i * 150 + 'ms'"
+          >
+            <div
+              class="text-4xl sm:text-6xl lg:text-8xl font-bold bg-clip-text text-transparent cursor-default hover:scale-110 transition-transform duration-300"
+              [ngClass]="'bg-gradient-to-br ' + value.gradient"
+            >
+              {{ value.letter }}
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="transition-all duration-1000 transform"
+          [ngClass]="{
+            'opacity-100 translate-y-0': showFinalAnimation(),
+            'opacity-0 translate-y-4': !showFinalAnimation()
+          }"
+          style="transition-delay: 1200ms"
+        >
+          <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            TEMSAH Manufacturing
+          </h3>
+          <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Six decades of excellence in caravan and specialized vehicle
+            manufacturing, built on these unwavering principles that define our
+            commitment to quality and innovation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -6,14 +6,14 @@
             <!-- Icon -->
             <span class="grid h-20 w-20 place-items-center rounded-full bg-sky-500 transition-all duration-300 group-hover:bg-sky-400">
                 <!-- Phone Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H3a.75.75 0 01-.75-.75V5.25z" />
-                </svg>
+                 <span class="w-12 h-12 text-2xl text-white bg-gradient-to-r from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <ng-icon name="lucidePhone" />
+                 </span>
             </span>
             <!-- Title -->
             <h3 class="text-lg font-semibold text-gray-900 mt-4">Phone</h3>
             <!-- Data (Phone number) -->
-            <p class="text-base text-gray-600 mt-2">0111 375 8909</p>
+            <p class="text-base text-gray-600 mt-2">+20 110 201 2009</p>
             <!-- Description -->
             <p class="text-sm text-gray-500 mt-2">Available Mon-Fri, 9 AM - 6 PM</p>
         </div>
@@ -24,11 +24,10 @@
         <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-red-700/80 transition-all duration-300 group-hover:scale-[10]"></span>
         <div class="relative z-10 mx-auto max-w-md text-center">
             <!-- Icon -->
-            <span class="grid h-20 w-20 place-items-center rounded-full bg-red-700 transition-all duration-300 group-hover:bg-orange-500">
-                <!-- Email Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H3a.75.75 0 01-.75-.75V5.25z" />
-                </svg>
+            <span class="grid h-20 w-20 place-items-center rounded-full bg-red-700 transition-all duration-300 group-hover:bg-orange-500"> 
+                <span class="w-5 h-5 text-3xl text-white">
+                    <ng-icon name="lucideMail" />
+                 </span>
             </span>
             <!-- Title -->
             <h3 class="text-lg font-semibold text-gray-900 mt-4">Email</h3>
@@ -38,28 +37,8 @@
             <p class="text-sm text-gray-500 mt-2">We'll respond within 24 hours</p>
         </div>
     </div>
-
-    <!-- Card 3: Email -->
-    <div class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl sm:mx-4 sm:max-w-xs sm:rounded-lg sm:px-10 mb-6 sm:mb-0 transform -translate-y-2">
-        <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-red-700/80 transition-all duration-300 group-hover:scale-[10]"></span>
-        <div class="relative z-10 mx-auto max-w-md text-center">
-            <!-- Icon -->
-            <span class="grid h-20 w-20 place-items-center rounded-full bg-red-700 transition-all duration-300 group-hover:bg-orange-500">
-                <!-- Email Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H3a.75.75 0 01-.75-.75V5.25z" />
-                </svg>
-            </span>
-            <!-- Title -->
-            <h3 class="text-lg font-semibold text-gray-900 mt-4">Email</h3>
-            <!-- Data (Email) -->
-            <p class="text-base text-gray-600 mt-2">{{email}}</p>
-            <!-- Description -->
-            <p class="text-sm text-gray-500 mt-2">We'll respond within 24 hours</p>
-        </div>
-    </div>
-
-    <!-- Card 4: Business Hours -->
+ 
+    <!-- Card 3: Business Hours -->
     <div class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl sm:mx-4 sm:max-w-xs sm:rounded-lg sm:px-10 mb-6 sm:mb-0 transform -translate-y-2">
         <span class="absolute top-10 z-0 h-20 w-20 rounded-full bg-green-700 transition-all duration-300 group-hover:scale-[10]"></span>
         <div class="relative z-10 mx-auto max-w-md text-center">
