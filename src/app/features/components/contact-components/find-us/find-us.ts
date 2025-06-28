@@ -9,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class FindUs {
   email:string = 'Temsah.caravan@gmail.com';
+  enableMapScroll = false;
+
 
   openDirections() {
   if (navigator.geolocation) {

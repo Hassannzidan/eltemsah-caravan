@@ -30,7 +30,7 @@ export class ContactCards {
       bgColor: 'bg-sky-500 group-hover:scale-110',
       iconBgHover: 'bg-sky-500 group-hover:bg-sky-400',
       ariaLabel: 'contactCards.contact.phone.aria',
-      gradient: 'bg-gradient-to-r from-red-700/80 to-red-800',
+      gradient: 'bg-gradient-to-r from-red-600 to-red-700',
       bgGradient: 'bg-gradient-to-br from-red-50 to-red-100',
     },
     {
@@ -54,7 +54,7 @@ export class ContactCards {
       bgColor: 'bg-green-700 group-hover:scale-110',
       iconBgHover: 'bg-green-700 group-hover:bg-green-500',
       ariaLabel: 'contactCards.contact.hours.aria',
-      gradient: 'bg-gradient-to-r from-red-700/80 to-red-800',
+      gradient: 'bg-gradient-to-r from-red-700/80 to-red-900',
       bgGradient: 'bg-gradient-to-br from-red-50 to-red-100',
       data:'contactCards.contact.hours.data'
     },
