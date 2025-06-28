@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, type OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { LanguageService } from '../../../../services/language/language.service';
@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterModule, NgIconsModule,TranslateModule],
+  imports: [CommonModule, RouterModule, NgIconsModule, TranslateModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
   viewProviders: [
@@ -45,12 +45,12 @@ export class Header {
   private lastScrollTop = 0;
 
   currentLang: 'en' | 'ar' = 'en';
- navigation = [
-  { name: 'heading.nav.home', href: '/' },
-  { name: 'heading.nav.about', href: '/about' },
-  { name: 'heading.nav.products', href: '/services' },
-  { name: 'heading.nav.contact', href: '/contact' },
-];
+  navigation = [
+    { name: 'heading.nav.home', href: '/' },
+    { name: 'heading.nav.about', href: '/about' },
+    { name: 'heading.nav.products', href: '/services' },
+    { name: 'heading.nav.contact', href: '/contact' },
+  ];
 
   constructor(private languageService: LanguageService, public router: Router) {
     this.currentLang = this.languageService.getCurrentLanguage();
@@ -63,11 +63,11 @@ export class Header {
     this.isScrolled = currentScroll > 20;
 
     if (currentScroll <= 0) {
-      this.showHeader = true; // عند أول الصفحة خليه ظاهر
+      this.showHeader = true;
     } else if (currentScroll > this.lastScrollTop && currentScroll > 100) {
-      this.showHeader = false; // Scroll Down
+      this.showHeader = false;
     } else if (currentScroll < this.lastScrollTop) {
-      this.showHeader = true; // Scroll Up
+      this.showHeader = true;
     }
 
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
