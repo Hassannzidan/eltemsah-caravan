@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, type OnInit } from '@angular/core';
+import { Component, HostListener, type OnInit, ElementRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { LanguageService } from '../../../../services/language/language.service';
@@ -42,7 +42,10 @@ export class Header {
   isMenuOpen = false;
   showHeader = true;
 
-  private lastScrollTop = 0;
+  lastScrollTop = 0;
+  showNavbar = true;
+
+  // private lastScrollTop = 0;
 
   currentLang: 'en' | 'ar' = 'en';
   navigation = [
@@ -52,22 +55,25 @@ export class Header {
     { name: 'heading.nav.contact', href: '/contact' },
   ];
 
-  constructor(private languageService: LanguageService, public router: Router) {
+  constructor(
+    private languageService: LanguageService,
+    public router: Router,
+    private eRef: ElementRef
+  ) {
     this.currentLang = this.languageService.getCurrentLanguage();
   }
 
   @HostListener('window:scroll', [])
-  onScroll(): void {
-    const currentScroll = window.scrollY;
+  onWindowScroll() {
+    const currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
 
-    this.isScrolled = currentScroll > 20;
-
-    if (currentScroll <= 0) {
-      this.showHeader = true;
-    } else if (currentScroll > this.lastScrollTop && currentScroll > 100) {
-      this.showHeader = false;
-    } else if (currentScroll < this.lastScrollTop) {
-      this.showHeader = true;
+    if (currentScroll > this.lastScrollTop && currentScroll > 100) {
+      // المستخدم نازل لتحت
+      this.showNavbar = false;
+    } else {
+      // المستخدم طالع لفوق
+      this.showNavbar = true;
     }
 
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
@@ -84,5 +90,14 @@ export class Header {
   toggleLanguage() {
     this.currentLang = this.currentLang === 'en' ? 'ar' : 'en';
     this.languageService.switchLanguage(this.currentLang);
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    const clickedInside = this.eRef.nativeElement.contains(event.target);
+    if (!clickedInside && this.isMenuOpen) {
+      this.closeMenu();
+    }
   }
 }

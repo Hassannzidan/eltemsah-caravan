@@ -6,3 +6,20 @@
   font-family: 'Staatliches', sans-serif;
   color: #8b0000; 
 }
+
+header {
+  will-change: transform;
+}
+
+
+.hide-navbar {
+  transform: translateY(-100%);
+}
+
+.show-navbar {
+  transform: translateY(0);
+}
+
+.transition-navbar {
+  transition: transform 0.5s ease-in-out;
+}
