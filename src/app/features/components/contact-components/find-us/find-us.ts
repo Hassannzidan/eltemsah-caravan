@@ -1,11 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgIconsModule, provideIcons } from '@ng-icons/core';
+import { lucideMapPin } from '@ng-icons/lucide';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-find-us',
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule,NgIconsModule],
   templateUrl: './find-us.html',
-  styleUrl: './find-us.css'
+  styleUrl: './find-us.css',
+  viewProviders:[provideIcons({
+    lucideMapPin
+  })]
+
 })
 export class FindUs {
   email:string = 'Temsah.caravan@gmail.com';

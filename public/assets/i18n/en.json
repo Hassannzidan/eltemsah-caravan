@@ -371,8 +371,40 @@
         "title": "Business Hours",
         "times": "Sat: 10:00 AM - 4:00 PM",
         "aria": "Business working hours",
-        "data":"Mon - Fri: 9:00 AM - 6:00 PM"
+        "data": "Mon - Fri: 9:00 AM - 6:00 PM"
       }
+    }
+  },
+  "contactPage": {
+    "title": "Find Us",
+    "subtitle": "Kerdasa, Giza Governorate",
+    "visitUs":"Visti Us",
+    "location": {
+      "label": "Company Location",
+      "address": "Km 28 Alex desert road, beside smart village\nGiza, Egypt",
+      "iconLabel": "Location icon"
+    },
+    "email": {
+      "label": "Email",
+      "iconLabel": "Email icon"
+    },
+    "phone": {
+      "label": "Phone Numbers",
+      "numbers": [
+        "011 02012009",
+        "010 64322663",
+        "012 20981525"
+      ],
+      "iconLabel": "Phone icon"
+    },
+    "map": {
+      "title": "Headquarter Location",
+      "label": "Map of the location",
+      "enableScroll": "Enable Scroll"
+    },
+    "buttons": {
+      "viewOnMap": "View on Google Maps",
+      "getDirections": "Get Directions from My Location"
     }
   },
   "productPage": {
