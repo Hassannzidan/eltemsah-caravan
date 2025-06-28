@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../services/spinner/loader.service';
 import { Component } from '@angular/core';
 import { VehicleSolutions } from '../../components/home-components/vehicle-solutions/vehicle-solutions';
 import { TrustedSponsors } from '../../components/home-components/trusted-sponsors/trusted-sponsors';
@@ -120,9 +121,17 @@ export class Home {
 
   currentIndex = 0;
   private intervalId: any;
+  
+  constructor(private loader:LoaderService){}
 
   ngOnInit(): void {
+    
+    this.loader.show();
     this.startAutoSlide();
+
+    setTimeout(() => {
+    this.loader.hide(); 
+  }, 2000);
   }
 
   ngOnDestroy(): void {
