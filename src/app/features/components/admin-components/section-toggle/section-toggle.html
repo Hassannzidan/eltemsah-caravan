@@ -1,11 +1,12 @@
  <div class="rounded-lg border-gray-200 bg-white text-black shadow-sm my-5">
       <div class="flex flex-col space-y-1.5 p-6">
         <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
-          <!-- <eye class="w-5 h-5 text-blue-500" /> -->
-            <span class="text-blue-500">
+            <span class="text-blue-500" aria-hidden="true">
                 <ng-icon name="lucideEye" class="w-5 h-5" />
             </span>
-          Section Visibility
+            <span  id="section-visibility-label">
+              Section Visibility
+            </span>
         </h3>
       </div>
 
@@ -23,20 +24,24 @@
 
               </ng-container>
               <ng-template #hiddenIcon>
-                <span class="text-slate-400">
+                <span class="text-slate-400" aria-hidden="true">
                     <ng-icon name="lucideEyeClosed" class="w-4 h-4" />
                 </span>
               </ng-template>
-              <span class="font-medium text-slate-900">{{ section.name }}</span>
+              <span class="font-medium text-slate-900"
+                [attr.aria-label]="'Section: ' + section.name"
+              >{{ section.name }}</span>
             </div>
-            <label class="inline-flex items-center cursor-pointer relative top-0 left-0 transition-transform duration-300 ease-in-out
-">
+            
+            <!-- Toggle Switch -->
+            <label class="inline-flex items-center relative cursor-pointer">
               <input
                 type="checkbox"
                 class="sr-only peer"
                 [checked]="section.isVisible"
                 (change)="toggleSection(section.id)"
-
+                 role="switch"
+                [attr.aria-checked]="section.isVisible"
               />
               <div
                 class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-500

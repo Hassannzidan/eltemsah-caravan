@@ -137,7 +137,7 @@ export class ProductImageUpload {
     setTimeout(() => {
       this.images.update((imgs) => {
         const updated = [...imgs, img.preview];
-        this.imagesChange.emit(imgs.map((_, i) => img.file)); // <-- send files to parent
+        this.imagesChange.emit(imgs.map((_, i) => img.file)); 
         return updated;
       });
       this.uploadingImages.update((list) =>

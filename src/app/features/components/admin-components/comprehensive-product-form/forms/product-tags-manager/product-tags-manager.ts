@@ -33,5 +33,8 @@ export class ProductTagsManager {
       this.addTag();
     }
   }
+  trackByTag(_: number, tag: string) {
+    return tag;
+  }
 
 }

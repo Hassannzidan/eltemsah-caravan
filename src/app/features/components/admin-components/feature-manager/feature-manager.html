@@ -1,14 +1,15 @@
-<div class="rounded-lg border-gray-400/80 bg-white shadow-sm my-5"
+<div class="rounded-lg border-gray-400/80 bg-white shadow-sm my-5 transition-opacity duration-200"
 [ngClass]="{ 'opacity-50 pointer-events-none cursor-not-allowed': disabled }">
-  <div class="flex items-center gap-2 p-6 text-2xl font-semibold">
-    <!-- <span *ngIf="icon" [innerHTML]="icon"></span> -->
-     <span class="text-orange-500/80">
+    <!-- Title with icon -->
+  <div class="flex items-center gap-2  p-4 sm:p-6 text-xl sm:text-2xl font-semibold text-slate-800">
+     <span class="text-orange-500/80 flex justify-center" aria-hidden="true">
        <ng-icon *ngIf="iconName" [name]="iconName" class="w-5 h-5"></ng-icon>
      </span>
     {{ title }}
   </div>
 
-  <div class="space-y-4 p-6 pt-0">
+    <!-- Content -->
+  <div class="space-y-4 px-4 pb-4 sm:px-6 sm:pb-6">
     <!-- Add Feature -->
     <div class="flex gap-2">
       <input
@@ -16,9 +17,14 @@
         [(ngModel)]="newFeature"
         (keydown.enter)="handleAddFeature()"
         [placeholder]="'Add new ' + title.toLowerCase() + '...'"
-        class="flex h-10 w-full rounded-md border border-gray-400/80 px-3 py-2 text-base text-black placeholder:text-gray-400"
-      />
-      <button (click)="handleAddFeature()" class="h-9 px-3 bg-red-800 text-white rounded-md cursor-pointer">
+        class="flex h-10 w-full rounded-md border border-gray-400/80 px-3 py-2 text-base text-black placeholder:text-gray-400  focus:outline-none focus:ring-2 focus:ring-red-800/80"
+        aria-label="Add new feature"
+        />
+      <button 
+        (click)="handleAddFeature()" 
+        aria-label="Add feature"
+        [disabled]="disabled"
+        class="h-9 px-3 bg-red-800 text-white rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400/80">
         <ng-icon name="lucidePlus" class="w-4 h-4" />
       </button>
     </div>
@@ -30,59 +36,75 @@
         class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg"
       >
         <div class="flex items-center gap-2 flex-1" >
-          <ng-container *ngIf="feature.isVisible; else hiddenIcon">
-            <span class="text-green-500">
-              <ng-icon name="lucideEye" class="w-4 h-4 " />
-            </span>
-          </ng-container>
-          <ng-template #hiddenIcon>
-            <span class="text-green-500">
-              <ng-icon name="lucideEyeClosed" class="w-4 h-4 " />
-            </span>         
-          </ng-template>
+          <span aria-hidden="true">
+            <ng-container *ngIf="feature.isVisible; else hiddenIcon">
+              <span class="text-green-500">
+                <ng-icon name="lucideEye" class="w-4 h-4 " />
+              </span>
+            </ng-container>
+            <ng-template #hiddenIcon>
+              <span class="text-green-500">
+                <ng-icon name="lucideEyeClosed" class="w-4 h-4 " />
+              </span>         
+            </ng-template>
+          </span>
 
+           <!-- Edit Input or Display -->
           <ng-container *ngIf="editingId === feature.id; else displayContent">
             <input
               [disabled]="disabled"
               [(ngModel)]="editContent"
               (keydown.enter)="saveEdit()"
-              class="flex-1 rounded border border-gray- px-2 py-1 text-sm"
+              class="flex-1 rounded border border-gray-400 px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-800"
+              aria-label="Edit feature"
             />
           </ng-container>
 
           <ng-template #displayContent>
             <span
+              class="flex-1 text-sm"
               [ngClass]="{
                 'text-slate-400': !feature.isVisible,
-                'text-slate-700': feature.isVisible
+                'text-slate-800': feature.isVisible
               }"
-              class="flex-1 text-sm"
             >
               {{ feature.content }}
             </span>
           </ng-template>
         </div>
 
-        <!-- Controls -->
+        <!-- Action Buttons -->
         <div class="flex items-center gap-1">
           <ng-container *ngIf="editingId === feature.id; else editButtons">
-            <button (click)="saveEdit()" class="h-9 w-9 rounded-md border">
-              <span>
+            <button 
+                  (click)="saveEdit()" 
+                  aria-label="Save edit"
+                  class="h-9 w-9 rounded-md border border-red-800/80 hover:bg-red-100/85 transition-colors">
+              <span class="text-gray-700">
                 <ng-icon class="h-5 w-5" name="lucideSave"/>
               </span>
             </button>
-            <button (click)="cancelEdit()" class="h-9 w-9 rounded-md border">
-              <span>
+            <button (click)="cancelEdit()" 
+                    class="h-9 w-9 rounded-md border border-red-800/80 hover:bg-red-100/85 transition-colors"
+                    aria-label="Cancel edit">
+              <span class="text-gray-700">
                 <ng-icon class="h-5 w-5" name="lucideX"/>
               </span>
             </button>
           </ng-container>
 
           <ng-template #editButtons>
-            <button (click)="startEdit(feature)" class="h-9 w-9 rounded-md border border-gray-300 cursor-pointer hover:bg-red-100/50">
+            <button (click)="startEdit(feature)" 
+            class="h-9 w-9 rounded-md border border-gray-300 cursor-pointer hover:bg-red-100/50"
+            aria-label="Edit Feature"
+            >
               <ng-icon name="lucideSquarePen" class="w-4 h-4" />
             </button>
-            <button (click)="deleteFeature.emit(feature.id)" class="h-9 w-9 rounded-md border border-gray-300 cursor-pointer hover:bg-red-100/50">
+            <button 
+                (click)="deleteFeature.emit(feature.id)" 
+                aria-label="Delete feature"
+                [disabled]="disabled"
+                class="h-9 w-9 rounded-md border border-gray-300 cursor-pointer hover:bg-red-100/50">
               <ng-icon name="lucideTrash2" class="w-4 h-4" />
             </button>
           </ng-template>

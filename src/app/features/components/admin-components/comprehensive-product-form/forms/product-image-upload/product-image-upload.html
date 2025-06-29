@@ -115,7 +115,9 @@
         <button
           type="button"
           aria-label="Remove image"
-          class="absolute top-2 right-2 w-8 h-8 opacity-0 group-hover:opacity-100 text-white bg-red-500 rounded-full hover:scale-110 transition"
+          class="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full 
+                flex items-center justify-center opacity-0 group-hover:opacity-100
+                sm:opacity-100 transition-transform hover:scale-110"
           (click)="removeImage(i)"
         >
           ✕
