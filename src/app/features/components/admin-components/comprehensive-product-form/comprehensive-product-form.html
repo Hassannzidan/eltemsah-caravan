@@ -57,12 +57,30 @@
          (formDataChange)="updateFormData($event)"
        />
    
-      <app-product-image-upload
+      <!-- <app-product-image-upload
         [images]="productImages"
         [existingImage]="formData().image"
         (imagesChange)="productImages = $event"
-      />
+      /> -->
    
+      <div class="my-5">
+        <app-product-image-upload
+          (imagesChange)="updateImages($event)"
+        ></app-product-image-upload>
+      </div>
+
+        <!-- بعده ممكن تستخدمي الصور في أي حاجة تانية -->
+        <div *ngIf="productImages.length > 0">
+          <p class="mt-4 font-semibold">Uploaded Images:</p>
+          <ul class="list-disc list-inside">
+            <!-- <li *ngFor="let img of productImages">{{ img }}</li> -->
+             <li *ngFor="let img of productImages">
+              {{ img.name }} — {{ img.size / 1024 | number: '1.0-1' }} KB ({{ img.type }})
+            </li>
+          </ul>
+        </div>
+
+
      <app-product-tags-manager
        [tags]="formData().tags"
        (tagsChange)="updateTags($event)"

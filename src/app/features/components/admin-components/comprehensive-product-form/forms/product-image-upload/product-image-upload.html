@@ -1,4 +1,4 @@
- <div class="card my-4">
+ <!-- <div class="card my-4">
       <div class="card-header">
         <h3 class="card-title">Product Image</h3>
       </div>
@@ -26,7 +26,7 @@
               <p class="title">Drop your image here</p>
               <p class="subtitle">or click to browse</p>
 
-              <!-- الصورة القديمة تظهر هنا -->
+              الصورة القديمة تظهر هنا
               <div *ngIf="existingImage && images.length === 0" class="mt-4 w-48 h-32 rounded overflow-hidden border">
                 <img [src]="existingImage" class="object-cover w-full h-full" alt="Current Image" />
               </div>
@@ -52,4 +52,119 @@
           </ng-template>
         </div>
       </div>
+</div> -->
+<div class="space-y-4">
+  <!-- Drop Zone -->
+  <div
+    class="relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 hover:bg-gray-50 hover:border-red-300 focus-within:ring-2 focus-within:ring-red-800 focus:outline-none"
+    tabindex="0"
+    role="button"
+    aria-label="Upload images by dragging or clicking"
+    [class.border-red-500]="dragActive()"
+    [class.bg-red-50]="dragActive()"
+    [class.scale-105]="dragActive()"
+    [class.shadow-lg]="dragActive()"
+    [class.border-gray-300]="!dragActive()"
+    (dragenter)="handleDrag($event)"
+    (dragleave)="handleDrag($event)"
+    (dragover)="handleDrag($event)"
+    (drop)="handleDrop($event)"
+  >
+    <div class="space-y-4">
+      <div
+        class="mx-auto w-14 h-14 flex items-center justify-center rounded-full transition-colors  duration-300"
+        [class.bg-red-100]="dragActive()"
+        [class.bg-gray-100]="!dragActive()"
+      >
+        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+          [class.text-gray-400]="!dragActive()"
+          [class.text-red-600]="dragActive()" viewBox="0 0 24 24">
+          <path d="M4 16v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1M12 12V4m0 0L8 8m4-4 4 4" />
+        </svg>
+      </div>
+      <p class="text-base font-medium text-gray-700">
+        {{ dragActive() ? 'Drop your images here!' : 'Drag & drop images here' }}
+      </p>
+      <p class="text-sm text-gray-500  my-1">
+        or click to browse • Supports multiple files • Max 10MB each
+      </p>
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        aria-label="Choose images to upload"
+        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        (change)="handleFileInput($event)"
+      />
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div
+    *ngIf="images().length > 0 || uploadingImages().length > 0"
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-4"
+  >
+    <!-- Uploaded Images -->
+    <div
+      *ngFor="let image of images(); let i = index"
+      class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
+    >
+      <div class="aspect-square relative">
+        <img [src]="image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300"></div>
+        <button
+          type="button"
+          aria-label="Remove image"
+          class="absolute top-2 right-2 w-8 h-8 opacity-0 group-hover:opacity-100 text-white bg-red-500 rounded-full hover:scale-110 transition"
+          (click)="removeImage(i)"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Uploading -->
+    <div
+      *ngFor="let item of uploadingImages()"
+      class="group relative overflow-hidden rounded-xl"
+    >
+      <div class="aspect-square relative">
+        <img [src]="item.preview" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+          <div class="text-center space-y-2 w-full px-4">
+            <div class="text-white text-sm font-medium">
+              {{ item.status === 'uploading' ? 'Uploading...' : 'Complete!' }}
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+              <div
+                class="h-full transition-all duration-300"
+                [class]="getProgressColor(item.progress)"
+                [style.width.%]="item.progress"
+              ></div>
+            </div>
+            <div class="text-white text-xs">
+              {{ item.progress | number: '1.0-0' }}%
+            </div>
+          </div>
+        </div>
+        <button
+          *ngIf="item.status === 'uploading'"
+          type="button"
+          aria-label="Cancel upload"
+          class="absolute top-2 right-2 w-8 h-8 text-white bg-red-500 rounded-full  flex items-center justify-center hover:scale-110 transition"
+          (click)="removeUploadingImage(item.id)"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="images().length === 0 && uploadingImages().length === 0" class="text-center py-8">
+    <span class="mx-auto text-5xl text-gray-400 mb-4" aria-hidden="true">
+      <ng-icon name="lucideImage" />
+    </span>
+    <p class="text-sm text-gray-400/90 my-1">No images uploaded yet</p>
+  </div>
 </div>

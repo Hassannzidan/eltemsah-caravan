@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal, type OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  type OnInit,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
@@ -11,7 +18,7 @@ import { ProductService } from '../../../../services/product/product.service';
 import { Router } from '@angular/router';
 import type { Product, ProductData } from '../../../../data/product.types';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule,  MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { ProductImageUpload } from './forms/product-image-upload/product-image-upload';
 
 type Category =
@@ -47,7 +54,7 @@ type Category =
     }),
   ],
 })
-export class ComprehensiveProductForm implements OnInit{
+export class ComprehensiveProductForm implements OnInit {
   [x: string]: any;
   isLoading = false;
 
@@ -56,7 +63,6 @@ export class ComprehensiveProductForm implements OnInit{
   @Output() cancel = new EventEmitter<void>();
   @Output() saveSuccess = new EventEmitter<Product>();
 
-  
   productDetails = signal<ProductData>(this.getDefaultProductDetails());
   productImages: File[] = [];
   activeTab = signal<'basic' | 'details'>('basic');
@@ -96,7 +102,7 @@ export class ComprehensiveProductForm implements OnInit{
   }
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -110,6 +116,10 @@ export class ComprehensiveProductForm implements OnInit{
     status: 'active' as 'active' | 'inactive',
     tags: [] as string[],
   });
+
+  updateImages(files: File[]) {
+    this.productImages = files;
+  }
 
   get availableSubcategories(): string[] {
     return this.formData().category
@@ -129,17 +139,13 @@ export class ComprehensiveProductForm implements OnInit{
     formData.append('status', this.formData().status);
     formData.append('tags', JSON.stringify(this.formData().tags));
 
-
-
     // productDetails Data
     const productDetails = {
       sections: this.productDetails()['sections'],
       features: this.productDetails()['features'],
-      specifications: this.productDetails()['specifications']
+      specifications: this.productDetails()['specifications'],
     };
     formData.append('productDetails', JSON.stringify(productDetails));
-
-
 
     this.productImages.forEach((file) => {
       formData.append('images', file);
@@ -153,9 +159,16 @@ export class ComprehensiveProductForm implements OnInit{
     request$.subscribe({
       next: (response) => {
         this.snackBar.open(
-          this.product ? 'Product updated successfully!' : 'Product created successfully!',
+          this.product
+            ? 'Product updated successfully!'
+            : 'Product created successfully!',
           'Close',
-          { duration: 3000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['snackbar-success'] }
+          {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-success'],
+          }
         );
         this.isLoading = false;
         this.saveSuccess.emit(response); // ✅ يرجع للـ parent سواء كان جديد أو معدل
@@ -166,7 +179,6 @@ export class ComprehensiveProductForm implements OnInit{
       },
     });
   }
-
 
   getDefaultProductDetails(): ProductData {
     return {
@@ -183,7 +195,7 @@ export class ComprehensiveProductForm implements OnInit{
           name: 'Technical Specifications',
           isVisible: true,
           order: 2,
-        }
+        },
       ],
       features: [
         {
@@ -216,5 +228,4 @@ export class ComprehensiveProductForm implements OnInit{
   updateTags(tags: string[]): void {
     this.formData.set({ ...this.formData(), tags });
   }
-
 }
