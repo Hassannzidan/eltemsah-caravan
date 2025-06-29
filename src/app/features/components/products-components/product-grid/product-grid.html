@@ -1,39 +1,49 @@
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
   <div
     *ngFor="let product of products"
-    class="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 rounded-lg border border-gray-300 bg-card text-card-foreground shadow-sm"
+    class="group transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg rounded-lg border border-gray-200 bg-white text-gray-900 shadow-sm focus-within:ring-2 focus-within:ring-red-800 focus-within:ring-offset-2"
   >
+      <!-- Product Image with Tag -->
     <div class="relative h-48 overflow-hidden rounded-t-lg">
       <img
         [src]="product.images"
-        [alt]="product.name"
-        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        [alt]="product.name || 'Product image'"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        loading="lazy"
+        decoding="async"
       />
-      <div class="absolute top-4 left-4">
+      <div class="absolute top-4 left-4 ">
         <span
-          class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold"
-        >
+          class="bg-gradient-to-r from-red-500 to-red-800 text-white px-3 py-1 rounded-full text-sm font-semibold"
+          aria-label="Product Subcategory"
+          >
           {{ product.subcategory }}
         </span>
       </div>
-
     </div>
 
-    <div class="flex flex-col space-y-1.5 p-6">
+    <!-- Product Info -->
+    <div class="flex flex-col gap-2 px-4 pt-4 pb-2">
       <h3
-        class="text-2xl font-semibold leading-none tracking-tight group-hover:text-orange-600 transition-colors"
+        class="text-lg sm:text-xl font-semibold leading-tight tracking-tight group-hover:text-orange-600 transition-colors"
       >
         {{ product.name }}
       </h3>
       <p class="text-sm text-slate-500">{{ product.category }}</p>
     </div>
 
+    <!-- Description and Tags -->
     <div class="p-6 pt-0">
-      <p class="text-slate-600 text-sm mb-4">
+      <p 
+      class="text-slate-600 text-sm mb-4"
+      [attr.aria-label]="'Description of ' + product.name">
         {{ product.description }}
       </p>
       
-      <div *ngIf="product.tags?.length" class="flex flex-wrap gap-2 mb-4">
+      <!-- Tags -->
+      <div *ngIf="product.tags?.length" 
+           class="flex flex-wrap gap-2 mb-4"
+            aria-label="Product Tags">
         <span *ngFor="let tag of product.tags" class="badge border border-gray-300/50 bg-white text-slate-800 px-2 py-1 text-xs rounded-xl">
           {{ tag }}
         </span>
@@ -41,8 +51,9 @@
 
       <a
         [routerLink]="['/product', product._id]"
-        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-red-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-white/90 hover:bg-red-100/70 hover:text-red-800/90 w-full h-10 px-4 py-2"
-      >
+        class="w-full inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-red-800 transition-colors bg-white border border-gray-300 rounded-md hover:bg-red-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
+        attr.aria-label="View more details about {{ product.name }}"
+        >
         Learn More
       </a>
     </div>

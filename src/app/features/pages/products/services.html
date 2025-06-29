@@ -1,31 +1,42 @@
 <div class="space-y-12 ">
+    <!-- Hero Section -->
     <app-hero-section-products></app-hero-section-products> 
 
-  <app-search-filter-bar
-  [searchTerm]="searchTerm()"
-  (searchTermChange)="searchTerm.set($event)"
-  [selectedCategory]="selectedCategory()"
-  (selectedCategoryChange)="selectedCategory.set($event)"
-  [viewMode]="viewMode"
-  (viewModeChange)="viewMode = $event"
-  [categories]="categories"
-  [filteredProductsCount]="filteredProductsCount"
-/>
-<section class="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
-  <div class="container mx-auto px-6 lg:px-8">
-    <app-product-list
-    *ngIf="viewMode === 'list'"
-    [products]="filteredProducts()"
-    />
-    <app-product-grid
-    *ngIf="viewMode === 'grid'"
-    [products]="filteredProducts()"
-    />
-  </div>
-  <ng-container *ngIf="filteredProducts.length === 0">
-    <app-no-result></app-no-result>
-  </ng-container>
-</section>
+    <!-- Filter and Search -->
+    <app-search-filter-bar
+      [searchTerm]="searchTerm()"
+      (searchTermChange)="searchTerm.set($event)"
+      [selectedCategory]="selectedCategory()"
+      (selectedCategoryChange)="selectedCategory.set($event)"
+      [viewMode]="viewMode"
+      (viewModeChange)="viewMode = $event"
+      [categories]="categories"
+      [filteredProductsCount]="filteredProductsCount"
+      aria-label="Search and filter products"
+  />
+  <!-- Products List / Grid -->
+  <section 
+      class="py-20 bg-gradient-to-br from-slate-50 to-slate-100"
+      role="region"
+      aria-labelledby="products-heading">
+
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="products-heading" class="sr-only">Products Section</h2>
+        
+        <app-product-list
+        *ngIf="viewMode === 'list'"
+        [products]="filteredProducts()"
+        />
+        <app-product-grid
+        *ngIf="viewMode === 'grid'"
+        [products]="filteredProducts()"
+        />
+      </div>
+
+      <ng-container *ngIf="filteredProducts.length === 0">
+        <app-no-result></app-no-result>
+      </ng-container>
+  </section>
 
 </div>
 

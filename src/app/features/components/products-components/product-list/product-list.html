@@ -1,9 +1,20 @@
 <div class="space-y-6">
   <ng-container *ngFor="let product of products">
-    <div class="flex flex-col md:flex-row overflow-hidden hover:shadow-lg transition-shadow rounded-xl border border-gray-200 bg-white">
+    <div 
+        class="flex flex-col md:flex-row overflow-hidden transition-shadow hover:shadow-lg rounded-xl border border-gray-200 bg-white"
+        >
+      
+      <!-- صورة المنتج -->
       <div class="w-full md:w-64 h-48 md:h-auto">
-        <img [src]="product.images" [alt]="product.name" class="w-full h-full object-cover" />
+        <img 
+          [src]="product.images" 
+          [alt]="product.name" 
+          class="w-full h-full object-cover" 
+          loading="lazy"
+          decoding="async"/>
       </div>
+
+      <!-- تفاصيل المنتج -->
       <div class="flex-1 p-6">
         <div class="flex justify-between items-start mb-4">
           <div>
@@ -20,6 +31,16 @@
           </a>
         </div>
         <p class="text-slate-600">{{ product.description }}</p>
+
+        <!-- <div *ngIf="product.tags?.length" class="flex flex-wrap gap-2 mt-4">
+          <span
+            *ngFor="let tag of product.tags"
+            class="badge border border-gray-300/50 bg-white text-slate-800 px-2 py-1 text-xs rounded-xl"
+          >
+            {{ tag }}
+          </span>
+        </div> -->
+
       </div>
     </div>
   </ng-container>
