@@ -1,21 +1,29 @@
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 bg-opacity-50">
-
-
-  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-xs bg-opacity-50"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="product-dialog-title"
+>
+  <div
+    class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-xl p-4 sm:p-6"
+    tabindex="-1"
+  >
+    <!-- Header -->
     <div class="mb-4">
-      <h2 class="text-lg font-semibold">
+      <h2 
+        id="product-dialog-title"
+        class="text-xl sm:text-2xl font-bold text-gray-800">
         {{ editingProduct ? 'Edit Product' : 'Add New Product' }}
       </h2>
+      <p  class="text-sm text-gray-500/90">Update the product information below.</p>
     </div>
 
-    <!-- (save)="onSave($event)" -->
+    <!-- Product Form -->
     <app-comprehensive-product-form
       [product]="editingProduct"
       [categories]="categories"
       (cancel)="onCancel()"
       (saveSuccess)="handleSaveSuccess($event)"
-      />
-      <!-- (saveSuccess)="handleSaveSuccess()" -->
+    />
   </div>
 </div>
-

@@ -1,18 +1,36 @@
-<form (ngSubmit)="handleSubmit()" class="space-y-6">
+<form 
+  (ngSubmit)="handleSubmit()"
+  class="space-y-6"
+  role="form"
+  aria-label="Product Form"
+  >
   <!-- Tabs -->
    <div class="TABS w-full">
-     <div class="h-12 p-1 items-center justify-center rounded-md bg-gray-100/80  text-gray-500 grid grid-cols-2 w-full border border-gray-300/20">
-        <button type="button"
-          class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer"
+     <div 
+     class="h-auto sm:h-12 p-1 rounded-md bg-gray-100/80
+           text-gray-500 border border-gray-300/20 grid 
+           grid-cols-2 gap-2 sm:gap-0"
+     role="tablist"
+     aria-label="Product Form Tabs">
+
+        <button 
+          type="button"
+          role="tab"
+          [attr.aria-selected]="activeTab() === 'basic'"
+          class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer" 
           [ngClass]="{
             'bg-white text-black shadow-sm': activeTab() === 'basic',
-            'text-muted-foreground': activeTab() !== 'basic'
+            'text-gray-500': activeTab() !== 'basic'
           }"
           (click)="activeTab.set('basic')">
           Basic Information
         </button>
 
-        <button type="button"
+        <button 
+          type="button"
+          role="tab"
+          [attr.aria-selected]="activeTab() === 'details'"
+          aria-controls="details-tab-panel"
           class="py-2 m-y-1 m-x-5 text-center rounded-md cursor-pointer"
           [ngClass]="{
             'bg-white text-black shadow-sm': activeTab() === 'details',
@@ -25,7 +43,12 @@
 
    
      <!-- Basic Tab -->
-     <div *ngIf="activeTab() === 'basic'" class="space-y-6">
+     <div 
+      *ngIf="activeTab() === 'basic'" 
+      id="basic-tab-panel"
+      role="tabpanel"
+      aria-labelledby="basic-tab"
+      class="space-y-6">
    
        <app-basic-product-form
          [formData]="formData()"
@@ -46,25 +69,30 @@
      />
      </div>
      
-     <!-- Details Tab -->  
-     <div *ngIf="activeTab() === 'details'" class="space-y-6">
+    <!-- Product Details Tab -->
+     <div 
+      *ngIf="activeTab() === 'details'" 
+      id="details-tab-panel"
+      role="tabpanel"
+      aria-labelledby="details-tab"
+      class="space-y-6">
+
        <app-product-details-form
          [productDetails]="productDetails()"
          (productDetailsChange)="productDetails.set($event)"
-
-         
        />
-
      </div>
    
      <!-- Buttons -->
-     <div class="flex justify-end gap-4 pt-4">
+     <div class="flex flex-col sm:flex-row justify-end gap-4 pt-6">
        <button type="button"
-         class="px-4 py-2 border border-gray-400 rounded"
-         (click)="cancel.emit()">Cancel</button>
+        class="px-4 py-2 border border-gray-400 rounded-md text-gray-700 hover:border-red-800/80 hover:bg-red-100 transition"
+         (click)="cancel.emit()"
+          aria-label="Cancel"
+         >Cancel</button>
          
        <button type="submit"
-         class="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded">
+        class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition">
          {{ product ? 'Update Product' : 'Create Product' }}
        </button>
      </div>
