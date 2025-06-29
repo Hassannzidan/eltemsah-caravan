@@ -1,9 +1,9 @@
-<section class="py-12 bg-white border-b border-gray-300">
-  <div class="container mx-auto px-6">
-    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
+<section class="py-10 sm:py-12 bg-white border-b border-gray-300">
+  <div class="container mx-auto px-4 sm:px-6">
+    <div class="flex flex-col  gap-6 lg:flex-row lg:items-center lg:justify-between">
       <!-- Search Bar -->
       <div class="relative flex-1 max-w-md w-full">
-        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none" aria-hidden="true"  fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
@@ -18,13 +18,16 @@
 
       <!-- Custom Category Dropdown -->
         <div class="relative w-full max-w-xs">
-        <span class="text-slate-600 w-5 h-5 text-xl absolute -left-7 top-6 transform -translate-y-1/2">
+        <span class="text-slate-600 text-xl w-5 h-5 absolute -left-7 top-6 transform -translate-y-1/2">
             <ng-icon name="featherFilter" />   
         </span>
 
         <button
             (click)="showCategoryMenu = !showCategoryMenu"
             class="relative flex h-12 w-full items-center rounded-md border border-gray-300 bg-white text-base px-4 pr-10 text-left focus:outline-none focus:ring-2 focus:ring-red-800"
+            aria-haspopup="listbox"
+            attr.aria-expanded="{{showCategoryMenu}}"
+            aria-label="Category filter"
         >
             <span class="truncate">{{ selectedCategory || 'All Categories' }}</span>
             <span class="absolute right-3 w-4 h-4 text-md pointer-events-none">
@@ -33,15 +36,18 @@
         </button>
 
         <ul
+            role="listbox"
+            tabindex="-1"
             [ngClass]="{
             'opacity-100 scale-100 translate-y-0 pointer-events-auto': showCategoryMenu,
             'opacity-0 scale-95 -translate-y-2 pointer-events-none': !showCategoryMenu
             }"
-            class=" absolute left-0 mt-1 pb-1 z-50 max-h-100 min-w-full origin-top rounded-md border border-gray-300 bg-white text-sm shadow-md transition-all duration-200 ease-in-out "
+            class=" absolute left-0 mt-1 pb-1 z-50 max-h-60 overflow-auto min-w-full origin-top rounded-md border border-gray-300 bg-white text-sm shadow-md transition-all duration-200 ease-in-out "
         >
-            <li
+            <li 
+            role="option"
             (click)="onCategoryChange('all'); showCategoryMenu = false"
-            class="cursor-pointer px-4 pl-10 py-2 hover:bg-red-100 hover:text-red-600 relative flex items-center whitespace-nowrap w-full"
+            class="px-4 pl-10 py-2 cursor-pointer  hover:bg-red-100 hover:text-red-600 relative flex items-center"
             >
             All Categories
             <ng-icon *ngIf="selectedCategory === 'all'" name="featherCheck" class="absolute left-3 text-lg text-red-600"></ng-icon>
@@ -49,8 +55,10 @@
 
             <li
             *ngFor="let category of categories"
+            role="option"
+            [attr.aria-selected]="selectedCategory === category"
             (click)="onCategoryChange(category); showCategoryMenu = false"
-            class="cursor-pointer px-4 pl-10 py-2 hover:bg-red-100 hover:text-red-600 relative flex items-center whitespace-nowrap w-full"
+            class="px-4 pl-10 py-2 cursor-pointer hover:bg-red-100 hover:text-red-600 relative flex items-center"
             >
             {{ category }}
             <ng-icon *ngIf="selectedCategory === category" name="featherCheck" class="absolute left-3 text-lg text-red-600"></ng-icon>
@@ -59,17 +67,26 @@
         </div>
 
     <!-- status drop down  -->
-    <div *ngIf="showStatusFilter" class="w-full max-w-xs">
+    <div *ngIf="showStatusFilter" class="w-full max-w-xs relative">
+      <label class="sr-only" for="statusFilter">Status Filter</label>
+
+      <!-- الأيقونة -->
+      <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-900">
+        <ng-icon name="featherChevronDown" class="w-4 h-4" />
+      </span>
+
       <select
+        id="statusFilter"
         [value]="statusFilter"
         (change)="onStatusFilterChange($any($event.target).value)"
-        class="border border-slate-300 rounded-lg px-3 py-2 w-full"
+        class="w-full h-12 px-3 pr-10 py-2 border border-slate-300 rounded-lg bg-white text-base appearance-none"
       >
         <option value="all">All Status</option>
         <option value="active">Active</option>
         <option value="inactive">Inactive</option>
       </select>
-    </div>
+</div>
+
 
 
       <!-- View Mode Toggle -->
@@ -80,12 +97,11 @@
           (click)="onViewModeChange('grid')"
           [ngClass]="viewMode === 'grid' ? 'bg-red-800 text-white/90 hover:bg-red-800/90' : 'border border-gray-300 bg-gray-50 hover:bg-red-700/20 hover:text-red-600/90'"
           class=" cursor-pointer inline-flex items-center justify-center h-10 w-10 rounded-md text-sm font-medium  ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
-        >
-          <!-- <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M4 4h6v6H4V4zM14 4h6v6h-6V4zM4 14h6v6H4v-6zM14 14h6v6h-6v-6z"/>
-          </svg> -->
-          <span class="text-xl">
-            <ng-icon name="lucideGrid3x3" class="w-4 h-4" />
+          aria-label="Grid view"
+          [attr.aria-pressed]="viewMode === 'grid'"
+          >
+          <span class="text-2xl flex justify-center items-center">
+            <ng-icon name="lucideGrid3x3" />
           </span>
         </button>
 
@@ -95,16 +111,18 @@
           (click)="onViewModeChange('list')"
           [ngClass]="viewMode === 'list' ? 'bg-red-800 text-white/90 hover:bg-red-800/80' : 'border border-gray-300 bg-gray-50 hover:bg-red-700/20 hover:text-red-600/90'"
           class="cursor-pointer inline-flex items-center justify-center h-10 w-10 rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-800 focus-visible:ring-offset-2"
-        >
-          <span class=" text-xl">
-            <ng-icon name="heroListBulletSolid" class="w-4 h-4" />   
+          aria-label="List view"
+          [attr.aria-pressed]="viewMode === 'list'"
+          >
+          <span class="text-2xl flex justify-center items-center">
+            <ng-icon name="heroListBulletSolid" />   
           </span>
         </button>
       </div>
     </div>
 
     <!-- Results Count -->
-    <div class="mt-6 text-slate-600">
+    <div class="mt-4  text-slate-600">
       Showing {{ filteredProductsCount }} products
       <ng-container *ngIf="selectedCategory !== 'all'"> in {{ selectedCategory }}</ng-container>
       <ng-container *ngIf="searchTerm"> matching "{{ searchTerm }}"</ng-container>

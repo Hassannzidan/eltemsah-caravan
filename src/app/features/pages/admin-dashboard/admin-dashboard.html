@@ -1,141 +1,110 @@
 <section class="space-y-12 mt-25">
   <div class="min-h-screen bg-slate-50">
     <!-- Header -->
-    <div class="bg-white border-b">
-        <div class="container mx-auto px-6 py-6">
-          <div class="flex justify-between items-center">
-            <div>
-              <h1 class="text-3xl font-bold text-slate-900">Product Management</h1>
-              <p class="text-slate-600">Manage your products and services</p>
-            </div>
-            <div class="flex gap-3">
-            <button 
-              [routerLink]="['/products/manage']"
-              class="cursor-pointer bg-blue-600 hover:bg-blue-700 
-                    text-white px-4 py-2 rounded-lg font-medium 
-                    flex items-center">
-
-              <span>
-                <ng-icon [name]="lucideSettings" class="w-4 h-4 mr-2"></ng-icon>
-              </span>
-              Manage Product Details
+    <div class="bg-white border-b border-gray-100">
+      <div class="container mx-auto px-4 sm:px-6 py-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">Admin Dashboard</h1>
+            <p class="text-slate-500 mt-1">Manage your products and services</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              (click)="openAddForm()"
+              aria-label="Add new product"
+              class="bg-red-800 hover:bg-red-700 hover:-translate-y-1 transition-all delay-50 text-white px-4 py-2 rounded-lg font-medium flex items-center"
+            >
+              <ng-icon [name]="lucidePlus" class="w-4 h-4 mr-2"></ng-icon>
+              Add Product
             </button>
 
-            <button (click)="openAddForm()" 
-                    class="cursor-pointer bg-orange-600 hover:bg-orange-700 
-                           text-white px-4 py-2 rounded-lg font-medium 
-                           flex items-center">
-
-                  <span class="">
-                    <ng-icon [name]="lucidePlus" class="w-4 h-4 mr-2"></ng-icon>
-                  </span>
-                  Add Product
-            </button>
-            <button (click)="logout()" 
-                    class="border border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 
-                           rounded-md px-5 py-1.5">
-
-                  <span class="text-lg">
-                    <ng-icon name="lucideLogOut" class="w-5 h-5 mr-2"></ng-icon>
-                  </span>
-                  Logout  
+            <button
+              (click)="logout()"
+              aria-label="Logout"
+              class="border border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md px-5 py-1.5"
+            >
+              <ng-icon name="lucideLogOut" class="w-5 h-5 mr-2"></ng-icon>
+              Logout
             </button>
 
             <app-add-product-dialog
-                *ngIf="isFormOpen()" 
-                [editingProduct]="editingProduct()"
-                [categories]="categories"
-                (cancel)="isFormOpen.set(false)"
-                (closeDialog)="isFormOpen.set(false)"
-                (saveSuccess)="addCreatedProduct($event)"
-                ></app-add-product-dialog>
-
-            </div>
+              *ngIf="isFormOpen()"
+              [editingProduct]="editingProduct()"
+              [categories]="categories"
+              (cancel)="isFormOpen.set(false)"
+              (closeDialog)="isFormOpen.set(false)"
+              (saveSuccess)="addCreatedProduct($event)"
+            ></app-add-product-dialog>
           </div>
         </div>
+      </div>
     </div>
 
-
-
+    <!-- Filter Bar -->
     <app-search-filter-bar
-    [searchTerm]="searchTerm()"
-    (searchTermChange)="searchTerm.set($event)"
-    [selectedCategory]="selectedCategory()"
-    (selectedCategoryChange)="selectedCategory.set($event)"
-    [viewMode]="viewMode()"
-    (viewModeChange)="viewMode.set($event)"
-    [categories]="categories"
-    [filteredProductsCount]="filteredProducts().length"
-    [showStatusFilter]="true"
-    [statusFilter]="statusFilter()"
-    (statusFilterChange)="statusFilter.set($event)"
-  />
+      [searchTerm]="searchTerm()"
+      (searchTermChange)="searchTerm.set($event)"
+      [selectedCategory]="selectedCategory()"
+      (selectedCategoryChange)="selectedCategory.set($event)"
+      [viewMode]="viewMode()"
+      (viewModeChange)="viewMode.set($event)"
+      [categories]="categories"
+      [filteredProductsCount]="filteredProducts().length"
+      [showStatusFilter]="true"
+      [statusFilter]="statusFilter()"
+      (statusFilterChange)="statusFilter.set($event)"
+    />
 
-    <!-- 📦 Products Grid/List -->
-    <div [ngSwitch]="viewMode()" class="container mx-auto px-6 py-8">
-      <!-- 🟦 Grid View -->
-      <div
-        *ngSwitchCase="'grid'"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-
-        <!-- Card -->
+    <!-- Products View -->
+    <div [ngSwitch]="viewMode()" class="container mx-auto px-4 sm:px-6 py-8">
+      <!-- Grid View -->
+      <div *ngSwitchCase="'grid'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           *ngFor="let product of filteredProducts()"
-          class="bg-white text-gray-500 border-gray-500 rounded-lg shadow hover:shadow-lg group transition-shadow"
+          class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg group transition-shadow w-full"
         >
           <div class="relative h-48 overflow-hidden rounded-t-lg">
             <img
               [src]="product.images"
               [alt]="product.name"
+              loading="lazy"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div class="absolute top-3 right-3 flex gap-2">
               <button
                 class="px-2 py-0.5 rounded-xl text-xs font-semibold border transition-colors"
                 [ngClass]="
-                product.status === 'active'
-                  ? 'border-transparent bg-red-900 text-white/90 hover:bg-red-800/70'
-                  : 'border-transparent bg-gray-200 text-gray-900  hover:bg-gray-200/60'
-              "
+                  product.status === 'active'
+                    ? 'bg-red-900 text-white hover:bg-red-800'
+                    : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                "
               >
                 {{ product.status }}
               </button>
             </div>
           </div>
-          <!-- CARD HEADER  product name  -->
-          <div class="flex flex-col space-y-1.5 p-6 pb-3">
-            <div
-              class="CARD TITLE font-semibold leading-none tracking-tight text-lg text-gray-900"
-            >
-              {{product.name}}
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-slate-500">{{product.category}}</span>
-            </div>
-          </div>
-          <!-- card content -->
-          <div class="card-content p-6 pt-0">
-            <!-- description -->
-            <p class="text-sm text-slate-600 mb-4 line-clamp-2">
-              {{product.description}}
-            </p>
 
-            <!-- tags -->
+          <div class="flex flex-col space-y-1.5 p-6 pb-3">
+            <h2 class="text-lg font-semibold text-gray-900">{{ product.name }}</h2>
+            <span class="text-sm text-slate-500">{{ product.category }}</span>
+          </div>
+
+          <div class="p-6 pt-0">
+            <p class="text-sm text-slate-600 mb-4 line-clamp-2">{{ product.description }}</p>
+
             <div class="flex flex-wrap gap-1 mb-4">
-              <div
+              <span
                 *ngFor="let tag of product.tags"
-                class="Badge inline-flex items-center rounded-full border border-gray-300/80 px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 text-shadow-gray-600 text-xs text-gray-800"
+                class="inline-flex items-center rounded-full border border-gray-300/80 px-2.5 py-0.5 text-xs text-gray-800 font-semibold"
               >
                 {{ tag }}
-              </div>
+              </span>
             </div>
 
-            <!-- openEdit Form & delete button -->
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="text-sm text-slate-600">Status:</span>
-                <label class="inline-flex items-center mr-5 cursor-pointer">
+                <label [attr.aria-label]="'Toggle status for ' + product.name" class="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     class="sr-only peer"
@@ -143,26 +112,24 @@
                     (change)="toggleStatus(product._id)"
                   />
                   <div
-                    class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform after:duration-500 dark:border-gray-600 peer-checked:bg-red-800 after:transform"
+                    class="w-11 h-6 bg-gray-200 rounded-full peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-transform peer-checked:bg-red-800 relative"
                   ></div>
                 </label>
               </div>
-              <div class="flex gap-1">
+              <div class="flex gap-2">
                 <button
-                  class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
+                  aria-label="Edit product"
+                  class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800 transition-colors"
                   (click)="openEditForm(product)"
                 >
-                  <span>
-                    <ng-icon name="lucideSquarePen" class="w-4 h-4"></ng-icon>
-                  </span>
+                  <ng-icon name="lucideSquarePen" class="w-4 h-4 mx-auto"></ng-icon>
                 </button>
                 <button
-                  class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
+                  aria-label="Delete product"
+                  class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800 transition-colors"
                   (click)="deleteProduct(product._id)"
                 >
-                  <span>
-                    <ng-icon name="lucideTrash2" class="w-4 h-4"></ng-icon>
-                  </span>
+                  <ng-icon name="lucideTrash2" class="w-4 h-4 mx-auto"></ng-icon>
                 </button>
               </div>
             </div>
@@ -170,86 +137,61 @@
         </div>
       </div>
 
-      <!-- 📃 List View -->
+      <!-- List View -->
       <div *ngSwitchCase="'list'" class="space-y-4">
-        <!-- Card -->
         <div
           *ngFor="let product of filteredProducts()"
-          class="rounded-lg border border-gray-300/85 bg-white text-card-foreground shadow-sm flex overflow-hidden hover:shadow-lg transition-shadow"
+          class="flex flex-col sm:flex-row items-start sm:items-center border border-gray-300 rounded-lg bg-white shadow-sm overflow-hidden hover:shadow-lg transition-shadow"
         >
-          <div class="w-32 h-32 flex-shrink-0">
+          <div class="w-full sm:w-32 h-48 sm:h-32">
             <img
               [src]="product.images"
               [alt]="product.name"
+              loading="lazy"
               class="w-full h-full object-cover"
             />
           </div>
-          <div class="flex-1 p-6">
-            <div class="flex justify-between items-start">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <h3 class="text-xl font-bold text-slate-900">
-                    {{product.name}}
-                  </h3>
-                  <button
-                    class="px-2 py-0.5 rounded-xl text-xs font-semibold border transition-colors"
-                    [ngClass]="
-                              product.status === 'active'
-                                ? 'border-transparent bg-red-900 text-white/90 hover:bg-red-800/70'
-                                : 'border-transparent bg-gray-200 text-gray-900  hover:bg-gray-200/60'
-                            "
+          <div class="flex-1 p-4 sm:p-6 w-full">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-slate-900">{{ product.name }}</h3>
+                <p class="text-sm text-red-600 font-medium mt-1">{{ product.category }}</p>
+                <p class="text-slate-600 mt-2 text-sm">{{ product.description }}</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span
+                    *ngFor="let tag of product.tags"
+                    class="inline-flex items-center rounded-full border border-gray-300/80 px-2.5 py-0.5 text-xs text-gray-800 font-semibold"
                   >
-                    {{ product.status }}
-                  </button>
-                </div>
-                <p class="text-sm text-orange-600 font-medium mb-2">
-                  {{product.category}}
-                </p>
-                <p class="text-slate-600 mb-3">{{product.description}}</p>
-                <div class="flex items-center gap-4">
-                  <div class="flex flex-wrap gap-1">
-                    <div
-                      *ngFor="let tag of product.tags"
-                      class="Badge inline-flex items-center rounded-full border border-gray-300/80 px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 text-shadow-gray-600 text-xs text-gray-800"
-                    >
-                      {{ tag }}
-                    </div>
-                  </div>
+                    {{ tag }}
+                  </span>
                 </div>
               </div>
-              <div class="flex items-center gap-4 ml-6">
-                <div class="flex items-center gap-2">
-                  <span class="text-sm text-slate-600">Active:</span>
-                  <label class="inline-flex items-center mr-5 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      class="sr-only peer"
-                      [checked]="product.status === 'active'"
-                      (change)="toggleStatus(product._id)"
-                    />
-                    <div
-                      class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform after:duration-500 dark:border-gray-600 peer-checked:bg-red-800 after:transform"
-                    ></div>
-                  </label>
-                </div>
-                <div class="flex gap-2">
-                  <button
-                    class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
-                    (click)="openEditForm(product)"
-                  >
-                    <span>
-                      <ng-icon name="lucideSquarePen" class="w-4 h-4"></ng-icon>
-                    </span>
-                  </button>
-                  <button
-                    class="focus:ring-red-800 h-10 w-10 border-1 border-gray-300 bg-white/80 rounded-md hover:bg-red-100/90 hover:text-red-800/70 cursor-pointer"
-                    (click)="deleteProduct(product._id)"
-                  >
-                    <span>
-                      <ng-icon name="lucideTrash2" class="w-4 h-4"></ng-icon>
-                    </span>
-                  </button>
-                </div>
+              <div class="flex gap-2 mt-4 sm:mt-0 sm:ml-6">
+                <label [attr.aria-label]="'Toggle status for ' + product.name" class="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    class="sr-only peer"
+                    [checked]="product.status === 'active'"
+                    (change)="toggleStatus(product._id)"
+                  />
+                  <div
+                    class="w-11 h-6 bg-gray-200 rounded-full peer-focus:ring-4 peer-focus:ring-red-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-transform peer-checked:bg-red-800 relative"
+                  ></div>
+                </label>
+                <button
+                  aria-label="Edit product"
+                  class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800"
+                  (click)="openEditForm(product)"
+                >
+                  <ng-icon name="lucideSquarePen" class="w-4 h-4 mx-auto"></ng-icon>
+                </button>
+                <button
+                  aria-label="Delete product"
+                  class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800"
+                  (click)="deleteProduct(product._id)"
+                >
+                  <ng-icon name="lucideTrash2" class="w-4 h-4 mx-auto"></ng-icon>
+                </button>
               </div>
             </div>
           </div>
@@ -258,4 +200,3 @@
     </div>
   </div>
 </section>
-

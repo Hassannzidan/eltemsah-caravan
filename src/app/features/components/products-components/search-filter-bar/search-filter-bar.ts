@@ -31,7 +31,7 @@ import { lucideGrid3x3 } from '@ng-icons/lucide';
       featherChevronDown,
       featherCheck,
       heroListBulletSolid,
-      lucideGrid3x3
+      lucideGrid3x3,
     }),
   ],
 })
@@ -68,7 +68,7 @@ export class SearchFilterBar {
   }
 
   onStatusFilterChange(value: string) {
-  this.statusFilterChange.emit(value);
+    this.statusFilterChange.emit(value);
   }
 
   // for detecting clicks outside the component to close the category menu
@@ -85,6 +85,17 @@ export class SearchFilterBar {
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
+      this.showCategoryMenu = false;
+    }
+  }
+
+  // for mobile phones
+  @HostListener('document:touchstart', ['$event'])
+  onTouchOutside(event: TouchEvent) {
+    const touchedInside = this.elementRef.nativeElement.contains(
+      event.target as Node
+    );
+    if (!touchedInside) {
       this.showCategoryMenu = false;
     }
   }

@@ -18,13 +18,13 @@ export const routes: Routes = [
   { path: 'admin', 
     component: AdminDashboard , 
     title: 'Admin Dashboard', 
-    canActivate: [authGuard] 
+    // canActivate: [authGuard] 
   },
   { path: 'verify-otp', component: OtpComponent , title: 'Verification Step' },
   { path: 'product/:id', component: ProductDetails },
   {
     path: 'admin/product-details',
     component: ProductDetails,
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   }
 ];
