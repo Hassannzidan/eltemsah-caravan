@@ -1,5 +1,4 @@
-<form 
-  (ngSubmit)="handleSubmit()"
+<form (ngSubmit)="handleSubmit()"
   class="space-y-6"
   role="form"
   aria-label="Product Form"
@@ -69,16 +68,14 @@
         ></app-product-image-upload>
       </div>
 
-        <!-- بعده ممكن تستخدمي الصور في أي حاجة تانية -->
-        <div *ngIf="productImages.length > 0">
+        <!-- <div *ngIf="productImages.length > 0">
           <p class="mt-4 font-semibold">Uploaded Images:</p>
           <ul class="list-disc list-inside">
-            <!-- <li *ngFor="let img of productImages">{{ img }}</li> -->
              <li *ngFor="let img of productImages">
               {{ img.name }} — {{ img.size / 1024 | number: '1.0-1' }} KB ({{ img.type }})
             </li>
           </ul>
-        </div>
+        </div> -->
 
 
      <app-product-tags-manager

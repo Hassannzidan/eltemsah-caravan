@@ -66,6 +66,7 @@ export class ComprehensiveProductForm implements OnInit {
   productDetails = signal<ProductData>(this.getDefaultProductDetails());
   productImages: File[] = [];
   activeTab = signal<'basic' | 'details'>('basic');
+  galleryPreviews: string[] = [];
 
   subcategories: Record<string, string[]> = {
     'Multi-purpose Caravans': ['Travel', 'Office', 'Workshop'],
@@ -119,6 +120,7 @@ export class ComprehensiveProductForm implements OnInit {
 
   updateImages(files: File[]) {
     this.productImages = files;
+    this.galleryPreviews = files.map((file) => URL.createObjectURL(file));
   }
 
   get availableSubcategories(): string[] {

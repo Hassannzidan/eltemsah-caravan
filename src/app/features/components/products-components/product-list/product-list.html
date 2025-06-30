@@ -7,7 +7,7 @@
       <!-- صورة المنتج -->
       <div class="w-full md:w-64 h-48 md:h-auto">
         <img 
-          [src]="product.images" 
+          [src]="product.images[0]" *ngIf="product.images?.length"
           [alt]="product.name" 
           class="w-full h-full object-cover" 
           loading="lazy"
@@ -19,7 +19,7 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <h3 class="text-xl font-bold text-slate-900 mb-2">{{ product.name }}</h3>
-            <p class="text-sm text-orange-600 font-semibold mb-2">{{ product.category }}</p>
+            <p class="text-sm text-red-600 font-semibold mb-2">{{ product.category }}</p>
             <ng-container *ngIf="product.subcategory">
               <span class="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm">
                 {{ product.subcategory }}

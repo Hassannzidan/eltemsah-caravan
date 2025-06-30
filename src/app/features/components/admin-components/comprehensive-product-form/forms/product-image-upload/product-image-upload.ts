@@ -29,12 +29,13 @@ interface UploadingImage {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './product-image-upload.html',
   styleUrl: './product-image-upload.css',
-  viewProviders: [provideIcons({ lucideUpload ,lucideImage })],
+  viewProviders: [provideIcons({ lucideUpload, lucideImage })],
 })
 export class ProductImageUpload {
   dragActive = signal(false);
   images = signal<string[]>([]);
   uploadingImages = signal<UploadingImage[]>([]);
+  uploadedFiles: File[] = [];
 
   @Output() imagesChange = new EventEmitter<File[]>();
   private http = inject(HttpClient);
@@ -64,32 +65,6 @@ export class ProductImageUpload {
       input.value = ''; // reset
     }
   }
-
-  // processFiles(files: FileList) {
-  //   const validFiles = Array.from(files).filter((file) => {
-  //     const isImage = file.type.startsWith('image/');
-  //     const isSizeOk = file.size <= 10 * 1024 * 1024;
-  //     return isImage && isSizeOk;
-  //   });
-
-  //   validFiles.forEach((file) => {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       const preview = e.target.result as string;
-  //       const newImage: UploadingImage = {
-  //         id: uuidv4(),
-  //         file,
-  //         preview,
-  //         progress: 0,
-  //         status: 'uploading',
-  //       };
-  //       this.uploadingImages.update((list) => [...list, newImage]);
-  //       // this.simulateUpload(newImage);
-  //       this.simulateUpload(newImage);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  // }
   processFiles(files: FileList) {
     const validFiles = Array.from(files).filter((file) => {
       const isImage = file.type.startsWith('image/');
@@ -137,13 +112,35 @@ export class ProductImageUpload {
     setTimeout(() => {
       this.images.update((imgs) => {
         const updated = [...imgs, img.preview];
-        this.imagesChange.emit(imgs.map((_, i) => img.file)); 
+
+        // ✅ Add the actual file to uploadedFiles
+        this.uploadedFiles.push(img.file);
+
+        // ✅ Emit all uploaded files so far
+        this.imagesChange.emit(this.uploadedFiles);
+
         return updated;
       });
+
       this.uploadingImages.update((list) =>
         list.filter((item) => item.id !== img.id)
       );
     }, 500);
+
+    // setTimeout(() => {
+    //   this.images.update((imgs) => {
+    //     const updated = [...imgs, img.preview];
+    //     // this.imagesChange.emit(imgs.map((_, i) => img.file));
+    //     this.imagesChange.emit(
+    //       this.uploadingImages().map((img) => img.file) // ✅ يرجع ملفات فعلية
+    //     );
+
+    //     return updated;
+    //   });
+    //   this.uploadingImages.update((list) =>
+    //     list.filter((item) => item.id !== img.id)
+    //   );
+    // }, 500);
   }
 
   // Move to completed

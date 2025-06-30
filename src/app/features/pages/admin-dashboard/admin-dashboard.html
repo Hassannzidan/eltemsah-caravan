@@ -65,7 +65,7 @@
         >
           <div class="relative h-48 overflow-hidden rounded-t-lg">
             <img
-              [src]="product.images"
+              [src]="product.images[0]"
               [alt]="product.name"
               loading="lazy"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -145,7 +145,7 @@
         >
           <div class="w-full sm:w-32 h-48 sm:h-32">
             <img
-              [src]="product.images"
+              [src]="product.images[0]"
               [alt]="product.name"
               loading="lazy"
               class="w-full h-full object-cover"

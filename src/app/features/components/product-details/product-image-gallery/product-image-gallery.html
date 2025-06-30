@@ -2,6 +2,7 @@
   <!-- Main Image Display -->
   <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-slate-200">
     <img
+      *ngIf="images.length > 0"
       [src]="images[currentImageIndex]"
       [alt]="productName"
       class="w-full h-full object-cover"
@@ -9,21 +10,29 @@
   </div>
 
   <!-- Thumbnail Grid -->
-  <div class="grid grid-cols-3 gap-2">
+  <div class="grid grid-cols-3 gap-2"
+  >
     <button
-      *ngFor="let image of images; let index = index"
-      (click)="setCurrentImageIndex(index)"
+      *ngFor="let image of images; let i = index; trackBy: trackByFn"
+      (click)="setCurrentImageIndex(i)"
       class="aspect-[4/3] overflow-hidden rounded-lg border-2 transition-all"
       [ngClass]="{
-        'border-orange-500 ring-2 ring-orange-200': currentImageIndex === index,
-        'border-slate-200 hover:border-slate-300': currentImageIndex !== index
+        'border-orange-500 ring-2 ring-orange-200': currentImageIndex === i,
+        'border-slate-200 hover:border-slate-300': currentImageIndex !== i
       }"
+      
     >
+      
       <img
         [src]="image"
-        [alt]="productName + ' view ' + (index + 1)"
+        [alt]="productName + ' view ' + (i + 1)"
         class="w-full h-full object-cover"
       />
     </button>
+  </div>
+    <!-- ✅ Debug section (اختياري) -->
+  <div class="text-center text-sm text-gray-600 pt-2">
+    Current index: {{ currentImageIndex }} <br />
+    Current image: {{ images[currentImageIndex] }}
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductSpecification } from '../../components/product-details/product-specification/product-specification';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { productData } from '../../../data/products.data';
@@ -10,6 +10,8 @@ import { ProductInfo } from '../../components/product-details/product-info/produ
 import { ProductImageGallery } from '../../components/product-details/product-image-gallery/product-image-gallery';
 import { ProductService } from '../../../services/product/product.service';
 import { Product, type ProductSpecificationCategory } from '../../../data/product.types';
+import { NgIconsModule, provideIcons } from '@ng-icons/core';
+import { lucideArrowBigLeftDash } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-product-details',
@@ -22,13 +24,18 @@ import { Product, type ProductSpecificationCategory } from '../../../data/produc
     ProductCTA,
     TrustIndicators,
     RouterLink,
+    NgIconsModule
   ],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
+  viewProviders:[provideIcons({
+    lucideArrowBigLeftDash
+  })]
 })
 export class ProductDetails {
   productId: string | null = null;
   product: Product | null = null;
+  @Input() galleryPreviews: string[] = [];
 
   constructor(
     private route: ActivatedRoute,

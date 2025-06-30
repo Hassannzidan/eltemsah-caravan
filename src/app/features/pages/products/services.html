@@ -33,9 +33,12 @@
         />
       </div>
 
-      <ng-container *ngIf="filteredProducts.length === 0">
-        <app-no-result></app-no-result>
-      </ng-container>
+
+    <ng-container *ngIf="filteredProducts().length === 0">
+      <app-no-result></app-no-result>
+    </ng-container>
+
+
   </section>
 
 </div>

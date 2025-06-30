@@ -11,24 +11,27 @@
   ></div>
 
   <!-- Blur layer -->
-  <div class="absolute inset-0 backdrop-blur-sm" aria-hidden="true"></div>
+  <div class="absolute inset-0 backdrop-blur-xs font-semibold" aria-hidden="true"></div>
 
   <!-- Blue & Red gradient overlay -->
   <div
-    class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-red-800/30"
+    class="absolute inset-0 bg-gradient-to-br from-blue-900/75 via-blue-500/10 to-red-800/30"
     aria-hidden="true"
   ></div>
 
   <!-- Content -->
   <div class="relative container mx-auto px-4 sm:px-6 text-center z-10">
     <h1
-      class="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 drop-shadow-xl bg-gradient-to-r from-red-800 via-red-600 to-red-700 bg-clip-text text-transparent"
-    >
+      class="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 bg-gradient-to-r from-red-800 via-red-700 to-red-600 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]"
+
+      >
+      <!-- class="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 drop-shadow-xl bg-gradient-to-r from-red-800 via-red-600 to-red-700 bg-clip-text text-transparent" -->
       {{ 'productPage.hero.title' | translate }}
     </h1>
-    <p
-      class="text-base sm:text-xl max-w-md sm:max-w-3xl mx-auto leading-relaxed drop-shadow-md"
+    <p   class="text-base sm:text-xl max-w-md sm:max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-white"
+
     >
+    <!-- class="text-base sm:text-xl max-w-md sm:max-w-3xl mx-auto leading-relaxed drop-shadow-md" -->
       {{ 'productPage.hero.description' | translate }}
     </p>
   </div>
