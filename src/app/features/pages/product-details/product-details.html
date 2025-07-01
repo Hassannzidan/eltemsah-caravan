@@ -49,9 +49,9 @@
   </ng-template>
 </div> -->
 
-<div class="min-h-screen bg-slate-50">
+<div class="min-h-screen bg-slate-50 mt-10">
     <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-300 sticky top-14 z-10 mt-20 shadow-sm" aria-label="Back Navigation">
+    <!-- <nav class="bg-white border-b border-gray-300 sticky top-14 z-10 mt-20 shadow-sm" aria-label="Back Navigation">
       <div class="container mx-auto px-4 py-4">
         <a 
           [routerLink]="['/services']" 
@@ -62,7 +62,7 @@
           <span>Back to Services</span>
         </a>
       </div>
-    </nav>
+    </nav> -->
 
     <!-- Product Details -->
     <main *ngIf="product; else notFound" class="container mx-auto px-4 py-8">
@@ -98,8 +98,8 @@
           />
 
           <!-- CTA and Trust -->
-          <app-product-cta />
-          <app-trust-indicators />
+             <app-product-cta />
+             <app-trust-indicators />
         </section>
       </div>
     </main>
