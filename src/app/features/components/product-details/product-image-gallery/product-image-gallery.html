@@ -10,7 +10,7 @@
   </div>
 
   <!-- Thumbnail Grid -->
-  <div class="grid grid-cols-3 gap-2"
+  <!-- <div class="grid grid-cols-3 gap-2"
   >
     <button
       *ngFor="let image of images; let i = index; trackBy: trackByFn"
@@ -29,10 +29,62 @@
         class="w-full h-full object-cover"
       />
     </button>
-  </div>
-    <!-- ✅ Debug section (اختياري) -->
-  <!-- <div class="text-center text-sm text-gray-600 pt-2">
-    Current index: {{ currentImageIndex }} <br />
-    Current image: {{ images[currentImageIndex] }}
   </div> -->
+
+<!-- Thumbnails Carousel -->
+  <div class="relative">
+    <!-- Prev Button -->
+    <button
+      type="button"
+      (click)="scrollThumbnails('prev')"
+      class="absolute top-1/2 z-10 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 p-2 rounded-full shadow transition"
+      [class.left-2]="dir === 'ltr'"
+      [class.right-2]="dir === 'rtl'"
+    >
+      <span [innerHTML]="dir === 'ltr' ? '&#8592;' : '&#8594;'"></span>
+    </button>
+
+    <!-- Next Button -->
+    <button
+      type="button"
+      (click)="scrollThumbnails('next')"
+      class="absolute top-1/2 z-10 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 p-2 rounded-full shadow transition"
+      [class.right-2]="dir === 'ltr'"
+      [class.left-2]="dir === 'rtl'"
+    >
+      <span [innerHTML]="dir === 'ltr' ? '&#8594;' : '&#8592;'"></span>
+    </button>
+
+    <!-- Scrollable Thumbnails -->
+    <div
+      class="flex gap-2 overflow-x-auto no-scrollbar px-1 py-2 scroll-smooth"
+      #thumbnailContainer
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
+      (touchend)="onTouchEnd()"
+      [dir]="dir"
+    >
+      <button
+        *ngFor="let image of images; let i = index; trackBy: trackByFn"
+        (click)="setCurrentImageIndex(i)"
+        class="flex-shrink-0 w-28 md:w-32 aspect-[4/3] overflow-hidden rounded-lg border-2 transition-all"
+        [ngClass]="{
+          'border-orange-500 ring-2 ring-orange-200': currentImageIndex === i,
+          'border-slate-200 hover:border-slate-300': currentImageIndex !== i
+        }"
+      >
+        <img
+          [src]="image"
+          [alt]="productName + ' view ' + (i + 1)"
+          class="w-full h-full object-cover"
+        />
+      </button>
+    </div>
+  </div>
 </div>
+
+<!-- ✅ Debug section (اختياري) -->
+<!-- <div class="text-center text-sm text-gray-600 pt-2">
+Current index: {{ currentImageIndex }} <br />
+Current image: {{ images[currentImageIndex] }}
+</div> -->

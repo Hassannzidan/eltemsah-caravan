@@ -1,7 +1,6 @@
- <section class="p-6 rounded-lg border border-gray-300/90 bg-white text-gray-900 shadow-sm">
+ <!-- <section class="p-6 rounded-lg border border-gray-300/90 bg-white text-gray-900 shadow-sm">
       <div class="text-2xl font-semibold leading-none tracking-tight">
         <div class="text-sm text-gray-900 flex items-center gap-2">
-          <!-- <Shield class="w-5 h-5 text-blue-500" /> -->
           <span class="">  
             <ng-icon name="lucideShield" class="inline-block w-5 h-5" aria-hidden="true">
             </ng-icon>
@@ -17,4 +16,30 @@
             </div>
         </div>
       </div>
+</section> -->
+<section class="rounded-lg border border-gray-300/80 bg-white shadow-sm my-5">
+  <!-- Title -->
+  <div class="flex items-center gap-2 p-4 sm:p-6 text-xl sm:text-2xl font-semibold text-slate-800">
+    <span class="text-orange-500/80 flex justify-center" aria-hidden="true">
+      <ng-icon name="lucideShield" class="w-5 h-5"></ng-icon>
+    </span>
+    Features Included
+  </div>
+
+  <!-- Feature List -->
+  <div class="px-4 pb-4 sm:px-6 sm:pb-6">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
+      <div 
+        *ngFor="let feature of features" 
+        class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg"
+      >
+      <span class="w-4 h-4 text-green-500 shrink-0">
+        <ng-icon name="lucideEye" />
+      </span>
+        <span class="text-slate-800 text-sm leading-tight">
+          {{ feature }}
+        </span>
+      </div>
+    </div>
+  </div>
 </section>

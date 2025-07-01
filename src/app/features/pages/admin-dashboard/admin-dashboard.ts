@@ -21,6 +21,7 @@ import { AddProductDialog } from '../../components/admin-components/add-product-
 import { ProductService } from '../../../services/product/product.service';
 import { Product } from '../../../data/product.types';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ConfirmDeleteDialog } from "../../components/admin-components/confirm-delete-dialog/confirm-delete-dialog";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -31,7 +32,8 @@ import { AuthService } from '../../../services/auth/auth.service';
     SearchFilterBar,
     RouterModule,
     AddProductDialog,
-  ],
+    ConfirmDeleteDialog
+],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
   viewProviders: provideIcons({
@@ -52,6 +54,10 @@ export class AdminDashboard {
   selectedCategory = signal('all');
   statusFilter = signal('all');
   viewMode = signal<'grid' | 'list'>('grid');
+
+  // for confirmation dialog
+  productToDelete = signal<Product | null>(null);
+
 
   // Dialogs and Editing
   editingProduct = signal<Product | null>(null);
@@ -155,6 +161,16 @@ export class AdminDashboard {
     this.editingProduct.set(null);
     this.isFormOpen.set(false);
   }
+
+  //for delete dialog
+  confirmFinalDelete() {
+  const product = this.productToDelete();
+  if (product && product._id) {
+    this.deleteProduct(product._id);
+    this.productToDelete.set(null);
+  }
+}
+
 
   logout() {
     this.authService.logout();          // يحدث signal ويشيل التوكن

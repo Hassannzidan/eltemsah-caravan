@@ -20,7 +20,6 @@ import { ProductService } from '../../../../../../services/product/product.servi
     SectionToggle,
     FeatureManager,
     SpecificationsManager,
-    CustomizationManager,
   ],
   templateUrl: './product-details-form.html',
   styleUrl: './product-details-form.css',
@@ -60,17 +59,17 @@ export class ProductDetailsForm {
   }
 
   handleAddFeature(sectionType: 'benefits' | 'features', content: string) {
-  const feature: ProductFeature = {
-    id: crypto.randomUUID(),
-    sectionId: sectionType,
-    content,
-    isVisible: true,
-    order: this.productDetails.features.length + 1,
-  };
+    const feature: ProductFeature = {
+      id: crypto.randomUUID(),
+      sectionId: sectionType,
+      content,
+      isVisible: true,
+      order: this.productDetails.features.length + 1,
+    };
 
-  this.productDetails.features.push(feature);
-  this.productDetailsChange.emit(structuredClone(this.productDetails));
-}
+    this.productDetails.features.push(feature);
+    this.productDetailsChange.emit(structuredClone(this.productDetails));
+  }
 
   handleUpdateFeature(
     sectionType: 'benefits' | 'features',
@@ -92,24 +91,32 @@ export class ProductDetailsForm {
       section.isVisible = !section.isVisible;
       this.productDetailsChange.emit(structuredClone(this.productDetails));
     }
-
-    // ابعت التحديث للـ backend
-    // this.productService
-    //   .updateProductSections(this.productId, this.productDetails.sections)
-    //   .subscribe();
   }
 
+  // for the app specification manager
   onAddCategory(category: ProductSpecificationCategory) {
-    // Send category to backend using ProductService
-    // this.productService.addCategory(this.productId, category).subscribe();
+    this.productDetails.specifications.push(category);
+    this.productDetailsChange.emit(structuredClone(this.productDetails));
   }
 
   onAddSpecification(event: { categoryId: string; spec: any }) {
-    // this.productService.addSpecification(this.productId, event.categoryId, event.spec).subscribe();
+    const category = this.productDetails.specifications.find(
+      (cat) => cat.id === event.categoryId
+    );
+    if (category) {
+      category.specifications.push(event.spec);
+      this.productDetailsChange.emit(structuredClone(this.productDetails));
+    }
   }
 
   onUpdateCategory(event: { id: string; title: string }) {
-    // this.productService.updateCategory(this.productId, event.id, event.title).subscribe();
+    const category = this.productDetails.specifications.find(
+      (cat) => cat.id === event.id
+    );
+    if (category) {
+      category.title = event.title;
+      this.productDetailsChange.emit(structuredClone(this.productDetails));
+    }
   }
 
   onUpdateSpecification(event: {
@@ -118,15 +125,35 @@ export class ProductDetailsForm {
     key: string;
     value: string;
   }) {
-    // this.productService.updateSpecification(this.productId, event.categoryId, event.specId, event.key, event.value).subscribe();
+    const category = this.productDetails.specifications.find(
+      (cat) => cat.id === event.categoryId
+    );
+    if (category) {
+      const spec = category.specifications.find((s) => s.id === event.specId);
+      if (spec) {
+        spec.key = event.key;
+        spec.value = event.value;
+        this.productDetailsChange.emit(structuredClone(this.productDetails));
+      }
+    }
   }
 
   onDeleteCategory(categoryId: string) {
-    // this.productService.deleteCategory(this.productId, categoryId).subscribe();
+    this.productDetails.specifications =
+      this.productDetails.specifications.filter((cat) => cat.id !== categoryId);
+    this.productDetailsChange.emit(structuredClone(this.productDetails));
   }
 
   onDeleteSpecification(event: { categoryId: string; specId: string }) {
-    // this.productService.deleteSpecification(this.productId, event.categoryId, event.specId).subscribe();
+    const category = this.productDetails.specifications.find(
+      (cat) => cat.id === event.categoryId
+    );
+    if (category) {
+      category.specifications = category.specifications.filter(
+        (s) => s.id !== event.specId
+      );
+      this.productDetailsChange.emit(structuredClone(this.productDetails));
+    }
   }
 
   isSectionVisible(sectionId: string): boolean {

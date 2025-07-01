@@ -11,13 +11,14 @@
   <!-- Add Category -->
   <div class="flex gap-2 mb-6">
     <input
+      (keydown.enter)="handleAddCategory(); $event.preventDefault()" 
       class="border border-gray-400/80 rounded px-3 py-2 flex-1 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-800"
       [disabled]="disabled"
       [(ngModel)]="newCategory"
-      (keydown.enter)="handleAddCategory()"
       placeholder="Add new specification category..."
       aria-label="New category name"
-    />
+      />
+      <!-- (keydown.enter)="handleAddCategory(); $event.preventDefault()" -->
 
     <button
       class="bg-red-800 text-white px-3 rounded-md hover:bg-red-700 transition"
@@ -49,9 +50,9 @@
             class="border border-gray-400/80 rounded px-2 py-1 flex-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-800/30"
             [disabled]="disabled"
             [(ngModel)]="editCategoryName"
-            (keydown.enter)="saveEditCategory()"
             aria-label="Edit category title"
-          />
+            (keydown.enter)="saveEditCategory();"
+            />
         </ng-container>
         <ng-template #viewCategory>
           <h4
@@ -68,13 +69,19 @@
         <!-- <input type="checkbox" [checked]="category.isVisible" (change)="toggleCategoryVisibility(category.id)" /> -->
         <ng-container *ngIf="editingCategory === category.id; else viewControls">
 
-          <button (click)="saveEditCategory()" class="p-1 rounded hover:bg-green-100" aria-label="Save category" >
+          <button
+            type="button" 
+            (click)="saveEditCategory()" 
+            class="p-1 rounded hover:bg-green-100" aria-label="Save category" >
             <span class="text-xl text-gray-500">
               <ng-icon class="h-5 w-5" name="lucideSave" />
             </span>
           </button>
 
-          <button (click)="editingCategory = null"  class="p-1 rounded hover:bg-gray-100" aria-label="Cancel edit">
+          <button
+            type="button" 
+            (click)="editingCategory = null"  
+            class="p-1 rounded hover:bg-gray-100" aria-label="Cancel edit">
             <span class="text-xl text-gray-500">
               <ng-icon class="h-5 w-5" name="lucideX" />
             </span>
@@ -83,13 +90,19 @@
         </ng-container>
 
         <ng-template #viewControls>
-          <button (click)="startEditCategory(category)" class="p-1 rounded " aria-label="Edit category">
+          <button
+            type="button" 
+            (click)="startEditCategory(category)" 
+            class="p-1 rounded " aria-label="Edit category">
             <span class="h-5 w-5 border border-gray-300 rounded-md hover:bg-red-100/80 px-1.5 py-1.5">
               <ng-icon name="lucideSquarePen" />
             </span>
           </button>
           
-          <button (click)="deleteCategory(category.id)" class="p-1 rounded  " aria-label="Delete category" >
+          <button
+            type="button" 
+            (click)="deleteCategory(category.id)" 
+            class="p-1 rounded  " aria-label="Delete category" >
              <span class="h-5 w-5 border border-gray-300 rounded-md hover:bg-red-100/80 px-1.5 py-1.5">
               <ng-icon name="lucideTrash2" />
             </span>
@@ -109,6 +122,9 @@
         (ngModelChange)="setSpecKey(category.id, $event)"
         placeholder="Specification name..."
         aria-label="Specification key"
+        name="specKey-{{category.id}}"  
+        id="specKey-{{category.id}}" 
+        (keydown.enter)="$event.preventDefault()" 
       />
 
       <!-- Value -->
@@ -118,14 +134,16 @@
           [disabled]="disabled"
           [ngModel]="getSpecValue(category.id)"
           (ngModelChange)="setSpecValue(category.id, $event)"
-          (keydown.enter)="handleAddSpecification(category.id)"
           placeholder="Value..."
           aria-label="Specification value"
-        />
+          name="specValue-{{category.id}}"
+          id="specValue-{{category.id}}"
+          (keydown.enter)="handleAddSpecification(category.id); $event.preventDefault()" 
+          />
         <button
           class="bg-indigo-600 text-white rounded w-8 h-8 flex items-center justify-center hover:bg-indigo-500 transition"
           type="button"
-          (click)="handleAddSpecification(category.id)"
+          (click)="onAddSpecClick(category.id)"
           aria-label="Add specification"
         >
           <span class="w-5 h-5">
@@ -159,10 +177,10 @@
                   class="border rounded px-2 py-1 text-sm flex-1"
                   [disabled]="disabled"
                   [(ngModel)]="editSpecData.value"
-                  (keydown.enter)="saveEditSpec(category.id)"
                   placeholder="Value"
                   aria-label="Edit spec value"
-                />
+                  />
+                  <!-- (keydown.enter)="saveEditSpec(category.id);$event.preventDefault() " -->
               </div>
           </ng-container>
 
@@ -188,15 +206,20 @@
         <!-- Spec Controls -->
         <div class="flex gap-1 items-center">
           <ng-container *ngIf="editingSpec === spec.id; else viewSpecControls">
-            <button (click)="saveEditSpec(category.id)" class="p-1 hover:bg-green-100 rounded" aria-label="Save spec">
+            <button
+              type="button" 
+              (click)="saveEditSpec(category.id)" class="p-1 hover:bg-green-100 rounded" aria-label="Save spec">
               <ng-icon name="lucideSave" class="w-5 h-5" />
             </button>
-            <button (click)="editingSpec = null" class="p-1 hover:bg-gray-100 rounded" aria-label="Cancel edit">
+            <button 
+              type="button"
+              (click)="editingSpec = null" class="p-1 hover:bg-gray-100 rounded" aria-label="Cancel edit">
               <ng-icon name="lucideX" class="w-5 h-5" />
             </button>
           </ng-container>
           <ng-template #viewSpecControls>
             <button
+              type="button"
               (click)="startEditSpec(spec.id, spec.key, spec.value)"
               class="p-1 hover:bg-red-100/70 rounded"
               aria-label="Edit specification"
@@ -204,6 +227,7 @@
               <ng-icon name="lucidePencil" class="w-5 h-5" />
             </button>
             <button
+              type="button"
               (click)="deleteSpecification(category.id, spec.id)"
               class="p-1 hover:bg-red-100/70 rounded"
               aria-label="Delete specification"

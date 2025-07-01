@@ -34,7 +34,14 @@
               (cancel)="isFormOpen.set(false)"
               (closeDialog)="isFormOpen.set(false)"
               (saveSuccess)="addCreatedProduct($event)"
-            ></app-add-product-dialog>
+            />
+            <app-confirm-delete-dialog
+            *ngIf="productToDelete()"
+            [productName]="productToDelete()?.name ?? ''"
+            (cancel)="productToDelete.set(null)"
+            (confirmDelete)="confirmFinalDelete()"
+          />
+
           </div>
         </div>
       </div>
@@ -127,7 +134,7 @@
                 <button
                   aria-label="Delete product"
                   class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800 transition-colors"
-                  (click)="deleteProduct(product._id)"
+                  (click)="productToDelete.set(product)"
                 >
                   <ng-icon name="lucideTrash2" class="w-4 h-4 mx-auto"></ng-icon>
                 </button>
@@ -188,7 +195,7 @@
                 <button
                   aria-label="Delete product"
                   class="h-10 w-10 border border-gray-300 bg-white rounded-md hover:bg-red-100 hover:text-red-800"
-                  (click)="deleteProduct(product._id)"
+                  (click)="productToDelete.set(product)"
                 >
                   <ng-icon name="lucideTrash2" class="w-4 h-4 mx-auto"></ng-icon>
                 </button>

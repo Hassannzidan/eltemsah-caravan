@@ -8,7 +8,7 @@ import { FaqSection } from "../../components/contact-components/faq-section/faq-
 
 @Component({
   selector: 'app-contact',
-  imports: [HeroSection, ContactCards, FindUs, RequestQoute, FaqSection],
+  imports: [HeroSection, ContactCards, FindUs],
   templateUrl: './contact.html',
   styleUrl: './contact.css'
 })

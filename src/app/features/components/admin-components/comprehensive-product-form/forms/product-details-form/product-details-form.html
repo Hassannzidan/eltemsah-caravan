@@ -1,30 +1,30 @@
 <div class="space-y-6">
+  
+  <app-section-toggle
+    [sections]="productDetails.sections"
+    (onToggleSection)="toggleSectionVisibility($event)"
+  />
 
- <app-section-toggle
-  [sections]="productDetails.sections"
-  (onToggleSection)="toggleSectionVisibility($event)"
-/>
+  <app-feature-manager
+    title="Features Included"
+    iconName="lucideShield"
+    [features]="productDetails.features"
+    [disabled]="!isSectionVisible('features')"
+    (toggleFeature)="handleToggleFeature('features', $event)"
+    (addFeature)="handleAddFeature('features', $event)"
+    (updateFeature)="handleUpdateFeature('features', $event.id, $event.content)"
+    (deleteFeature)="handleDeleteFeature('features', $event)"
+  />
 
-<app-feature-manager
-  title="Features Included"
-  iconName="lucideShield"
-  [features]="productDetails.features"
-  [disabled]="!isSectionVisible('features')"
-  (toggleFeature)="handleToggleFeature('features', $event)"
-  (addFeature)="handleAddFeature('features', $event)"
-  (updateFeature)="handleUpdateFeature('features', $event.id, $event.content)"
-  (deleteFeature)="handleDeleteFeature('features', $event)"
-/>
-
-<app-specifications-manager
-  [specifications]="productDetails.specifications"
-  [disabled]="!isSectionVisible('specifications')"
-  (addCategory)="onAddCategory($event)"
-  (addSpecification)="onAddSpecification($event)"
-  (updateCategory)="onUpdateCategory($event)"
-  (updateSpecification)="onUpdateSpecification($event)"
-  (deleteCategoryEvent)="onDeleteCategory($event)"
-  (deleteSpecificationEvent)="onDeleteSpecification($event)"
-></app-specifications-manager>
+  <app-specifications-manager
+    [specifications]="productDetails.specifications"
+    [disabled]="!isSectionVisible('specifications')"
+    (addCategory)="onAddCategory($event)"
+    (addSpecification)="onAddSpecification($event)"
+    (updateCategory)="onUpdateCategory($event)"
+    (updateSpecification)="onUpdateSpecification($event)"
+    (deleteCategoryEvent)="onDeleteCategory($event)"
+    (deleteSpecificationEvent)="onDeleteSpecification($event)"
+  ></app-specifications-manager>
 
 </div>

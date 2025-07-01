@@ -1,6 +1,6 @@
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { Component, Input } from '@angular/core';
-import { lucideShield } from '@ng-icons/lucide';
+import { lucideEye, lucideShield } from '@ng-icons/lucide';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [NgIconsModule,CommonModule],
   templateUrl: './product-features.html',
   styleUrl: './product-features.css',
-  viewProviders:[provideIcons({lucideShield})]
+  viewProviders:[provideIcons({lucideShield,lucideEye})]
 })
 export class ProductFeatures {
   @Input() features: string[] = [];

@@ -6,7 +6,7 @@ import { SectionToggle } from '../section-toggle/section-toggle';
 
 @Component({
   selector: 'app-product-details-manager',
-  imports: [CommonModule, SectionToggle, FeatureManager],
+  imports: [CommonModule],
   templateUrl: './product-details-manager.html',
   styleUrl: './product-details-manager.css'
 })

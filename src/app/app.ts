@@ -28,7 +28,6 @@ import { LoaderService } from './services/spinner/loader.service';
     MatSnackBarModule,
     TranslateModule,
     ChatBot,
-    Spinner,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

@@ -132,6 +132,8 @@ export class ComprehensiveProductForm implements OnInit {
   handleSubmit() {
     this.isLoading = true;
 
+        console.log('📦 productDetails.specifications:', this.productDetails()['specifications']);
+
     // BiscProduct Data
     const formData = new FormData();
     formData.append('name', this.formData().name);

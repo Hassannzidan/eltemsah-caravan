@@ -112,7 +112,7 @@
       <div class="aspect-square relative">
         <img [src]="image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300"></div>
-        <button
+        <!-- <button
           type="button"
           aria-label="Remove image"
           class="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full 
@@ -121,7 +121,21 @@
           (click)="removeImage(i)"
         >
           ✕
+        </button> -->
+       <button
+          type="button"
+          aria-label="Remove image"
+          class="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full 
+                flex items-center justify-center
+                opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                transition-transform hover:scale-110"
+          (click)="removeImage(i)"
+        >
+          ✕
         </button>
+
+
+      
       </div>
     </div>
 

@@ -21,7 +21,7 @@ export const routes: Routes = [
     // canActivate: [authGuard] 
   },
   { path: 'verify-otp', component: OtpComponent , title: 'Verification Step' },
-  { path: 'product/:id', component: ProductDetails },
+  { path: 'product/:id', component: ProductDetails , title: 'Product Detials'},
   {
     path: 'admin/product-details',
     component: ProductDetails,

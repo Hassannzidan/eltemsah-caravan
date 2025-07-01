@@ -19,7 +19,6 @@ export interface ProductSpecificationCategory {
   icon: string;
   color: string;
   specifications: { id: string; key: string; value: string; isVisible: boolean }[];
-  isVisible: boolean;
 }
 
 export interface CustomizationCategory {
