@@ -15,13 +15,13 @@ import {
   lucideSquarePen,
   lucideTrash2,
 } from '@ng-icons/lucide';
-import { SearchFilterBar } from '../../products-components/search-filter-bar/search-filter-bar';
+import { SearchFilterBar } from '../products/components/search-filter-bar/search-filter-bar';
 import { RouterModule, Router } from '@angular/router';
-import { ProductService } from '../../../services/product/product.service';
-import { Product } from '../../../data/product.types';
-import { AuthService } from '../../../services/auth/auth.service';
-import { AddProductDialog } from '../../admin/components/add-product-dialog/add-product-dialog';
-import { ConfirmDeleteDialog } from '../../admin/components/confirm-delete-dialog/confirm-delete-dialog';
+import { ProductService } from '../../services/product/product.service';
+import { Product } from '../../data/product.types';
+import { AuthService } from '../../services/auth/auth.service';
+import { AddProductDialog } from './components/add-product-dialog/add-product-dialog';
+import { ConfirmDeleteDialog } from './components/confirm-delete-dialog/confirm-delete-dialog';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -34,8 +34,8 @@ import { ConfirmDeleteDialog } from '../../admin/components/confirm-delete-dialo
     AddProductDialog,
     ConfirmDeleteDialog
 ],
-  templateUrl: './admin-dashboard.html',
-  styleUrl: './admin-dashboard.css',
+  templateUrl: './admin-dashboard.page.html',
+  styleUrl: './admin-dashboard.page.css',
   viewProviders: provideIcons({
     lucideTrash2,
     lucideSquarePen,

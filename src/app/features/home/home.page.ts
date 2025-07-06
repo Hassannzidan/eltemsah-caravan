@@ -1,14 +1,14 @@
-import { LoaderService } from './../../../services/spinner/loader.service';
+import { LoaderService } from '../../services/spinner/loader.service';
 import { Component } from '@angular/core';
-import { VehicleSolutions } from '../../home/components/vehicle-solutions/vehicle-solutions';
-import { TrustedSponsors } from '../../home/components/trusted-sponsors/trusted-sponsors';
-import { CompanyServices } from '../../home/components/company-products/company-services';
-import { VideoShowcase } from '../../home/components/video-showcase/video-showcase';
-import { RequestQoute } from '../../home/components/request-qoute/request-qoute';
+import { VehicleSolutions } from './components/vehicle-solutions/vehicle-solutions';
+import { TrustedSponsors } from './components/trusted-sponsors/trusted-sponsors';
+import { CompanyServices } from './components/company-products/company-services';
+import { VideoShowcase } from './components/video-showcase/video-showcase';
+import { RequestQoute } from './components/request-qoute/request-qoute';
 import { CommonModule } from '@angular/common';
 import { NgIconsModule } from '@ng-icons/core';
-import { HeroCarousel } from '../../home/components/hero-carousel/hero-carousel';
-import { Brochure } from '../../home/components/brochure/brochure';
+import { HeroCarousel } from './components/hero-carousel/hero-carousel';
+import { Brochure } from './components/brochure/brochure';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +23,8 @@ import { Brochure } from '../../home/components/brochure/brochure';
     NgIconsModule,
     HeroCarousel,
   ],
-  templateUrl: './home.html',
-  styleUrl: './home.css',
+  templateUrl: './home.page.html',
+  styleUrl: './home.page.css',
 })
 export class Home {
   images: string[] = [

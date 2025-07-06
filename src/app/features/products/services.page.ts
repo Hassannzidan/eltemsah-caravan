@@ -1,19 +1,19 @@
 import { Component, computed, signal } from '@angular/core';
-import { HeroSectionProducts } from "../../products-components/hero-section-products/hero-section-products";
-import { SearchFilterBar } from "../../products-components/search-filter-bar/search-filter-bar";
-import { ProductGrid } from "../../products-components/product-grid/product-grid";
-import { ProductList } from "../../products-components/product-list/product-list";
-import { services, allProducts, allCategories, Service } from '../../../data/products.data';
+import { HeroSectionProducts } from "./components/hero-section-products/hero-section-products";
+import { SearchFilterBar } from "./components/search-filter-bar/search-filter-bar";
+import { ProductGrid } from "./components/product-grid/product-grid";
+import { ProductList } from "./components/product-list/product-list";
+import { services, allProducts, allCategories, Service } from '../../data/products.data';
 import { CommonModule } from '@angular/common';
-import { NoResult } from "../../products-components/no-result/no-result";
-import type { Product } from '../../../data/product.types';
-import { ProductService } from '../../../services/product/product.service';
+import { NoResult } from "./components/no-result/no-result";
+import { Product } from '../../data/product.types';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-services',
   imports: [SearchFilterBar, ProductGrid, ProductList, CommonModule, HeroSectionProducts, NoResult],
-  templateUrl: './services.html',
-  styleUrl: './services.css'
+  templateUrl: './services.page.html',
+  styleUrl: './services.page.css'
 })
 export class Services { 
   searchTerm = signal('');

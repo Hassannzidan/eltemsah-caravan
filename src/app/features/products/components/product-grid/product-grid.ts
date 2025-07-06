@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { allCategories, allProducts, services, type Product, type Service } from '../../../data/products.data';
+import { allCategories, allProducts, services, type Product, type Service } from '../../../../data/products.data';
 
 
 

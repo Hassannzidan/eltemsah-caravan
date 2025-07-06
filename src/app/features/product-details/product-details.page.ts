@@ -1,17 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { ProductSpecification } from '../../product-details/product-specification/product-specification';
+import { ProductSpecification } from './components/product-specification/product-specification';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { productData } from '../../../data/products.data';
 import { CommonModule } from '@angular/common';
-import { TrustIndicators } from '../../product-details/trust-indicators/trust-indicators';
-import { ProductCTA } from '../../product-details/product-cta/product-cta';
-import { ProductFeatures } from '../../product-details/product-features/product-features';
-import { ProductInfo } from '../../product-details/product-info/product-info';
-import { ProductImageGallery } from '../../product-details/product-image-gallery/product-image-gallery';
-import { ProductService } from '../../../services/product/product.service';
-import { Product, type ProductSpecificationCategory } from '../../../data/product.types';
+import { ProductCTA } from './components/product-cta/product-cta';
+import { ProductFeatures } from './components/product-features/product-features';
+import { ProductInfo } from './components/product-info/product-info';
+import { ProductImageGallery } from './components/product-image-gallery/product-image-gallery';
+import { Product, type ProductSpecificationCategory } from '../../data/product.types';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { lucideArrowBigLeftDash } from '@ng-icons/lucide';
+import { TrustIndicators } from './components/trust-indicators/trust-indicators';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -26,8 +25,8 @@ import { lucideArrowBigLeftDash } from '@ng-icons/lucide';
     RouterLink,
     NgIconsModule
   ],
-  templateUrl: './product-details.html',
-  styleUrl: './product-details.css',
+  templateUrl: './product-details.page.html',
+  styleUrl: './product-details.page.css',
   viewProviders:[provideIcons({
     lucideArrowBigLeftDash
   })]
