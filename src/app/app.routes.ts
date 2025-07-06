@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { Home } from './features/pages/home/home';
-import { About } from './features/pages/about/about';
+import { About } from './features/about/components/about.page';
 import { Contact } from './features/pages/contact/contact';
 import { Services } from './features/pages/products/services';
-import { Login } from './features/components/auth-components/login';
+import { Login } from './features/auth/components/auth-components/login';
 import { AdminDashboard } from './features/pages/admin-dashboard/admin-dashboard';
 import { ProductDetails } from './features/pages/product-details/product-details';
-import { OtpComponent } from './features/components/auth-components/otp-component/otp-component';
+import { OtpComponent } from './features/auth/components/auth-components/otp-component/otp-component';
 import { authGuard } from './services/auth/auth.guard';
 
 export const routes: Routes = [

@@ -1,11 +1,11 @@
 import { Component, computed, signal } from '@angular/core';
-import { HeroSectionProducts } from "../../components/products-components/hero-section-products/hero-section-products";
-import { SearchFilterBar } from "../../components/products-components/search-filter-bar/search-filter-bar";
-import { ProductGrid } from "../../components/products-components/product-grid/product-grid";
-import { ProductList } from "../../components/products-components/product-list/product-list";
+import { HeroSectionProducts } from "../../products-components/hero-section-products/hero-section-products";
+import { SearchFilterBar } from "../../products-components/search-filter-bar/search-filter-bar";
+import { ProductGrid } from "../../products-components/product-grid/product-grid";
+import { ProductList } from "../../products-components/product-list/product-list";
 import { services, allProducts, allCategories, Service } from '../../../data/products.data';
 import { CommonModule } from '@angular/common';
-import { NoResult } from "../../components/products-components/no-result/no-result";
+import { NoResult } from "../../products-components/no-result/no-result";
 import type { Product } from '../../../data/product.types';
 import { ProductService } from '../../../services/product/product.service';
 

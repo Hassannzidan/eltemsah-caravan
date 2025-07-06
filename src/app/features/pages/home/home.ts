@@ -1,14 +1,14 @@
 import { LoaderService } from './../../../services/spinner/loader.service';
 import { Component } from '@angular/core';
-import { VehicleSolutions } from '../../components/home-components/vehicle-solutions/vehicle-solutions';
-import { TrustedSponsors } from '../../components/home-components/trusted-sponsors/trusted-sponsors';
-import { CompanyServices } from '../../components/home-components/company-services/company-services';
-import { VideoShowcase } from '../../components/home-components/video-showcase/video-showcase';
-import { Brochure } from '../../components/home-components/brochure/brochure';
-import { RequestQoute } from '../../components/home-components/request-qoute/request-qoute';
+import { VehicleSolutions } from '../../home/components/vehicle-solutions/vehicle-solutions';
+import { TrustedSponsors } from '../../home/components/trusted-sponsors/trusted-sponsors';
+import { CompanyServices } from '../../home/components/company-products/company-services';
+import { VideoShowcase } from '../../home/components/video-showcase/video-showcase';
+import { RequestQoute } from '../../home/components/request-qoute/request-qoute';
 import { CommonModule } from '@angular/common';
 import { NgIconsModule } from '@ng-icons/core';
-import { HeroCarousel } from '../../components/home-components/hero-carousel/hero-carousel';
+import { HeroCarousel } from '../../home/components/hero-carousel/hero-carousel';
+import { Brochure } from '../../home/components/brochure/brochure';
 
 @Component({
   selector: 'app-home',

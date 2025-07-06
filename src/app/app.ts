@@ -13,9 +13,8 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './services/language/language.service';
-import { ChatBot } from './features/components/chat-bot/chat-bot';
+import { ChatBot } from './features/chat-bot/chat-bot';
 import { filter } from 'rxjs';
-import { Spinner } from './features/layout/spinner/spinner';
 import { LoaderService } from './services/spinner/loader.service';
 
 @Component({

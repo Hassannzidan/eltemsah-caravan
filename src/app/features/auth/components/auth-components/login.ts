@@ -12,7 +12,7 @@ import { RouterModule, Router } from '@angular/router';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { featherEye, featherEyeOff } from '@ng-icons/feather-icons';
 import { TranslateModule } from '@ngx-translate/core';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../../environments/environment.prod';
 import {
   lucideEye,
   lucideEyeClosed,

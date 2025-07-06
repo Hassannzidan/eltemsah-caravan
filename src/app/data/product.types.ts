@@ -18,7 +18,8 @@ export interface ProductSpecificationCategory {
   title: string;
   icon: string;
   color: string;
-  specifications: { id: string; key: string; value: string; isVisible: boolean }[];
+  specifications: { id: string; key: string; value: string;isVisible: boolean}[];
+  isVisible: boolean;
 }
 
 export interface CustomizationCategory {
@@ -33,6 +34,7 @@ export interface ProductData {
   sections: ProductSection[];
   features: ProductFeature[];
   specifications: ProductSpecificationCategory[];
+
 }
 
 export interface Product {

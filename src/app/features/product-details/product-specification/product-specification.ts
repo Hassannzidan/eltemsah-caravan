@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, signal } from '@angular/core';
-import type { ProductSpecificationCategory } from '../../../../data/product.types';
+import type { ProductSpecificationCategory } from '../../../data/product.types';
 
 @Component({
   selector: 'app-product-specification',
