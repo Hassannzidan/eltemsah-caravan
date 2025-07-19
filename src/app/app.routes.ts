@@ -6,7 +6,7 @@ import { Services } from './features/products/services.page';
 import { Login } from './features/auth/components/auth-components/login';
 import { ProductDetails } from './features/product-details/product-details.page';
 import { OtpComponent } from './features/auth/components/auth-components/otp-component/otp-component';
-import { authGuard } from './services/auth/auth.guard';
+import { authGuard } from './core/services/auth/auth.guard';
 import { AdminDashboard } from './features/admin/admin-dashboard.page';
 
 export const routes: Routes = [

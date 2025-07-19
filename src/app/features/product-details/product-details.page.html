@@ -1,71 +1,7 @@
-<!-- <div class="min-h-screen bg-slate-50">
-  <div class="bg-white border-b sticky top-0 z-10 mt-20">
-    <div class="container mx-auto px-4 py-4">
-      <a [routerLink]='"/services"' class="cursor-pointer inline-flex items-center text-slate-600 hover:text-red-600 transition-colors border rounded-lg p-2 hover:bg-red-100 font-semibold">
-        <span class="w-5 h-5 text-2xl text-slate-800 flex flex-col justify-center align-middle items-center">
-          <ng-icon name="lucideArrowBigLeftDash" />
-        </span> 
-        Back to Services
-      </a>
-    </div>
-  </div>
-
-  <div *ngIf="product; else notFound" class="container mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <app-product-image-gallery [images]="product.images" [productName]="product.name" />
-
-      <div class="space-y-6">
-        <app-product-info 
-          [name]="product.name"
-          [category]="product.category"
-          [subcategory]="product.subcategory"
-          [longDescription]="product.description" />
-
-          <div class="mt-5">
-
-          </div>
-         <app-product-features 
-          *ngIf="isSectionVisible('features')"
-            [features]="features" />
-        <app-product-specification
-          [specifications]="getFlatSpecifications(product.productDetails?.specifications)"
-          *ngIf="isSectionVisible('specifications')"
-        />      
-        <app-product-cta />
-        <app-trust-indicators />
-      
-      </div>
-    </div>
-  </div>
-
-  
-  <ng-template #notFound>
-    <div class="min-h-screen flex items-center justify-center">
-      <div class="text-center">
-        <h1 class="text-2xl font-bold text-slate-900 mb-4">Product Not Found</h1>
-        <a routerLink="/services" class="text-red-600 hover:text-red-700 cursor-pointer">← Back to Services</a>
-      </div>
-    </div>
-  </ng-template>
-</div> -->
-
-<div class="min-h-screen bg-slate-50 mt-10">
-    <!-- Navigation -->
-    <!-- <nav class="bg-white border-b border-gray-300 sticky top-14 z-10 mt-20 shadow-sm" aria-label="Back Navigation">
-      <div class="container mx-auto px-4 py-4">
-        <a 
-          [routerLink]="['/services']" 
-          class="inline-flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors border rounded-lg p-2 hover:bg-red-50 font-semibold focus:outline-none focus:ring-2 focus:ring-red-400"
-          aria-label="Back to Services"
-        >
-          <ng-icon name="lucideArrowBigLeftDash" class="w-5 h-5 text-2xl text-gray-900" aria-hidden="true" />
-          <span>Back to Services</span>
-        </a>
-      </div>
-    </nav> -->
+<div class="min-h-screen bg-slate-50 mt-10 px-4 sm:px-6 md:px-8 lg:px-12  py-6 sm:py-8 md:py-10 lg:py-12">
 
     <!-- Product Details -->
-    <main *ngIf="product; else notFound" class="container mx-auto px-4 py-8">
+    <main *ngIf="product; else notFound" class="container mx-auto px-4 py-4  ">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <!-- Product Gallery -->
         <app-product-image-gallery 
@@ -120,3 +56,20 @@
       </div>
     </ng-template>
 </div>
+
+
+
+
+    <!-- Navigation -->
+    <!-- <nav class="bg-white border-b border-gray-300 sticky top-14 z-10 mt-20 shadow-sm" aria-label="Back Navigation">
+      <div class="container mx-auto px-4 py-4">
+        <a 
+          [routerLink]="['/services']" 
+          class="inline-flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors border rounded-lg p-2 hover:bg-red-50 font-semibold focus:outline-none focus:ring-2 focus:ring-red-400"
+          aria-label="Back to Services"
+        >
+          <ng-icon name="lucideArrowBigLeftDash" class="w-5 h-5 text-2xl text-gray-900" aria-hidden="true" />
+          <span>Back to Services</span>
+        </a>
+      </div>
+    </nav> -->

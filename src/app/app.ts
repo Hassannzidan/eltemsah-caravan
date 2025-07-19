@@ -12,7 +12,7 @@ import { Footer } from './features/layout/footer/footer/footer';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LanguageService } from './services/language/language.service';
+import { LanguageService } from './core/services/language/language.service';
 import { ChatBot } from './features/chat-bot/chat-bot';
 import { filter } from 'rxjs';
 import { LoaderService } from './services/spinner/loader.service';

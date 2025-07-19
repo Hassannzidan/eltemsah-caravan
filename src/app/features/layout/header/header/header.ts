@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, type OnInit, ElementRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
-import { LanguageService } from '../../../../services/language/language.service';
+import { LanguageService } from '../../../../core/services/language/language.service';
 import {
   featherArrowRight,
   featherGlobe,

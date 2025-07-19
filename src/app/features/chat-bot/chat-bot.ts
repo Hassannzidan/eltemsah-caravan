@@ -7,7 +7,7 @@ import {
   effect,
   signal,
 } from '@angular/core';
-import { GeminiChatService } from '../../services/gemini/gemini-chat.service';
+import { GeminiChatService } from '../../core/services/gemini/gemini-chat.service';
 
 @Component({
   selector: 'app-chat-bot',

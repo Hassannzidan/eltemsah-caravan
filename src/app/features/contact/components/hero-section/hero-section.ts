@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageService } from '../../../../services/language/language.service';
+import { LanguageService } from '../../../../core/services/language/language.service';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
 import { lucideAward, lucideSalad, lucideShield, lucideStar } from '@ng-icons/lucide';
 
