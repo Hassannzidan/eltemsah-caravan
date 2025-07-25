@@ -21,6 +21,7 @@
 }
 
 
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .snackbar-success {
@@ -36,4 +37,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body {
   overflow-x: hidden;
+}
+
+body.font-arabic {
+  font-family: 'Noto Kufi Arabic', sans-serif !important;
+}
+
+body.font-english {
+  font-family: 'Inter', sans-serif !important;
+    /* font-family: 'Staatliches', sans-serif !important; */
+
 }

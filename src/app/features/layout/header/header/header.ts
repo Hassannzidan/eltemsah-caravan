@@ -16,7 +16,7 @@ import {
   lucideUsersRound,
   lucideX,
 } from '@ng-icons/lucide';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule,  TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -57,12 +57,16 @@ export class Header {
 
   constructor(
     private languageService: LanguageService,
+    private eRef: ElementRef,
     public router: Router,
-    private eRef: ElementRef
+    public translate: TranslateService
   ) {
     this.currentLang = this.languageService.getCurrentLanguage();
   }
 
+    get isArabic(): boolean {
+    return this.translate.currentLang === 'ar';
+  }
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const currentScroll =

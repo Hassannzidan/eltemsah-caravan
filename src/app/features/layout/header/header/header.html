@@ -1,26 +1,25 @@
-<header 
-  class="fixed top-0 left-0 right-0 z-50 bg-white/85  transition-transform duration-500 ease-out backdrop-blur-[2px]"
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-white/85 transition-transform duration-500 ease-out backdrop-blur-[2px] py-1.5"
   [ngClass]="{ 'hide-navbar': !showNavbar, 'show-navbar': showNavbar }"
-
-  >
-  <!-- <p class="fixed bottom-0 left-0 bg-black text-white px-4 py-2 z-[100]">
-  ScrollTop: {{ lastScrollTop }} | Show: {{ showNavbar }}
-</p> -->
-
-
-  <!-- <div class="max-w-7xl mx-auto px-8 sm:px-10 lg:px-12"> -->
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
-      <a routerLink="/" class="flex items-center space-x-2">
+      <!-- <a routerLink="/" class="flex items-center space-x-2">
         <span
           class="self-center whitespace-nowrap logo-text text-center text-2xl tracking-wider flex flex-col leading-6"
         >
           <span>{{ 'heading.brand.line1' | translate }}</span>
           <span>{{ 'heading.brand.line2' | translate }}</span>
         </span>
+      </a> -->
+      <a routerLink="/" class="flex items-center space-x-2">
+        <img
+          src="assets/logos/brandLogo.png"
+          alt="Logo"
+          class="mt-2 h-10 w-auto sm:h-12 md:h-16 lg:h-20 xl:h-24 2xl:h-28 transition-transform duration-300 hover:scale-105"
+        />
       </a>
-
       <!-- Desktop Navigation -->
       <nav
         class="hidden lg:flex items-center space-x-8 border-b-2 border-transparent transition-all duration-300"
@@ -29,8 +28,12 @@
           *ngFor="let item of navigation"
           [routerLink]="item.href"
           (click)="closeMenu()"
-          class="relative text-md text-[#8b0000] font-medium transition-all duration-300 group tracking-wider font-Staatliches hover:text-red-600"
-        >
+          class="relative text-md text-[#8b0000] font-medium transition-all duration-300 group tracking-wider hover:text-red-600"
+            [ngClass]="{
+              'font-Staatliches': !isArabic,
+              'font-[Noto_Kufi_Arabic]': isArabic
+            }"
+          >
           {{ item.name | translate }}
           <span
             class="absolute -bottom-1 left-0 w-0 h-1 rounded transition-all duration-300 group-hover:w-full font-Anton"
@@ -46,7 +49,7 @@
       <div class="hidden lg:flex items-center space-x-6 text-[#8b0000]">
         <!-- Language Switch -->
         <button
-          class="flex items-center space-x-1 px-1.5 transition-all duration-300 cursor-pointer rounded hover:bg-red-300/20 border-transparent hover:border hover:border-red-800/50 hover:text-[#b22222] "
+          class="flex items-center space-x-1 px-1.5 transition-all duration-300 cursor-pointer rounded hover:bg-red-300/20 border-transparent hover:border hover:border-red-800/50 hover:text-[#b22222]"
           (click)="toggleLanguage()"
         >
           <span class="text-md p-0.5 mt-0.5">
@@ -58,11 +61,15 @@
         </button>
 
         <!-- Phone -->
-        <div class="flex items-center space-x-1 font-Staatliches tracking-wider">
+        <div
+          class="flex items-center space-x-1 font-Staatliches tracking-wider"
+        >
           <span class="mt-1.5">
             <ng-icon name="featherPhone" class="w-4 h-4" />
           </span>
-          <span class="text-md font-medium transition-colors duration-300 mt-0.5">
+          <span
+            class="text-md font-medium transition-colors duration-300 mt-0.5"
+          >
             {{ 'heading.phone.desktop' | translate }}
           </span>
         </div>
@@ -76,7 +83,9 @@
           }"
         >
           {{ 'heading.cta.desktop' | translate }}
-          <span class="inline-block transition-transform duration-300 translate-y-0.5 font-bold">
+          <span
+            class="inline-block transition-transform duration-300 translate-y-0.5 font-bold"
+          >
             <ng-icon name="featherArrowRight" class="w-4 h-4" />
           </span>
         </button>
@@ -111,7 +120,9 @@
         'max-h-screen opacity-100 scale-y-100': isMenuOpen
       }"
     >
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg">
+      <div
+        class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg"
+      >
         <a
           *ngFor="let item of navigation"
           [routerLink]="item.href"
@@ -143,9 +154,10 @@
         </a>
 
         <!-- Mobile Language -->
-        <div 
+        <div
           (click)="toggleLanguage()"
-          class="px-3 py-2 flex items-center space-x-2">
+          class="px-3 py-2 flex items-center space-x-2"
+        >
           <span class="text-md p-0.5 mt-0.5 text-red-800">
             <ng-icon name="featherGlobe" class="w-5 h-5" />
           </span>
@@ -166,7 +178,9 @@
 
         <!-- Mobile CTA -->
         <div class="px-3 py-2">
-          <button class="w-full bg-red-800 hover:bg-red-800 text-white p-2 rounded-full">
+          <button
+            class="w-full bg-red-800 hover:bg-red-800 text-white p-2 rounded-full"
+          >
             {{ 'heading.cta.mobile' | translate }}
           </button>
         </div>

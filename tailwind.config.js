@@ -18,7 +18,9 @@ module.exports = {
         dark: "#111827", // Almost Black
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Inter", "sans-serif"], // default
+        arabic: ['"Noto Kufi Arabic"', 'sans-serif'],
+        english: ["Staatliches", "sans-serif"],
         serif: ["Merriweather", "serif"],
         mono: ["Courier New", "monospace"],
       },

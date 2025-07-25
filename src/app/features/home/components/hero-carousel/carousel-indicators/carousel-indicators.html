@@ -6,8 +6,8 @@
           [attr.aria-label]="'Go to slide ' + (i + 1)"
           class="w-3 h-3 rounded-full transition-all duration-300 hover:scale-125"
           [ngClass]="{
-            'bg-red-500 scale-125 shadow-lg shadow-red-500/50': i === currentSlide,
-            'bg-white/40 hover:bg-white/60': i !== currentSlide
+            'bg-red-800 scale-125 shadow-lg shadow-red-500/50': i === currentSlide,
+            'bg-white/40 hover:bg-red-500/60': i !== currentSlide
           }"
         ></button>
       </div>

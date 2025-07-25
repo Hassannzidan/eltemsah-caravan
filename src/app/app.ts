@@ -62,13 +62,22 @@ export class App implements OnInit {
       }
     });
   }
-  
+
   ngOnInit() {
-    // استمع لأحداث التوجيه
+    const currentLang = this.languageService.getCurrentLanguage();
+    // اضبط الاتجاه
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = currentLang;
+
+    // أضف كلاس للغة على body للتحكم في الخط
+    const body = document.body;
+    body.classList.remove('font-arabic', 'font-english');
+    body.classList.add(currentLang === 'ar' ? 'font-arabic' : 'font-english');
+
+    // Scroll to top عند التوجيه
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
-        // عندما يتم التوجيه، نعيد التمرير إلى أعلى الصفحة
         window.scrollTo(0, 0);
       });
   }

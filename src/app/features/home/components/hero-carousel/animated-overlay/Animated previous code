@@ -1,0 +1,112 @@
+<div
+  class="absolute inset-0 flex items-end justify-center pb-24 pointer-events-none"
+>
+  <div class="container mx-auto px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center relative overflow-hidden">
+      <!-- Wipe Effect Rectangle -->
+      <div
+        class="absolute inset-0 h-full w-full bg-gradient-to-r from-red-600 to-red-500 transition-transform duration-1000 ease-out sm:inset-0 inset-y-1/4 inset-x-4 rounded-xl"
+        [ngClass]="{
+          'translate-x-full': isActive,
+          'translate-x-0': !isActive
+        }"
+        [ngStyle]="{
+          transformOrigin: 'left',
+          zIndex: 20
+        }"
+      ></div>
+
+      <!-- Title -->
+      <div
+        class="inline-flex items-center rounded-full border border-white/30 px-6 py-2 text-lg font-semibold text-white bg-white/20 backdrop-blur-md relative overflow-hidden"
+      >
+        {{ slide.title | translate }}
+      </div>
+
+      <!-- <div class="relative z-10">
+        <div class="absolute inset-0 bg-black/40 rounded-2xl"></div>
+        <div>
+          <h1
+            class="text-4xl sm:text-5xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-red-800 to-red-800 bg-clip-text text-transparent transition-all duration-[800ms] ease-out"
+            [ngClass]="{
+             'opacity-100 translate-y-0': isActive,
+             'opacity-0 translate-y-8': !isActive
+           }"
+            [ngStyle]="{
+             transitionDelay: isActive ? '1200ms' : '0ms'
+           }"
+          >
+            {{ slide.title | translate }}
+          </h1>
+        </div>
+      </div> -->
+
+      <!-- Content Container -->
+      <!-- <div class="relative z-10 py-8 ">
+        <div class="inline-block max-w-5xl mx-auto rounded-xl bg-blend-lighten backdrop-blur-md p-6 sm:p-10">
+            -->
+
+      <!-- Description -->
+      <!-- <p
+              class="text-xl lg:text-2xl bg-gradient-to-r from-orange-800 via-red-800 to-red-800 bg-clip-text text-transparent mb-8 max-w-3xl mx-auto leading-relaxed transition-all duration-[800ms] ease-out"
+              [ngClass]="{
+                'opacity-100 translate-y-0': isActive,
+                'opacity-0 translate-y-8': !isActive
+              }"
+              [ngStyle]="{
+                transitionDelay: isActive ? '1600ms' : '0ms'
+              }"
+            >
+              {{ slide.description | translate }}
+            </p> -->
+      <!-- </div> -->
+      <!-- CTA Buttons -->
+      <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          
+          <button
+            class="h-11 rounded-md px-8 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-semibold text-lg shadow-2xl hover:shadow-red-500/25 transition-all duration-[800ms] ease-out hover:scale-105 flex items-center justify-center gap-2"
+            [ngClass]="{
+              'opacity-100 translate-y-0': isActive,
+              'opacity-0 translate-y-8': !isActive
+            }"
+            [ngStyle]="{
+              transitionDelay: isActive ? '2000ms' : '0ms'
+            }"
+            (click)="navigateTo(slide.primaryCta.href)"
+          >
+            <span class="w-5 h-5 text-xl">
+              <ng-icon name="featherHome" />
+            </span>
+            {{ slide.primaryCta.text | translate }}
+          </button>
+
+          <button
+            class="h-11 rounded-md px-8 border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm font-semibold text-lg transition-all duration-[800ms] ease-out hover:scale-105 flex items-center justify-center gap-2"
+            [ngClass]="{
+              'opacity-100 translate-y-0': isActive,
+              'opacity-0 translate-y-8': !isActive
+            }"
+            [ngStyle]="{
+              transitionDelay: isActive ? '2200ms' : '0ms'
+            }"
+            (click)="navigateTo(slide.secondaryCta.href)"
+          >
+            {{ slide.secondaryCta.text | translate }}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div> -->
+      <!-- </div> -->
+
+      <!-- Decorative Circles -->
+      <div
+        class="absolute -top-20 -left-20 w-40 h-40 border border-red-500/20 rounded-full animate-pulse"
+      ></div>
+      <div
+        class="absolute -bottom-16 -right-16 w-32 h-32 border border-red-500/30 rounded-full animate-pulse"
+        style="animation-delay: 1s"
+      ></div>
+    </div>
+  </div>
+</div>
